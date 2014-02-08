@@ -1,0 +1,30 @@
+<h1>New Network</h1>
+<hr />
+	
+<form ng-submit="create()">
+
+	<fieldset>
+		<label for="networkName">Network name:</label>
+		<input id="networkName" type="text" placeholder="Name your network.." ng-model="network.name" required>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<label for="facebookSearch">Search from Facebook</label>
+					<input id="facebookSearch" type="text" placeholder="Search.." ng-model="selectedFriend" typeahead="friend as friend.name for friend in searchFriend($viewValue) | filter:$viewValue" typeahead-template-url="templates/TypeAheadFriendTemplate.html" typeahead-loading="searchingFriend" typeahead-wait-ms="300" typeahead-on-select="addFriend($item, $model, $label)" class="form-control">
+					
+    				<i ng-show="searchingFriend" class="glyphicon glyphicon-refresh"></i>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" ng-repeat="friend in network.friends">
+					<div class="row">
+						<i ng-show="{{$index > 0}}" class="glyphicon glyphicon-remove" ng-click="removeFriend($index)"></i>{{$index + 1}}. {{friend.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	<button type="submit" data-loading-text="Loading..." class="btn btn-primary">Save</button>
+</form>

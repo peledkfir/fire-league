@@ -1,0 +1,540 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"netw",
+				"network"
+			],
+			[
+				"net",
+				"network"
+			],
+			[
+				"lea",
+				"leagueService"
+			],
+			[
+				"sync",
+				"syncData"
+			],
+			[
+				"fa",
+				"favorites"
+			],
+			[
+				"le",
+				"leagues"
+			],
+			[
+				"ne",
+				"newLeague"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"ang",
+				"angular.copy	AngularJS"
+			],
+			[
+				"fri",
+				"friend"
+			],
+			[
+				"content",
+				"align-content"
+			],
+			[
+				"$roo",
+				"$rootScope"
+			],
+			[
+				"is",
+				"isReady"
+			],
+			[
+				"rea",
+				"isReady"
+			],
+			[
+				"face",
+				"facebook"
+			],
+			[
+				"ready",
+				"facebookReady"
+			],
+			[
+				"l",
+				"log"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"root",
+				"rootScope"
+			],
+			[
+				"facebook",
+				"facebookReady"
+			],
+			[
+				"networ",
+				"networks"
+			],
+			[
+				"user",
+				"user"
+			],
+			[
+				"fr",
+				"friend"
+			],
+			[
+				"frie",
+				"friend"
+			],
+			[
+				"val",
+				"validate"
+			],
+			[
+				"fir",
+				"firebaseRef"
+			],
+			[
+				"n",
+				"network"
+			],
+			[
+				"p",
+				"pic_square"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"Fa",
+				"Facebook"
+			],
+			[
+				"tem",
+				"templates"
+			],
+			[
+				"log",
+				"logout"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"v",
+				"validate"
+			],
+			[
+				"va",
+				"val"
+			],
+			[
+				"te",
+				"templates"
+			],
+			[
+				"fire",
+				"firebaseSimpleLogin"
+			],
+			[
+				"template",
+				"templateUrl"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"de",
+				"deferred"
+			],
+			[
+				"leagues",
+				"leaguesData"
+			],
+			[
+				"j",
+				"jquery"
+			],
+			[
+				"table",
+				"tableCalculator"
+			],
+			[
+				"teams",
+				"teamsData"
+			],
+			[
+				"roun",
+				"rounds"
+			],
+			[
+				"math",
+				"match"
+			],
+			[
+				"fo",
+				"for	for (…) {…}"
+			],
+			[
+				"ma",
+				"matches"
+			],
+			[
+				"matc",
+				"match"
+			],
+			[
+				"ro",
+				"rounds"
+			],
+			[
+				"padding-",
+				"padding-top"
+			],
+			[
+				"r",
+				"rounds"
+			],
+			[
+				"ind",
+				"indexer"
+			],
+			[
+				"g",
+				"generateTables"
+			],
+			[
+				"m",
+				"matches"
+			],
+			[
+				"P",
+				"Peled"
+			],
+			[
+				"s",
+				"syncData"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"",
+				"AngularJS: Rebuild Search Index"
+			],
+			[
+				"ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"jaa",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"index",
+				"AngularJS: Rebuild Search Index"
+			],
+			[
+				"html",
+				"Set Syntax: HTML (Angular.js)"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"angular",
+				"Set Syntax: HTML (Angular.js)"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ht",
+				"HTML: Wrap Selection With Tag"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: sa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/peledkfir/jive/friends-league/.gitignore",
+		"/Users/peledkfir/jive/friends-league/config/security-rules.json",
+		"/Users/peledkfir/jive/friends-league/app/js/app.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/leagueService.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/LeagueCreateCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/LeagueCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/NetworkLeaguesCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/NetworkBrowseCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/LoginCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/NetworkCreateCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/templates/League.html",
+		"/Users/peledkfir/jive/friends-league/app/templates/LeagueCreate.html",
+		"/Users/peledkfir/jive/friends-league/app/index.html",
+		"/Users/peledkfir/jive/friends-league/app/templates/NetworkLeagues.html",
+		"/Users/peledkfir/jive/friends-league/app/js/services/tableCalculator.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/leagueBuilder.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/idFactory.js",
+		"/Users/peledkfir/jive/friends-league/app/sass/main.sass",
+		"/Users/peledkfir/jive/friends-league/app/lib/jquery/sortable.js",
+		"/Users/peledkfir/jive/friends-league/app/templates/NetworkBrowse.html",
+		"/Users/peledkfir/jive/friends-league/app/templates/BrowseLeagues.html",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/BrowseController.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/BrowseLeaguesCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/CreateNetworkCtrl.js",
+		"/Users/peledkfir/jive/friends-league/app/templates/Browse.html",
+		"/Users/peledkfir/jive/friends-league/app/templates/TypeAheadFriendTemplate.html",
+		"/Users/peledkfir/jive/friends-league/app/data/networks/jive",
+		"/Users/peledkfir/jive/friends-league/app/templates/CreateNetwork.html",
+		"/Users/peledkfir/jive/friends-league/app/templates/NotFound.html",
+		"/Users/peledkfir/jive/friends-league/app/js/services/firebaseHelper.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/teamsData.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/CreateNetworkController.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/LoginController.js",
+		"/Users/peledkfir/jive/friends-league/app/lib/facebook/angular-facebook.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/NetworkService.js",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/PlayerMatchesController.js",
+		"/Users/peledkfir/jive/friends-league/app/data/networks/test-empty",
+		"/Users/peledkfir/jive/friends-league/app/js/services/networksData.js",
+		"/Users/peledkfir/jive/friends-league/scripts/web-server.js",
+		"/Users/peledkfir/jive/friends-league/restify-server.js",
+		"/Users/peledkfir/jive/friends-league/scripts/restify-server.js",
+		"/Users/peledkfir/jive/friends-league/app/templates/PlayerMatches.html",
+		"/Users/peledkfir/jive/friends-league/app/js/controllers/TableGeneratorController.js",
+		"/Users/peledkfir/jive/friends-league/app/js/services/networks.js",
+		"/Users/peledkfir/jive/friends-league/app/lib/jquery/jquery-2.0.3.min.js",
+		"/Users/peledkfir/jive/friends-league/app/sass/main.css",
+		"/Users/peledkfir/jive/friends-league/app/lib/angular/angular.js",
+		"/Users/peledkfir/jive/friends-league/app/sass/screen.sass",
+		"/Users/peledkfir/jive/friends-league/app/css/ie.css",
+		"/Users/peledkfir/jive/friends-league/app/css/app.css",
+		"/Users/peledkfir/jive/friends-league/friends-league.sublime-project",
+		"/Users/peledkfir/jive/sbs/jive7/core/target/classes/jive_i18n_en.properties",
+		"/Users/peledkfir/jive/friends-league/config.rb",
+		"/Users/peledkfir/jive/angularFire-seed/app/partials/home.html",
+		"/Users/peledkfir/jive/angularFire-seed/app/css/app.css",
+		"/Users/peledkfir/Tools/hbase-0.94.6-cdh4.4.0/bin/hbrestart.sh",
+		"/Users/peledkfir/jive/angular-phonecat/app/js/app.js",
+		"/Users/peledkfir/Downloads/Weeds.S02E01.DVDRip.XviD-TOPAZ.srt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"syncData",
+			"firebaseRef",
+			"$state",
+			"syncData",
+			"tempNetwork",
+			"idFactory",
+			"gen",
+			"network.friends",
+			"tempNetwork",
+			"oldVal",
+			");\n",
+			"newVal",
+			"$urlRouteProvider",
+			"jquery",
+			"set",
+			"$set",
+			"template/typea",
+			"typeahead-match",
+			"typeahead",
+			"api",
+			"Facebook",
+			"BrowseController",
+			"graph",
+			"https://graph.facebook.com/",
+			"api",
+			"myModal",
+			"}",
+			"{",
+			"	{",
+			"map",
+			"table",
+			"Table",
+			"table",
+			"i",
+			"nav",
+			"scroll",
+			"length",
+			"league",
+			"com.jivesoftware.util.ByteFormat",
+			"= Download$",
+			"Download",
+			"This is an archived version of the document. The current version can be viewed",
+			"Manage version",
+			"= OK",
+			"= uploaded file$",
+			"= upload file$",
+			"= upload a file$",
+			"= Upload a file",
+			"Upload a file"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"i"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"inde",
+				"app/index.html"
+			],
+			[
+				"ctrl",
+				"app/js/controllers/CreateNetworkCtrl.js"
+			],
+			[
+				"logi",
+				"app/js/controllers/LoginCtrl.js"
+			],
+			[
+				"login",
+				"app/js/controllers/LoginCtrl.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": true
+}

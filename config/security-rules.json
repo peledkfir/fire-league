@@ -1,0 +1,178 @@
+{
+  "rules": {
+      ".read": false,
+      ".write": false,
+
+      "networks": {
+         ".read": true,
+         "$network": {
+            ".write": "auth != null && (!data.exists() || data.child('owners').child(auth.uid).exists())",
+            ".validate": "newData.hasChildren(['name', 'owners', 'friends'])",
+            "name": {
+               ".validate": "newData.isString() && newData.val().length <= 40 && $network == newData.val()"
+            },
+            "friends": { 
+               "$friend": {
+                  ".validate": "newData.hasChildren(['id', 'name'])",
+                  
+                  "id": {
+                    ".validate": "newData.isNumber()"
+                  },
+                  "name": {
+                    ".validate": "newData.isString()"
+                  },
+                  "$other": {
+                    ".validate": false
+                  }
+               }
+            },
+            "owners": {
+              "$owner" : {
+                  ".validate": "root.child('users').child($owner).exists() && newData.hasChildren(['id', 'name'])",
+                  
+                  "id": {
+                    ".validate": "newData.isNumber()"
+                  },
+                  "name": {
+                    ".validate": "newData.isString()"
+                  },
+                  "$other": {
+                    ".validate": false
+                  }
+              }
+            },
+
+            "$other": {
+               ".validate": false
+            }
+         }
+      },
+      
+      "network_leagues": {
+        ".read": true,
+        
+        "$network": {
+          ".validate": "root.child('networks').child($network).exists()",
+          
+          "$league": {
+            ".read": true,
+            ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
+            ".validate": "newData.hasChildren(['name', 'players'])",
+            
+            "name": {
+              ".validate": "newData.isString() && newData.val().length <= 40 && $league == newData.val()"
+            },
+            
+            "players": {
+              "$player": {
+                   ".validate": "newData.hasChildren(['id', 'name'])",
+                  
+                  "id": {
+                    ".validate": "newData.isNumber()"
+                  },
+                  "name": {
+                    ".validate": "newData.isString()"
+                  },
+                  "$other": {
+                    ".validate": false
+                  }
+              }
+            },
+            
+            "$other": {
+              ".validate": true
+            }
+          }
+        }
+      },
+      
+      "league_matches": {
+        ".read": true,
+        
+        "$network": {
+          ".validate": "root.child('networks').child($network).exists()",
+          
+          "$league": {
+            ".validate": "root.child('network_leagues').child($network).child($league).exists()",
+            
+            "$round": {
+              "$match": {
+                ".validate": "newData.hasChildren(['result'])",
+                
+                "result": {
+                  ".validate": "newData.hasChildren(['home', 'away'])",
+                  
+                  "home": {
+                    ".validate": "newData.isNumber()"
+                  },
+                  
+                  "away": {
+                    ".validate": "newData.isNumber()"
+                  },
+                  
+                  "$other": {
+                    ".validate": false
+                  }
+                },
+                
+                "$other": {
+                  ".validate": false
+                }
+              }
+            }
+          }
+        }  
+      },
+      
+      "user_favorites": {
+        ".read": true,
+        "$user": {
+          ".read": true,
+          "networks": {
+            "$network": {
+              ".read": true,
+              ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
+              ".validate": "root.child('networks').child($network).exists() &&
+                            root.child('networks').child($network).child('friends').child($user).exists()",
+              
+              "leagues": {
+                "$league": {
+                  ".read": true,
+                  ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
+                  ".validate": "root.child('network_leagues').child($network).child($league).exists()"
+                }
+              }
+            }
+          }, 
+          
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+
+      "users": {
+         ".read": true,
+         "$user": {
+            ".read": "auth.uid === $user",
+            ".write": "auth.uid === $user",
+            ".validate": "$user == auth.uid && newData.hasChildren(['id', 'name'])",
+            
+            "id": {
+              ".validate": "newData.isString()"
+            },
+            "name": {
+              ".validate": "newData.isString()"
+            },
+            
+            "$other": {
+              ".validate": false
+            }
+         }
+      },
+      
+      "$other": {
+        ".validate": false
+      }
+   }
+}

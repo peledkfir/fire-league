@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" ng-app="friends-league">
+<head>
+  <meta charset="utf-8">
+  <title>Builds soccer leagues tables</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body ng-cloak ng-controller="LoginCtrl">
+  <header>
+    <nav class="navbar navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-top">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Friends-League <small>beta</small></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-top">
+        <ul class="nav navbar-nav">
+          <li class="active"><a ui-sref="browse">Browse</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-cloak>
+          <li ng-show="$root.auth.user" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a ui-sref="networkCreate">Network</a></li>
+              <li ng-show="$state.includes('network')"><a ui-sref="leagueCreate({network: $state.params.network})">League</a></li>
+            </ul>
+          </li>
+          <li>
+            <p class="navbar-text" ng-show="$root.auth.user"><img class="profile_24" ng-src="http://graph.facebook.com/{{$root.auth.user.username}}/picture?type=square&width=16&height=16"> {{$root.auth.user.name}} | <a href="" ng-click="logout()">Logout</a></p>
+            <a href="" ng-hide="$root.auth.user" data-toggle="modal" data-target="#loginModal" ng-enabled="facebookReady">Login</a>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+  </header>
+
+  <ui-view></ui-view>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            Currently we support using Facebook to login.
+          </div>
+          <div>
+            <a href="" ng-click="login()">
+              <img src="img/active_404.png">
+            </a>
+          </div>
+          <div class="row">
+            <small>WE WILL NEVER POST ANYTHING WITHOUT PERMISSION!</small>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--  
+<div class="container">
+  <tabset>
+    <tab heading="Dashboard">
+      <div ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
+        <span>{{row.team.name}}</span> <span>{{row.p}}</span> <span>{{row.w}}</span> <span>{{row.d}}</span> <span>{{row.l}}</span> <span>{{row.f}}</span> <span>{{row.a}}</span> <span>{{row.gd()}}</span> <span>{{row.pts()}}</span>
+      </div>  
+    </tab>
+    <tab heading="Matches">
+      <tabset type="'pills'">
+        <tab ng-repeat="team in league.teams" heading="{{team.name}}" active="$first">
+        </tab>
+        <div ng-switch on="" ng-repeat="team in league.teams"> 
+          <div ng-repeat="round in league.rounds" ng-switch-when="{{team.name}}">
+            <div class="col-md-12" ng-repeat="match in round.matches | filter:team.name">
+              <div class="col-md-3">{{match.home.name}}</div>
+              <div class="col-md-3">-</div>
+              <div class="col-md-3">{{match.away.name}}</div>        
+            </div>
+          </div>
+        </div>
+
+      </tabset>
+    </tab>
+  </tabset>
+
+  <ng-view></ng-view>
+</div>
+-->
+
+<!--    <div class="row row-offcanvas row-offcanvas-right">
+
+      <div class="col-sm-11">
+        <div class="row" ng-repeat="round in league.rounds">
+          <div id="r{{round.number}}">
+            <h2>Round {{round.number}}</h2>
+
+            <div class="col-md-12" ng-repeat="match in round.matches">
+              <div class="col-md-3">{{match.home.name}}</div>
+              <div class="col-md-3">-</div>
+              <div class="col-md-3">{{match.away.name}}</div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div id="sidebar" class="col-sm-1 sidebar-offcanvas" role="navigation">
+        <div class="list-group">
+          <a class="col-md-1" ng-repeat="round in league.rounds" ng-class="{active: $index == 0}" href="##r{{round.number}}">{{round.number}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+  <!--
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script src="//code.angularjs.org/1.2.8/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap-tpls.min.js"></script>
+  <script src="//cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+-->
+<!--
+  <script src="lib/underscore/underscore-min.js"></script>
+  <script src="lib/jquery/jquery-2.0.3.min.js"></script>
+  <script src="lib/bootstrap/bootstrap.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/ui/ui-bootstrap-0.9.0.min.js"></script>
+-->
+<script src="lib/underscore/underscore-min.js"></script>
+<script src="lib/underscore/underscore.string.min.js"></script>
+<script src="lib/jquery/jquery-2.0.3.min.js"></script>
+<script src="lib/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="lib/string/sprintf.js"></script>
+
+<script src="//static.firebase.com/v0/firebase.js"></script>
+<script src="//cdn.firebase.com/v0/firebase-simple-login.js"></script>
+
+<!--
+<script src='lib/firebase/firebase.js'></script>
+<script src='lib/firebase/firebase-simple-login.js'></script>
+-->
+
+<script src="lib/angular/angular.js"></script>
+<!--
+<script src="lib/angular/angular-route.js"></script>
+-->
+<script src="lib/angular/ui/angular-ui-router.js"></script>
+<script src="lib/angular/ui/ui-bootstrap-0.10.0.js"></script>
+<script src="lib/jquery/sortable.js"></script>
+<script src="lib/firebase/angularfire.js"></script>
+<script src="lib/facebook/angular-facebook.js"></script>
+
+<!--
+<script src="lib/angular/ui/ui-bootstrap-0.9.0.js"></script>
+<script src="lib/angular/ui/anguler-ui-router.js"></script>
+-->
+<script src="js/app.js"></script>
+<script src="js/controllers/LoginCtrl.js"></script>  
+<script src="js/controllers/NetworkBrowseCtrl.js"></script>  
+<script src="js/controllers/NetworkCreateCtrl.js"></script>  
+<script src="js/controllers/NetworkLeaguesCtrl.js"></script>  
+<script src="js/controllers/LeagueCreateCtrl.js"></script>  
+<script src="js/controllers/LeagueCtrl.js"></script>  
+<script src="js/services/firebaseHelper.js"></script>  
+<script src="js/services/leagueService.js"></script>  
+</body>
+</html>

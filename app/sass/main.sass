@@ -1,0 +1,39 @@
+@import compass
+@import compass/layout	
+
+body
+	padding-top: 70px
+
+#navbar-top .navbar-right
+	padding-right: 10px
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+	display: none !important
+
+=square_size($size)
+	width: #{$size}px
+	height: #{$size}px
+
+@each $size in (16, 24)
+	.profile_#{$size}
+		+square_size($size)
+
+.leagueEdit
+	.players
+		border: 2px dashed blue
+		margin: 10px 10px 0 0
+		padding: 5px
+
+	.player
+		border: 1px solid black
+		cursor: move
+
+	.playerPlaceholder
+		border: 4px dashed #cfcfcf
+		opacity: 0.8
+		text-align: center
+		vertical-align: middle
+
+		&:before
+			color: #cfcfcf
+			content: "HERE"

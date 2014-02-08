@@ -1,0 +1,42 @@
+<h1>New League in {{network}}</h1>
+<hr />
+	
+<form ng-submit="create()" class="leagueEdit">
+
+	<fieldset>
+		<label for="leagueName">League name:</label>
+		<input id="leagueName" type="text" placeholder="Name your league.." ng-model="name" required>
+
+		<div class="container">
+			<div class="row">
+				<div class="players col-md-4" ui-sortable="sortableOptions" ng-model="teams">
+		  			<div class="player" ng-repeat="team in teams">{{$index + 1}} <img <img class="profile_24" ng-src="http://graph.facebook.com/{{team.id}}/picture?type=square&width=16&height=16"> {{team.name}}</div>
+				</div>
+				<div class="players col-md-4" ui-sortable="sortableOptions" ng-model="bench">
+		  			<div class="player" ng-repeat="team1 in bench">{{$index + 1}} {{team1.name}}</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+	<div>
+		<h2>Preview</h2>
+		<div>
+			<h3>Matches</h3>
+			<tabset>
+				<tab ng-repeat="round in leaguePreview.rounds">
+					<tab-heading>{{round.number}}</tab-heading>
+					<h2>Round {{round.number}}</h2>
+
+		            <div class="col-md-12" ng-repeat="match in round.matches">
+		              <div class="col-md-2">{{match.home.name}}</div>
+		              <div class="col-md-1">-</div>
+		              <div class="col-md-2">{{match.away.name}}</div>
+		            </div>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+
+	<button type="submit" data-loading-text="Loading..." class="btn btn-primary">Save</button>
+</form>
