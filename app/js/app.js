@@ -57,7 +57,7 @@ var fApp = angular.module('friends-league', ['ui.router', 'ui.sortable', 'ui.boo
 		_.mixin(_.str.exports());
 
 		$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
-			if (_(toState.name).endsWith('Create') && $rootScope.auth.user == null) {
+			if (_.endsWith(toState.name, 'Create') && $rootScope.auth.user == null) {
 				ev.preventDefault();
 				$state.transitionTo('browse');
 			}

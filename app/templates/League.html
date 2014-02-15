@@ -1,1 +1,59 @@
-<h1>{league.name}</h1>
+<div class="row">
+    <div class="col-lg-12">
+	    <h1 class="page-header">{{league.name}}</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<table>
+			<thead>
+				<tr>
+					<th>Pos</th>
+					<th>Team</th>
+					<th>P</th>
+					<th>W</th>
+					<th>D</th>
+					<th>L</th>
+					<th>F</th>
+					<th>A</th>
+					<th>GD</th>
+					<th>Pts</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
+					<th>{{$index + 1}}</th>
+					<th>{{row.team.name}}</th>
+					<th>{{row.p}}</th>
+					<th>{{row.w}}</th>
+					<th>{{row.d}}</th>
+					<th>{{row.l}}</th>
+					<th>{{row.f}}</th>
+					<th>{{row.a}}</th>
+					<th>{{row.gd()}}</th>
+					<th>{{row.pts()}}</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<tabset>
+			<tab ng-repeat="round in league.rounds">
+				<tab-heading>{{round.number}}</tab-heading>
+				<h2>Round {{round.number}}</h2>
+
+	            <div class="col-lg-12" ng-repeat="match in round.matches">
+	              <div class="col-lg-2">{{match.home.name}}</div>
+	              <div class="col-lg-1">{{match.result.home}}</div>
+	              <div class="col-lg-1">-</div>
+	              <div class="col-lg-1">{{match.result.away}}</div>
+	              <div class="col-lg-2">{{match.away.name}}</div>
+	            </div>
+			</tab>
+		</tabset>
+	</div>
+</div>
