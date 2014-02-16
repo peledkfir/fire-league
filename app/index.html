@@ -25,22 +25,25 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <ul class="nav navbar-top-links navbar-right" ng-cloak>
+        <li ng-show="loading">
+          <a><i class="fa fa-cog fa-spin fa-lg fa-fw"></i></a>
+        </li>
         <li class="dropdown" ng-show="$root.auth.user">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <img class="profile_24" ng-src="http://graph.facebook.com/{{$root.auth.user.username}}/picture?type=square&width=16&height=16">  <i class="fa fa-caret-down"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-user">
-                  <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                  </li>
-              </ul>
-              <!-- /.dropdown-user -->
-          </li>
-        <li>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <img class="profile_24" ng-src="http://graph.facebook.com/{{$root.auth.user.username}}/picture?type=square&width=16&height=16">  <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+              <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+              </li>
+              <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+              </li>
+              <li class="divider"></li>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+              </li>
+          </ul>
+          <!-- /.dropdown-user -->
+        </li>
+        <li ng-hide="loading">
           <a href="" ng-hide="$root.auth.user" data-toggle="modal" data-target="#loginModal" ng-enabled="facebookReady">
             <i class="fa fa-sign-in fa-fw"></i> Login
           </a>
