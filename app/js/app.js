@@ -52,14 +52,40 @@ var fApp = angular.module('friends-league', ['ui.router', 'ui.sortable', 'ui.boo
 	     FacebookProvider.init('');
 	}])
 	.constant('FBURL', 'https://.firebaseio.com')
-	.run(function($rootScope, $state) {
+	.run(function($rootScope, $state, $stateParams, $firebaseSimpleLogin, Facebook, leagueService) {
 		// Setup underscore.string
 		_.mixin(_.str.exports());
 
+	    $rootScope.$state = $state;
+    	$rootScope.$stateParams = $stateParams;
+
+		var root = leagueService.res.root.ref();
+		$rootScope.auth = $firebaseSimpleLogin(root);
+
+		// Here, usually you should watch for when Facebook is ready and loaded
+		var $destroyWatch = $rootScope.$watch(function() {
+			return Facebook.isReady(); // This is for convenience, to notify if Facebook is loaded and ready to go.
+		}, function(newVal) {
+			if (newVal) {
+				$destroyWatch();
+				$rootScope.facebookReady = true; // You might want to use this to disable/show/hide buttons and else
+			}
+		});
+
+		$rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+			console.log("Logged in");
+		});
+
 		$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
-			if (_.endsWith(toState.name, 'Create') && $rootScope.auth.user == null) {
-				ev.preventDefault();
-				$state.transitionTo('browse');
+			if ($rootScope.auth.user == null) {
+				if (_.endsWith(toState.name, 'Create')) {
+					ev.preventDefault();
+					$state.transitionTo('browse');
+				} else if (_.endsWith(toState.name, 'delete')) {
+					ev.preventDefault();
+					$state.transitionTo(_.strLeftBack(toState.name, '.'), toParams, { location: 'replace' });
+					// TODO: report bug for this $state.transitionTo('^', toParams, { location: 'replace', relative: toState });					
+				}
 			}
 		});
 	});
