@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var fApp = angular.module('friends-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'firebase', 'facebook'])
+var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
 	.config(function($stateProvider, $urlRouterProvider) {
 		$stateProvider
 		.state('browse', {
@@ -33,25 +33,12 @@ var fApp = angular.module('friends-league', ['ui.router', 'ui.sortable', 'ui.boo
 		.state('unknown', {
 			url: '/pageNotFound', 
 			templateUrl: 'templates/NotFound.html',
-		})
-		//.when('/network/:name/edit')
-		// .when('/:leagueName/:teamName', {
-		// 	templateUrl: '/templates/PlayerMatches.html',
-		// 	controller: '/'
-		// })
-		// .when('/app/index.html' {
-		// 	controller: 'TableGeneratorController'
-		// })
+		});
+		
 		$urlRouterProvider
 		.when('', '/browse')
 		.otherwise('/pageNotFound');
 	})
-	.config(['FacebookProvider', function(FacebookProvider) {
-	     // Here you could set your appId throug the setAppId method and then initialize
-	     // or use the shortcut in the initialize method directly.
-	     FacebookProvider.init('');
-	}])
-	.constant('FBURL', 'https://.firebaseio.com')
 	.run(function($rootScope, $state, $stateParams, $firebaseSimpleLogin, Facebook, leagueService) {
 		// Setup underscore.string
 		_.mixin(_.str.exports());
