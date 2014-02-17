@@ -28,6 +28,19 @@
         <li ng-show="loading">
           <a><i class="fa fa-cog fa-spin fa-lg fa-fw"></i></a>
         </li>
+        <li class="dropdown" ng-show="$root.auth.user && $state.includes('network')"> 
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-cog fa-lg fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+                <a ui-sref="editNetwork({network: networkName})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
+              </li> 
+            <li>
+                <a ui-sref="deleteNetwork({network: networkName})"><i class="fa fa-times-circle fa-fw"></i> Delete Network</a>
+            </li>
+          </ul>
+        </li>
         <li class="dropdown" ng-show="$root.auth.user">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <img class="profile_24" ng-src="http://graph.facebook.com/{{$root.auth.user.username}}/picture?type=square&width=16&height=16">  <i class="fa fa-caret-down"></i>
@@ -58,7 +71,7 @@
                   <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
               </li>
               <li ng-show="$root.auth.user">
-                  <a href="#"><i class="fa fa-edit fa-fw"></i> Create<span class="fa arrow"></span></a>
+                  <a href="#"><i class="fa fa-copy fa-fw"></i> Create<span class="fa arrow"></span></a>
                   <ul class="nav nav-second-level collapse" style="height: 0px;">
                       <li>
                           <a ui-sref="networkCreate">Network</a>
