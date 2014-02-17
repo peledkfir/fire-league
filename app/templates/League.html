@@ -4,7 +4,11 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-<div class="row">
+<div ng-show="loading">
+	<i class="fa fa-cog fa-spin fa-5x"></i>
+</div>
+
+<div class="row" ng-hide="loading" ng-cloak>
 	<div class="col-lg-12">
 		<table>
 			<thead>
@@ -39,7 +43,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row" ng-hide="loading" ng-cloak>
 	<div class="col-lg-12">
 		<tabset>
 			<tab ng-repeat="round in league.rounds">
