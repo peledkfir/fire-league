@@ -1,6 +1,6 @@
 'use strict';
 
-fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, Facebook, leagueService) {	
+fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, $state, Facebook, leagueService) {	
 	$scope.addFriend = function(item, model, label) {
 		network.friends.push({id: item.uid, name: item.name});
 		$scope.selectedFriend = '';
@@ -41,6 +41,8 @@ fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootSco
 			var friend = network.friends[j];
 			leagueService.res.favorites.network.set(leagueService.ids.facebook(friend.id), newNetwork.name);
 		}
+
+		$state.go('network', {network: newNetwork.name});
 	};
 
 	var network = $scope.network = {

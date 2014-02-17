@@ -1,6 +1,8 @@
 'use strict';
 
-fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $stateParams, leagueService) {
+fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $state, $stateParams, leagueService) {
+	var network = $scope.network = $stateParams.network;
+	
 	$scope.create = function() {
 		// Prepare model
 		var teams = $scope.teams;
@@ -20,6 +22,8 @@ fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $statePara
 		for (var j = teams.length - 1; j >= 0; j--) {
 			leagueService.res.favorites.league.set(leagueService.ids.facebook(teams[j].id), network, newLeague.name);
 		}
+
+		$state.go('league', {network: network, league: newLeague.name});
 	};
 
 	$scope.$watchCollection('teams', function(newTeams, oldTeams, $scope) {
@@ -31,7 +35,6 @@ fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $statePara
 		placeholder: 'playerPlaceholder'
 	};
 
-	var network = $scope.network = $stateParams.network;
 	$scope.bench = [];
 	$scope.teams =[];
 
