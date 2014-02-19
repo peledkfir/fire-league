@@ -3,7 +3,7 @@
 fApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, Facebook) {
 	$scope.openLoginModal = function () {
 	    $modal.open({
-	    	templateUrl: 'LoginModal.html',
+	    	templateUrl: 'templates/LoginModal.html',
 	    	resolve: {
 	    		$loginCtrlScope: function() {
 	    			return $scope;

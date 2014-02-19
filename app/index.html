@@ -34,7 +34,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-                <a ui-sref="networkEdit({network: networkName})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
+                <a ui-sref="network.edit({network: $state.params.network}})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
               </li> 
             <li>
                 <a ui-sref="network.delete({network: $state.params.network})"><i class="fa fa-times-circle fa-fw"></i> Delete Network</a>
@@ -94,29 +94,6 @@
     <div ui-view id="page-wrapper" autoscroll="false">
     </div>
   </div> <!-- /#wrapper --> 
-
-  <script type="text/ng-template" id="LoginModal.html">
-    <!-- Login Modal -->
-    <div class="modal-header">
-      <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Login</h4>
-    </div>
-    <div class="modal-body">
-      <div class="container">
-        <div class="row">
-          Currently we support using Facebook to login.
-        </div>
-        <div>
-          <a href="" ng-click="login()">
-            <img src="img/active_404.png">
-          </a>
-        </div>
-        <div class="row">
-          <small>WE WILL NEVER POST ANYTHING WITHOUT PERMISSION!</small>
-        </div>
-      </div>
-    </div>
-  </script>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>

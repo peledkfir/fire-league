@@ -39,31 +39,15 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		.when('', '/browse')
 		.otherwise('/pageNotFound');
 	})
-	.run(function($rootScope, $state, $stateParams, $firebaseSimpleLogin, Facebook, leagueService) {
+	.run(function() {
 		// Setup underscore.string
 		_.mixin(_.str.exports());
-
-	    $rootScope.$state = $state;
+	})
+	.run(function($rootScope, $state, $stateParams) {
+		$rootScope.$state = $state;
     	$rootScope.$stateParams = $stateParams;
 
-		var root = leagueService.res.root.ref();
-		$rootScope.auth = $firebaseSimpleLogin(root);
-
-		// Here, usually you should watch for when Facebook is ready and loaded
-		var $destroyWatch = $rootScope.$watch(function() {
-			return Facebook.isReady(); // This is for convenience, to notify if Facebook is loaded and ready to go.
-		}, function(newVal) {
-			if (newVal) {
-				$destroyWatch();
-				$rootScope.facebookReady = true; // You might want to use this to disable/show/hide buttons and else
-			}
-		});
-
-		$rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
-			console.log("Logged in");
-		});
-
-		$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
+    	$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
 			if ($rootScope.auth.user == null) {
 				if (_.endsWith(toState.name, 'Create')) {
 					ev.preventDefault();
@@ -75,4 +59,26 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 				}
 			}
 		});
+	})
+	.run(function($http, $templateCache) {
+		// cache modals
+		_.delay(function() {
+			$http.get('templates/LoginModal.html', {cache: $templateCache});
+			$http.get('templates/NetworkDeleteModal.html', {cache: $templateCache});
+		}, 2000);
+	})
+	.run(function($rootScope, Facebook) {
+		// Here, usually you should watch for when Facebook is ready and loaded
+		var $destroyWatch = $rootScope.$watch(function() {
+			return Facebook.isReady(); // This is for convenience, to notify if Facebook is loaded and ready to go.
+		}, function(newVal) {
+			if (newVal) {
+				$destroyWatch();
+				$rootScope.facebookReady = true; // You might want to use this to disable/show/hide buttons and else
+			}
+		});
+	})
+	.run(function($rootScope, $firebaseSimpleLogin, leagueService) {
+		var root = leagueService.res.root.ref();
+		$rootScope.auth = $firebaseSimpleLogin(root);		
 	});
