@@ -67,6 +67,10 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					return firebaseRef('networks/' + name);
 				},
 
+				sync: function(name) {
+					return syncData('networks/' + name);
+				},
+
 				set: function(networkObj) {
 					var ref = this.ref(networkObj.name);
 					ref.set(networkObj);

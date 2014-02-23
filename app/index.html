@@ -34,10 +34,10 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-                <a ui-sref="network.edit({network: $state.params.network}})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
+                <a ui-sref="network.edit({network: $state.params.network})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
               </li> 
             <li>
-                <a ui-sref="network.delete({network: $state.params.network})"><i class="fa fa-times-circle fa-fw"></i> Delete Network</a>
+                <a ui-sref="network.delete({network: $state.params.network})" ui-sref-opts="{ location: false }"><i class="fa fa-times-circle fa-fw"></i> Delete Network</a>
             </li>
           </ul>
         </li>
@@ -148,6 +148,7 @@
 <script src="js/controllers/LoginCtrl.js"></script>  
 <script src="js/controllers/NetworkBrowseCtrl.js"></script>  
 <script src="js/controllers/NetworkCreateCtrl.js"></script>  
+<script src="js/controllers/NetworkEditCtrl.js"></script>  
 <script src="js/controllers/NetworkDeleteCtrl.js"></script>  
 <script src="js/controllers/NetworkLeaguesCtrl.js"></script>  
 <script src="js/controllers/LeagueCreateCtrl.js"></script>  

@@ -26,7 +26,7 @@ fApp.config(function($stateProvider) {
 
       // deletes the network
       leagueService.res.network.ref(network).remove(function() {
-       $scope.$close(true);
+        $scope.$close(true);
       });
     };
 
@@ -38,18 +38,20 @@ fApp.config(function($stateProvider) {
 	.state('network.delete', {
 		url: '/delete',
 		onEnter: function($stateParams, $state, $modal) {
-    	$modal.open({
-        	templateUrl: "templates/NetworkDeleteModal.html",
-          resolve: {
-            network: function() { return $stateParams.network; }
-          },
-        	controller: NetworkDeleteCtrl
+      $modal.open({
+        templateUrl: "templates/NetworkDeleteModal.html",
+        resolve: {
+          network: function() { return $stateParams.network; }
+        },
+        controller: NetworkDeleteCtrl
       })
       .result.then(function(result) {
-          if (result) {
-              return $state.transitionTo("browse");
-          }
-	    });
+        if (result) {
+          return $state.transitionTo("browse");
+        }
+      }, function(result) {
+          return $state.go("^");
+      });
 		}
 	});
 });
