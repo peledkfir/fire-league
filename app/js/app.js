@@ -25,6 +25,15 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			templateUrl: 'templates/NetworkLeagues.html',
 			controller: 'NetworkLeaguesCtrl'
 		})
+		.state('network.edit', {
+			url: '/edit',
+			views: {
+				'@': {
+					templateUrl: 'templates/NetworkEdit.html',
+					controller: 'NetworkEditCtrl'
+				}			
+			}
+		})
 		.state('league', {
 			url: '/network/:network/league/:league', 
 			templateUrl: 'templates/League.html',
@@ -52,7 +61,7 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 				if (_.endsWith(toState.name, 'Create')) {
 					ev.preventDefault();
 					$state.transitionTo('browse');
-				} else if (_.endsWith(toState.name, 'delete')) {
+				} else if (_.endsWith(toState.name, 'delete') || _.endsWith(toState.name, 'edit')) {
 					ev.preventDefault();
 					$state.transitionTo(_.strLeftBack(toState.name, '.'), toParams, { location: 'replace' });
 					// TODO: report bug for this $state.transitionTo('^', toParams, { location: 'replace', relative: toState });					
