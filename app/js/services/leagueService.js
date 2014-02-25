@@ -1,6 +1,7 @@
-'use strict';
 
 fApp.service('leagueService', function(firebaseRef, syncData) {
+	'use strict';
+	
 	var mixinTableRow = {
 		gd: function() {
 			return this.f - this.a;
@@ -22,7 +23,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			friends: {
 				query: function(query, filter) {
 					if (filter && filter.length > 0) {
-						filter = sprintf("NOT (uid IN (%s)) AND ", filter);
+						filter = sprintf('NOT (uid IN (%s)) AND ', filter);
 					}
 					var fql = sprintf("SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR uid in (SELECT uid FROM group_member WHERE gid IN (SELECT gid FROM group_member WHERE uid = me()))) AND strpos(lower(name), lower('%s')) >=0 ORDER BY strpos(lower(name), lower('%s')) LIMIT 10", filter, query, query);
 					return fql;
@@ -50,13 +51,13 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 
 					remove: function(uid, name) {
 						var ref = this.ref(uid, name);
-						ref.remove();	
+						ref.remove();
 					}
 				},
 
 				league: {
 					set: function(uid, network, name) {
-						var ref = firebaseRef('user_favorites/' + uid + '/networks/' + network + '/leagues/' + name);  
+						var ref = firebaseRef('user_favorites/' + uid + '/networks/' + network + '/leagues/' + name);
 						ref.set(true);
 					}
 				}
@@ -79,6 +80,12 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				all: {
 					sync: function() {
 						return syncData('networks');
+					}
+				},
+
+				owners: {
+					ref: function(name){
+						return firebaseRef('networks/' + name + '/owners');
 					}
 				},
 
@@ -107,7 +114,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				},
 
 				ref: function(network, league) {
-					var ref = firebaseRef('network_leagues/' + network + '/' + league);	
+					var ref = firebaseRef('network_leagues/' + network + '/' + league);
 					return ref;
 				},
 
@@ -148,10 +155,10 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			};
 			var next = function(index, teams, match, skip) {
 				return (index + match - 1 + skip) % teams;
-			}
+			};
 			var previous = function(index, teams, match, skip) {
 				return (index - match + teams - skip) % teams;
-			}
+			};
 
 			var league = {
 				name: name,
@@ -186,7 +193,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 							if (h == p) {
 								sh = 1;
 								h++;
-							}	
+							}
 						}
 
 						var a = previous(ai, cnt, m, sa); // away
@@ -198,7 +205,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 						//console.log('r' + (r+1) + 'm' + (m+1) + 'hi'+ hi + 'ai'+ ai+ 'h' + h + 'a' + a);
 						matches.push({
 							round: round,
-							match: i * (cnt - 1) + m + 1,
+							match: m + 1,
 							home: teams[i == 0 ? h : a],
 							away: teams[i == 0 ? a : h]
 						});
@@ -232,37 +239,36 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					f: 0,
 					a: 0
 				}, mixinTableRow);
-			};
-
-			for (var r = 0; r < league.rounds.length; r++) {
-				var round = league.rounds[r];
-				for (var m = 0; m < round.matches.length; m++) {
-					var match = round.matches[m];
-
-					if (match.result) {
-						var h = tblHash[match.home.name];
-						var a = tblHash[match.away.name];
-						h.p++;
-						a.p++;
-
-						h.f += match.result.home;
-						h.a += match.result.away;
-
-						a.f += match.result.away;
-						a.a += match.result.home;
-
-						if (match.result.home == match.result.away) {
-							h.d++;
-							a.d++;
-						} else {
-							var winner = match.result.home > match.result.away ? h : a;
-							var looser = winner == h ? a : h;
-							winner.w++;
-							looser.l++;  
-						}
-					}
-				}
 			}
+
+			_.each(league.rounds, function(round) {
+				if (round.matches) {
+					_.each(round.matches, function(match) {
+						if (match.result) {
+							var h = tblHash[match.home.name];
+							var a = tblHash[match.away.name];
+							h.p++;
+							a.p++;
+
+							h.f += match.result.home;
+							h.a += match.result.away;
+
+							a.f += match.result.away;
+							a.a += match.result.home;
+
+							if (match.result.home == match.result.away) {
+								h.d++;
+								a.d++;
+							} else {
+								var winner = match.result.home > match.result.away ? h : a;
+								var looser = winner == h ? a : h;
+								winner.w++;
+								looser.l++;
+							}
+						}
+					});
+				}
+			});
 
 			var table = [];
 			
