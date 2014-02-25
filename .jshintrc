@@ -1,0 +1,17 @@
+{
+  "curly": true,
+  "devel": true,
+  "eqeqeq": false,
+  "globals": {
+    "angular": true,
+    "fApp": true,
+    "_": true,
+    "$": true
+  },
+  "indent": 2,
+  "quotmark": "single",
+  "strict": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true
+}
