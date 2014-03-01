@@ -7,14 +7,36 @@
  */
 fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
 	'use strict';
+	var state = {
 
-	var syncTable = function() {
+	};
+
+	var matchMixin = {
+		currentUserMatch: function() {
+			var match = this;
+			if ($rootScope.auth.user) {
+				return match && match.home && match.away && (match.home.id == $rootScope.auth.user.id || match.away.id == $rootScope.auth.user.id);
+			}
+
+			return false;
+		},
+
+		canEdit: function() {
+			return state.isOwner || this.currentUserMatch();
+		}
+	};
+
+	var syncStats = function() {
+		// saves ui state aside
 		var roundTabInfo = _.map($scope.league.rounds, function(round) { return _.pick(round, 'active'); });
-		$scope.league = leagueService.build($scope.leagueInfo.name, $scope.leagueInfo.players);
-		var roundsData = _.pick($scope.leagueData, 'rounds');
 		
+		// rebuild league as merge is not sufficient when result is deleted
+		var league = leagueService.build(state.leagueStructure.name, state.leagueStructure.players, matchMixin);
+		var roundsData = _.pick(state.$leagueData, 'rounds');
+		
+		// merge matches results to league structure
 		$.each(roundsData.rounds, function (r, round) {
-			var roundObj = $scope.league.rounds[r];
+			var roundObj = league.rounds[r];
 			
 			if (round) {
 				$.each(round.matches, function(m, match) {
@@ -23,58 +45,54 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 			}
 		});
 
-		_.merge($scope.league.rounds, roundTabInfo);
-		$scope.table = leagueService.table($scope.league);
-	};
+		// merge back ui state
+		_.merge(league.rounds, roundTabInfo);
 
-	// TODO: update when logged in
-	$scope.currentUserMatch = function(match) {
-		if ($rootScope.auth.user) {
-			return match && match.home && match.away && (match.home.id == $rootScope.auth.user.id || match.away.id == $rootScope.auth.user.id);
-		}
-
-		return false;
+		// update scope
+		$scope.league = league;
+		$scope.stats = leagueService.stats($scope.league);
 	};
 
 	$scope.cancelEdit = function() {
-		var originalMatch = $scope.originalMatch;
-		$scope.league.rounds[originalMatch.round - 1].matches[originalMatch.match - 1] = originalMatch;
 		$scope.editedMatch = null;
 	};
 
 	$scope.editMatch = function(match) {
-		if ($scope.isOwner || $scope.currentUserMatch(match)) {
+		if (match.canEdit()) {
 			if ($scope.editedMatch) {
 				$scope.cancelEdit();
 			}
 
+			state.originalMatch = match;
 			$scope.editedMatch = match;
-			$scope.originalMatch = angular.extend({}, $scope.editedMatch);
-			$scope.originalMatch.result = angular.extend({}, $scope.editedMatch.result);
+			$scope.editedResult = angular.extend({}, match.result);
 		}
 	};
 
 	$scope.doneEditing = function(match) {
-		$scope.editedMatch = null;
-		
-		if (match.result && match.result.away >= 0 && match.result.home >= 0) {
+		var result = $scope.editedResult;
+		$scope.cancelEdit();
+
+		if (result && _.isNumber(result.away) && _.isNumber(result.home) && result.away >= 0 && result.home >= 0) {
 			// checking if adding match result for the first time
-			if (!$scope.leagueData.rounds) {
-				$scope.leagueData.rounds = {};
+			if (!state.$leagueData.rounds) {
+				state.$leagueData.rounds = {};
 			}
 
-			if (!$scope.leagueData.rounds[match.round - 1]) {
-				$scope.leagueData.rounds[match.round - 1] = { matches: {} };
+			if (!state.$leagueData.rounds[match.round - 1]) {
+				state.$leagueData.rounds[match.round - 1] = { matches: {} };
 			}
 
-			$scope.leagueData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(match.result) };
+			match.result = angular.copy(result);
+			state.$leagueData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(result) };
 		} else {
-			if ($scope.leagueData.rounds && $scope.leagueData.rounds[match.round - 1] && $scope.leagueData.rounds[match.round - 1].matches) {
-				delete $scope.leagueData.rounds[match.round - 1].matches[match.match - 1];
+			if (state.$leagueData.rounds && state.$leagueData.rounds[match.round - 1] && state.$leagueData.rounds[match.round - 1].matches) {
+				delete match.result;
+				delete state.$leagueData.rounds[match.round - 1].matches[match.match - 1];
 			}
 		}
 		
-		$scope.leagueData.$save();
+		state.$leagueData.$save();
 	};
 
 	var league = $stateParams.league;
@@ -98,18 +116,17 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	});
 
 	leagueRef.once('value', function(snap) {
-		var leagueVal = $scope.leagueInfo = snap.val();
-		$scope.league = leagueService.build(leagueVal.name, leagueVal.players);
-
-		$scope.leagueData = leagueService.res.league.table.sync(network, league);
-		$scope.leagueData.$on('loaded', function() {
+		state.leagueStructure = snap.val();
+		
+		state.$leagueData = leagueService.res.league.table.sync(network, league);
+		state.$leagueData.$on('loaded', function() {
 			$scope.loading = false;
 			$timeout.cancel(promise);
-			syncTable();
+			syncStats();
 		});
 
-		$scope.leagueData.$on('change', function() {
-			syncTable();
+		state.$leagueData.$on('change', function() {
+			syncStats();
 		});
 	});
 });

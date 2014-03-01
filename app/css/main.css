@@ -21,24 +21,43 @@
 }
 
 /* line 22, ../sass/main.sass */
+thead th.away {
+  text-align: right;
+}
+
+/* line 26, ../sass/main.sass */
+tbody th.home, tbody th.away {
+  width: 123px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+}
+/* line 33, ../sass/main.sass */
+tbody th.away {
+  direction: rtl;
+  text-align: right;
+}
+
+/* line 38, ../sass/main.sass */
 .leagueEdit .players {
   border: 2px dashed blue;
   margin: 10px 10px 0 0;
   padding: 5px;
 }
-/* line 27, ../sass/main.sass */
+/* line 43, ../sass/main.sass */
 .leagueEdit .player {
   border: 1px solid black;
   cursor: move;
 }
-/* line 31, ../sass/main.sass */
+/* line 47, ../sass/main.sass */
 .leagueEdit .playerPlaceholder {
   border: 4px dashed #cfcfcf;
   opacity: 0.8;
   text-align: center;
   vertical-align: middle;
 }
-/* line 37, ../sass/main.sass */
+/* line 53, ../sass/main.sass */
 .leagueEdit .playerPlaceholder:before {
   color: #cfcfcf;
   content: "HERE";

@@ -5,6 +5,8 @@
   "globals": {
     "angular": true,
     "fApp": true,
+    "myApp": true,
+    "sprintf": true,
     "_": true,
     "$": true
   },

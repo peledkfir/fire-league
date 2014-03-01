@@ -18,6 +18,22 @@
 	.profile_#{$size}
 		+square_size($size)
 
+thead th
+	&.away
+		text-align: right
+
+tbody th
+	&.home,&.away
+		width: 123px
+		overflow: hidden
+		text-overflow: ellipsis
+		display: block
+		white-space: nowrap
+
+	&.away
+		direction: rtl
+		text-align: right
+
 .leagueEdit
 	.players
 		border: 2px dashed blue

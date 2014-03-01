@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<i class="fa fa-bar-chart-o fa-fw"></i> Table
+	</div>
+	<div class="panel-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Pos</th>
+					<th>Team</th>
+					<th>P</th>
+					<th>W</th>
+					<th>D</th>
+					<th>L</th>
+					<th>F</th>
+					<th>A</th>
+					<th>GD</th>
+					<th>Pts</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
+					<th>{{$index + 1}}</th>
+					<th><fb-avatar size="24" id="row.team.id"></fb-avatar> {{row.team.name}}</th>
+					<th>{{row.p}}</th>
+					<th>{{row.w}}</th>
+					<th>{{row.d}}</th>
+					<th>{{row.l}}</th>
+					<th>{{row.f}}</th>
+					<th>{{row.a}}</th>
+					<th>{{row.gd()}}</th>
+					<th>{{row.pts()}}</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
