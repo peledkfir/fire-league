@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="css/sb-admin.custom.css"/>
+  <link rel="stylesheet" href="css/social-buttons.css"/>
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 <body ng-cloak ng-controller="LoginCtrl">
@@ -51,14 +52,14 @@
               <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
               </li>
               <li class="divider"></li>
-              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Sign Out</a>
               </li>
           </ul>
           <!-- /.dropdown-user -->
         </li>
-        <li ng-hide="loading">
-          <a href="" ng-hide="$root.auth.user" ng-click="openLoginModal()" ng-enabled="facebookReady">
-            <i class="fa fa-sign-in fa-fw"></i> Login
+        <li ng-hide="loading || $root.auth.user">
+          <a href="" ng-click="openLoginModal()" ng-enabled="facebookReady">
+            <i class="fa fa-sign-in fa-fw"></i> Sign In
           </a>
         </li>
       </ul>
@@ -91,7 +92,7 @@
       <!-- /.sidebar-collapse -->
     </nav>
 
-    <div ui-view id="page-wrapper" autoscroll="false">
+    <div ui-view id="page-wrapper" class="container" autoscroll="false">
     </div>
   </div> <!-- /#wrapper --> 
 
@@ -156,5 +157,7 @@
 <script src="js/services/firebaseHelper.js"></script>  
 <script src="js/services/leagueService.js"></script>  
 <script src="js/directives/metisMenu.js"></script>  
+<script src="js/directives/leagueDirectives.js"></script>  
+<script src="js/directives/facebookDirectives.js"></script>  
 </body>
 </html>

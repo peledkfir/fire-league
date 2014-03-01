@@ -4,73 +4,57 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-<div ng-show="loading || !table">
+<div ng-show="loading || !stats">
 	<i class="fa fa-cog fa-spin fa-5x"></i>
 </div>
 
-<div class="row" ng-hide="loading || !table" ng-cloak>
-	<div class="col-lg-12">
-		<table>
-			<thead>
-				<tr>
-					<th>Pos</th>
-					<th>Team</th>
-					<th>P</th>
-					<th>W</th>
-					<th>D</th>
-					<th>L</th>
-					<th>F</th>
-					<th>A</th>
-					<th>GD</th>
-					<th>Pts</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
-					<th>{{$index + 1}}</th>
-					<th>{{row.team.name}}</th>
-					<th>{{row.p}}</th>
-					<th>{{row.w}}</th>
-					<th>{{row.d}}</th>
-					<th>{{row.l}}</th>
-					<th>{{row.f}}</th>
-					<th>{{row.a}}</th>
-					<th>{{row.gd()}}</th>
-					<th>{{row.pts()}}</th>
-				</tr>
-			</tbody>
-		</table>
+<div class="row" ng-hide="loading || !stats" ng-cloak>
+	<div class="col-lg-8">
+		<league-table-panel table="stats.table" />
+	</div>
+	<div class="col-lg-4">
+		<league-curr-round-panel stats="stats" />
 	</div>
 </div>
 
-<div class="row" ng-hide="loading || !table" ng-cloak>
-	<div class="col-lg-12">
+<div class="row" ng-hide="loading || !stats" ng-cloak>
+	<div class="col-lg-8">
 		<tabset>
 			<tab ng-repeat="round in league.rounds" active="round.active">
 				<tab-heading>{{round.number}}</tab-heading>
 				<h2>Round {{round.number}}</h2>
+            	
 
-	            <div class="col-lg-12" ng-dblclick="editMatch(match)" ng-hide="match == editedMatch" ng-repeat-start="match in round.matches">
-	              <div class="col-lg-2">{{match.home.name}}</div>
-	              <div class="col-lg-1">{{match.result.home}}</div>
-	              <div class="col-lg-1">-</div>
-	              <div class="col-lg-1">{{match.result.away}}</div>
-	              <div class="col-lg-2">{{match.away.name}}</div>
-	              <div class="col-lg-1" ng-show="isOwner || currentUserMatch(match)" ng-click="editMatch(match)"><i class="fa fa-edit"></i></div>
-	            </div>
-	            <div class="col-lg-12" ng-show="match == editedMatch" ng-repeat-end>
-	            	<form ng-submit="doneEditing(match)">
-			            <div class="col-lg-2">{{match.home.name}}</div>
-			            <div class="col-lg-1"><input type="number" min="0" max="99" ng-model="editedMatch.result.home"></div>
-			            <div class="col-lg-1">-</div>
-			            <div class="col-lg-1"><input type="number" min="0" max="99" ng-model="editedMatch.result.away"></div>
-			            <div class="col-lg-2">{{match.away.name}}</div>
-			            <div class="col-lg-2" >
-			            	<button type="submit" class="btn btn-default btn-link"><i class="fa fa-check"></i></button>
-			            	<button type="button" class="btn btn-default btn-link" ng-click="cancelEdit()"><i class="fa fa-times"></i></button>
-		            	</div>
-		          	</form>
-	            </div>
+				<table>
+					<thead>
+						<tr>
+							<th>HOME</th>
+							<th colspan="3">SCORE</th>
+							<th>AWAY</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+	            		<tr ng-dblclick="editMatch(match)" ng-repeat="match in round.matches">
+	            			<th>{{match.home.name}}</th>
+	            			<th ng-hide="match == editedMatch">{{match.result.home}}</th>
+							<th ng-show="match == editedMatch"><input form="m{{match.matchIdx}}" type="number" min="0" max="99" ng-model="editedResult.home"></th>
+	            			<th>-</th>
+	            			<th ng-hide="match == editedMatch">{{match.result.away}}</th>
+							<th ng-show="match == editedMatch"><input form="m{{match.matchIdx}}" type="number" min="0" max="99" ng-model="editedResult.away"></th>
+	            			<th>{{match.away.name}}</th>
+	            			<th ng-hide="match == editedMatch || !match.canEdit()" ng-click="editMatch(match)">
+	            				<i class="fa fa-edit" tooltip="Edit"></i>
+	            			</th>
+	            			<th ng-show="match == editedMatch">
+	            				<form id="m{{match.matchIdx}}" ng-submit="doneEditing(match)">
+				            		<button type="submit" class="btn btn-default btn-link"><i class="fa fa-check" tooltip="Save"></i></button>
+			            			<button type="button" class="btn btn-default btn-link" ng-click="cancelEdit()"><i class="fa fa-times" tooltip="Discard"></i></button>
+			            		</form>
+	            			</th>
+						</tr>
+					</tbody>
+				</table>
 			</tab>
 		</tabset>
 	</div>

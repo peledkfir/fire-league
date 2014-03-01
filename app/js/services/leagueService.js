@@ -25,7 +25,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					if (filter && filter.length > 0) {
 						filter = sprintf('NOT (uid IN (%s)) AND ', filter);
 					}
-					var fql = sprintf("SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR uid in (SELECT uid FROM group_member WHERE gid IN (SELECT gid FROM group_member WHERE uid = me()))) AND strpos(lower(name), lower('%s')) >=0 ORDER BY strpos(lower(name), lower('%s')) LIMIT 10", filter, query, query);
+					var fql = sprintf('SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR uid in (SELECT uid FROM group_member WHERE gid IN (SELECT gid FROM group_member WHERE uid = me()))) AND strpos(lower(name), lower(\'%s\')) >=0 ORDER BY strpos(lower(name), lower(\'%s\')) LIMIT 10', filter, query, query);
 					return fql;
 				}
 			}
@@ -148,7 +148,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			}
 		},
 
-		build: function(name, teams) {
+		build: function(name, teams, matchMixin) {
 			var indexer = function (round, teams, away) {
 				var totalRounds = teams - 1;
 				return (totalRounds - away - round) % totalRounds + 1;
@@ -166,6 +166,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			};
 
 			var cnt = teams.length;
+			var matchesInRound = Math.floor(cnt/2);
 
 			var rounds = [];
 
@@ -182,9 +183,9 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 						round = i * (cnt - 1) + r + 1;
 
 					// walking through the matches
-					for (var m = 0; m < Math.floor(cnt/2); m++) {
+					for (var m = 0; m < matchesInRound; m++) {
 						var h; // home
-						if (m == 0) {
+						if (m === 0) {
 							h = p;
 						} else {
 							h = next(hi, cnt, m, sh);
@@ -197,18 +198,19 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 						}
 
 						var a = previous(ai, cnt, m, sa); // away
-						if (a == 0) {
+						if (a === 0) {
 							sa = 1;
 							a = previous(ai, cnt, m, sa);
 						}
 
 						//console.log('r' + (r+1) + 'm' + (m+1) + 'hi'+ hi + 'ai'+ ai+ 'h' + h + 'a' + a);
-						matches.push({
+						matches.push(_.extend({
 							round: round,
 							match: m + 1,
-							home: teams[i == 0 ? h : a],
-							away: teams[i == 0 ? a : h]
-						});
+							matchIdx: (round - 1) * matchesInRound + m + 1,
+							home: teams[i === 0 ? h : a],
+							away: teams[i === 0 ? a : h]
+						}, matchMixin || {}));
 					}
 
 					rounds.push({
@@ -218,13 +220,14 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}
 			}
 
-			league.matchInRound = Math.floor(cnt/2);
+			league.matchInRound = matchesInRound;
 			league.rounds = rounds;
+			league.totalMatches = league.matchInRound * rounds.length;
 
 			return league;
 		},
 
-		table: function (league) {
+		stats: function (league) {
 			var tblHash = {};
 
 			for (var t = 0; t < league.teams.length; t++) {
@@ -241,7 +244,14 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}, mixinTableRow);
 			}
 
+			var currentRoundSet = false;
+			var currentRound = 1;
+
 			_.each(league.rounds, function(round) {
+				if (!currentRoundSet) {
+					currentRound = round.number;
+				}
+
 				if (round.matches) {
 					_.each(round.matches, function(match) {
 						if (match.result) {
@@ -265,8 +275,12 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 								winner.w++;
 								looser.l++;
 							}
+						} else {
+							currentRoundSet = true;
 						}
 					});
+				} else {
+					currentRoundSet = true;
 				}
 			});
 
@@ -276,7 +290,11 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				table.push(value);
 			});
 
-			return table;
+			return {
+				table: table,
+				league: league,
+				currentRound: currentRound
+			};
 		}
 	};
 });

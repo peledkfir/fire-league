@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<i class="fa fa-tasks fa-fw"></i> Matches
+	</div>
+	<div class="panel-body">
+		<div class="text-center">
+			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm" boundary-links="true"></pagination>
+		</div>
+
+		<table class="table">
+			<thead>
+				<th class="home">Home</th>
+				<th class="text-center" colspan="3">Score</th>
+				<th class="away">Away</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="match in stats.league.rounds[currPage - 1].matches">
+					<th class="home small"><fb-avatar size="24" id="match.home.id"></fb-avatar> {{match.home.name}}</th>
+					<th class="text-center">{{match.result.home}}</th>
+					<th class="text-center">-</th>
+					<th class="text-center">{{match.result.away}}</th>
+					<th class="away small"><fb-avatar size="24" id="match.away.id"></fb-avatar> {{match.away.name}}</th>
+				</tr>
+			</tbody>
+		</table>
+		<a class="btn btn-default btn-block" ng-click="currPage = stats.currentRound">Current round: {{stats.currentRound}}</a>
+	</div>
+</div>

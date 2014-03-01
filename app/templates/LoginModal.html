@@ -1,18 +1,20 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-  <h4 class="modal-title" id="myModalLabel">Login</h4>
+  <h4 class="modal-title" id="myModalLabel">Sign In</h4>
 </div>
 <div class="modal-body">
-  <div class="container">
-    <div class="row">
-      Currently we support using Facebook to login.
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      Share your games scores with your friends. Sign in now.
     </div>
-    <div>
-      <a href="" ng-click="login()">
-        <img src="img/active_404.png">
+    <div class="col-md-6 col-md-offset-3 text-center">
+      <a class="btn btn-block btn-social btn-facebook" ng-click="login()">
+        <i class="fa fa-facebook"></i> Sign in with Facebook
       </a>
     </div>
-    <div class="row">
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 text-center small">
       <small>WE WILL NEVER POST ANYTHING WITHOUT PERMISSION!</small>
     </div>
   </div>
