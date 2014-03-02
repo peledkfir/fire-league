@@ -1,21 +1,12 @@
 'use strict';
 
-fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, $state, Facebook, leagueService) {	
+fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, $state, leagueService) {	
 	$scope.addFriend = function(item, model, label) {
 		network.friends.push({id: item.uid, name: item.name});
-		$scope.selectedFriend = '';
 	};
 
 	$scope.removeFriend = function(index) {
 		$scope.network.friends.splice(index, 1);
-	};
-
-	$scope.searchFriend = function(query) {
-		var filter = _.map(network.friends, function(f) { return f.id; }).join();
-		var fql = leagueService.facebook.friends.query(query, filter);
-		return Facebook.api('/fql', {q: fql}, function(response) {}).then(function(response){
-			return response.data;
-		});
 	};
 
 	$scope.create = function() {
