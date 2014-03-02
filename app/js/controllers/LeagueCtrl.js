@@ -27,30 +27,32 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	};
 
 	var syncStats = function() {
-		// saves ui state aside
-		var roundTabInfo = _.map($scope.league.rounds, function(round) { return _.pick(round, 'active'); });
-		
-		// rebuild league as merge is not sufficient when result is deleted
-		var league = leagueService.build(state.leagueStructure.name, state.leagueStructure.players, matchMixin);
-		var roundsData = _.pick(state.$leagueData, 'rounds');
-		
-		// merge matches results to league structure
-		$.each(roundsData.rounds, function (r, round) {
-			var roundObj = league.rounds[r];
+		if (state.leagueStructure) {
+			// saves ui state aside
+			var roundTabInfo = _.map($scope.league.rounds, function(round) { return _.pick(round, 'active'); });
 			
-			if (round) {
-				$.each(round.matches, function(m, match) {
-					_.merge(roundObj.matches[m], match);
-				});
-			}
-		});
+			// rebuild league as merge is not sufficient when result is deleted
+			var league = leagueService.build(state.leagueStructure.name, state.leagueStructure.players, matchMixin);
+			var roundsData = _.pick(state.$leagueData, 'rounds');
+			
+			// merge matches results to league structure
+			$.each(roundsData.rounds || [], function (r, round) {
+				var roundObj = league.rounds[r];
+				
+				if (round) {
+					$.each(round.matches, function(m, match) {
+						_.merge(roundObj.matches[m], match);
+					});
+				}
+			});
 
-		// merge back ui state
-		_.merge(league.rounds, roundTabInfo);
+			// merge back ui state
+			_.merge(league.rounds, roundTabInfo);
 
-		// update scope
-		$scope.league = league;
-		$scope.stats = leagueService.stats($scope.league);
+			// update scope
+			$scope.league = league;
+			$scope.stats = leagueService.stats($scope.league);
+		}
 	};
 
 	$scope.cancelEdit = function() {

@@ -5,7 +5,7 @@ fApp.directive('fbAvatar', function() {
 	return {
 		restrict: 'E',
 		replace: true,
-		template: '<img class="profile_{{size}} {{clazz}}" ng-src="http://graph.facebook.com/{{id}}/picture?type=square&width={{size}}&height={{size}}">',
+		template: '<img class="profile_{{size}} {{clazz}}" ng-src="//graph.facebook.com/{{id}}/picture?type=square&width={{size}}&height={{size}}">',
 		scope: {
 			clazz: '@',
 			size: '=',
