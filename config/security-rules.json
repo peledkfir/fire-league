@@ -52,6 +52,7 @@
         ".read": true,
         
         "$network": {
+          ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
           ".validate": "root.child('networks').child($network).exists()",
           
           "$league": {
@@ -90,35 +91,50 @@
         ".read": true,
         
         "$network": {
+          ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
           ".validate": "root.child('networks').child($network).exists()",
           
           "$league": {
+            ".write": "root.child('network_leagues').child($network).child($league).child('players').child(auth.uid).exists()",
             ".validate": "root.child('network_leagues').child($network).child($league).exists()",
             
-            "$round": {
-              "$match": {
-                ".validate": "newData.hasChildren(['result'])",
+            "rounds": {
+              "$round": {
                 
-                "result": {
-                  ".validate": "newData.hasChildren(['home', 'away'])",
-                  
-                  "home": {
-                    ".validate": "newData.isNumber()"
-                  },
-                  
-                  "away": {
-                    ".validate": "newData.isNumber()"
-                  },
-                  
-                  "$other": {
-                    ".validate": false
+                "matches": {
+                  "$match": {
+                    ".validate": "newData.hasChildren(['result'])",
+                    
+                    "result": {
+                      ".validate": "newData.hasChildren(['home', 'away'])",
+                      
+                      "home": {
+                        ".validate": "newData.isNumber() && newData.val() >= 0"
+                      },
+                      
+                      "away": {
+                        ".validate": "newData.isNumber() && newData.val() >= 0"
+                      },
+                      
+                      "$other": {
+                        ".validate": false
+                      }
+                    },
+                    
+                    "$other": {
+                      ".validate": false
+                    }
                   }
                 },
-                
+            
                 "$other": {
                   ".validate": false
                 }
               }
+            },
+            
+            "$other": {
+              ".validate": false
             }
           }
         }  
@@ -133,7 +149,8 @@
               ".read": true,
               ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
               ".validate": "root.child('networks').child($network).exists() &&
-                            root.child('networks').child($network).child('friends').child($user).exists()",
+                            root.child('networks').child($network).child('friends').child($user).exists() &&
+                            (newData.child('leagues').exists() || !data.child('leagues').exists())",
               
               "leagues": {
                 "$league": {
@@ -141,7 +158,11 @@
                   ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
                   ".validate": "root.child('network_leagues').child($network).child($league).exists()"
                 }
-              }
+              },
+                
+              "$other": {
+                ".validate": false
+              }              
             }
           }, 
           
