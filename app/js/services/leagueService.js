@@ -20,12 +20,21 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 		},
 
 		facebook: {
+			groups: {
+				query: function() {
+					return 'SELECT gid, name from group WHERE gid IN (SELECT gid FROM group_member WHERE uid = me())';
+				}
+			},
+
 			friends: {
-				query: function(query, filter) {
+				query: function(query, filter, groups) {
 					if (filter && filter.length > 0) {
 						filter = sprintf('NOT (uid IN (%s)) AND ', filter);
 					}
-					var fql = sprintf('SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) OR uid in (SELECT uid FROM group_member WHERE gid IN (SELECT gid FROM group_member WHERE uid = me()))) AND strpos(lower(name), lower(\'%s\')) >=0 ORDER BY strpos(lower(name), lower(\'%s\')) LIMIT 10', filter, query, query);
+					if (groups && groups.length > 0) {
+						groups = sprintf(' OR uid in (SELECT uid FROM group_member WHERE gid IN (%s))', groups);
+					}
+					var fql = sprintf("SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me())%s) AND strpos(lower(name), lower('%s')) >=0 ORDER BY strpos(lower(name), lower('%s')) LIMIT 10", filter, groups, query, query);
 					return fql;
 				}
 			}

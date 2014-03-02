@@ -11,18 +11,17 @@
 <form ng-hide="loading" ng-cloak ng-submit="save()">
 	<fieldset>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<label for="facebookSearch">Search from Facebook</label>
-				<input id="facebookSearch" type="text" placeholder="Search.." ng-model="selectedFriend" typeahead="friend as friend.name for friend in searchFriend($viewValue) | filter:$viewValue" typeahead-template-url="templates/TypeAheadFriendTemplate.html" typeahead-loading="searchingFriend" typeahead-wait-ms="100" typeahead-on-select="addFriend($item, $model, $label)" class="form-control">
-				
-				<i ng-show="searchingFriend" class="glyphicon glyphicon-refresh"></i>
+
+				<fb-friends-typeahead on-add-friend="addFriend(item, model, label)" filter="network.friends"></fb-friends-typeahead>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12" ng-repeat="friend in network.friends">
 				<div class="row">
-					<i ng-show="isOwner(friend)" class="glyphicon glyphicon-remove" ng-click="removeFriend(friend)"></i>{{$index + 1}}. {{friend.name}}
+					<i ng-show="isOwner(friend)" class="fa fa-times" ng-click="removeFriend(friend)"></i>{{$index + 1}}. {{friend.name}}
 				</div>
 			</div>
 		</div>

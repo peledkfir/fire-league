@@ -15,11 +15,9 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<label for="facebookSearch">Search from Facebook</label>
-					<input id="facebookSearch" type="text" placeholder="Search.." ng-model="selectedFriend" typeahead="friend as friend.name for friend in searchFriend($viewValue) | filter:$viewValue" typeahead-template-url="templates/TypeAheadFriend.html" typeahead-loading="searchingFriend" typeahead-wait-ms="100" typeahead-on-select="addFriend($item, $model, $label)" class="form-control">
-					
-    				<i ng-show="searchingFriend" class="fa fa-refresh"></i>
+					<fb-friends-typeahead on-add-friend="addFriend(item, model, label)" filter="network.friends"></fb-friends-typeahead>
 				</div>
 			</div>
 
