@@ -1,9 +1,10 @@
-'use strict';
 
 
 // Declare app level module which depends on filters, and services
 var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
 	.config(function($stateProvider, $urlRouterProvider) {
+		'use strict';
+		
 		$stateProvider
 		.state('browse', {
 			url: '/browse',
@@ -11,12 +12,12 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			controller: 'NetworkBrowseCtrl'
 		})
 		.state('networkCreate', {
-			url: '/create/network', 
+			url: '/create/network',
 			templateUrl: 'templates/NetworkCreate.html',
 			controller: 'NetworkCreateCtrl'
 		})
 		.state('leagueCreate', {
-			url: '/create/league?network', 
+			url: '/create/league?network',
 			templateUrl: 'templates/LeagueCreate.html',
 			controller: 'LeagueCreateCtrl'
 		})
@@ -31,16 +32,20 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 				'@': {
 					templateUrl: 'templates/NetworkEdit.html',
 					controller: 'NetworkEditCtrl'
-				}			
+				}
 			}
 		})
 		.state('league', {
-			url: '/network/:network/league/:league', 
+			url: '/network/:network/league/:league',
 			templateUrl: 'templates/League.html',
 			controller: 'LeagueCtrl'
 		})
+		.state('favorites', {
+			url: '/favorites',
+			template: '<div>Coming Soon..</div>'
+		})
 		.state('unknown', {
-			url: '/pageNotFound', 
+			url: '/pageNotFound',
 			templateUrl: 'templates/NotFound.html',
 		});
 		
@@ -49,14 +54,18 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		.otherwise('/pageNotFound');
 	})
 	.run(function() {
+		'use strict';
+
 		// Setup underscore.string
 		_.mixin(_.str.exports());
 	})
 	.run(function($rootScope, $state, $stateParams) {
+		'use strict';
+		
 		$rootScope.$state = $state;
-    	$rootScope.$stateParams = $stateParams;
+		$rootScope.$stateParams = $stateParams;
 
-    	$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
+		$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
 			if ($rootScope.auth.user == null) {
 				if (_.endsWith(toState.name, 'Create')) {
 					ev.preventDefault();
@@ -70,6 +79,8 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		});
 	})
 	.run(function($http, $templateCache) {
+		'use strict';
+		
 		// cache modals
 		_.delay(function() {
 			$http.get('templates/LoginModal.html', {cache: $templateCache});
@@ -77,6 +88,8 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		}, 2000);
 	})
 	.run(function($rootScope, Facebook) {
+		'use strict';
+		
 		// Here, usually you should watch for when Facebook is ready and loaded
 		var $destroyWatch = $rootScope.$watch(function() {
 			return Facebook.isReady(); // This is for convenience, to notify if Facebook is loaded and ready to go.
@@ -88,6 +101,8 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		});
 	})
 	.run(function($rootScope, $firebaseSimpleLogin, leagueService) {
+		'use strict';
+		
 		var root = leagueService.res.root.ref();
-		$rootScope.auth = $firebaseSimpleLogin(root);		
+		$rootScope.auth = $firebaseSimpleLogin(root);
 	});

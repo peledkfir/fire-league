@@ -17,7 +17,7 @@
 	</div>
 </div>
 
-<div class="row" ng-hide="loading || !stats" ng-cloak>
+<div class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
 	<div class="col-lg-8">
 		<tabset>
 			<tab ng-repeat="round in league.rounds" active="round.active">

@@ -111,7 +111,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	// TODO: update when logged in
 	ownersRef.once('value', function(snap) {
 		if ($rootScope.auth.user) {
-			$scope.isOwner = _.has(snap.val(), $rootScope.auth.user.uid);
+			state.isOwner = _.has(snap.val(), $rootScope.auth.user.uid);
 		}
 	});
 

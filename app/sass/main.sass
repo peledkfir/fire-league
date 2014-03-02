@@ -1,5 +1,6 @@
 @import compass
-@import compass/layout	
+@import compass/layout
+@import compass/css3/user-interface
 
 //body
 //	padding-top: 70px
@@ -18,21 +19,22 @@
 	.profile_#{$size}
 		+square_size($size)
 
-thead th
-	&.away
-		text-align: right
-
-tbody th
-	&.home,&.away
-		width: 123px
+.list-group-item
+	.home,.away
 		overflow: hidden
-		text-overflow: ellipsis
-		display: block
 		white-space: nowrap
-
-	&.away
-		direction: rtl
+		text-overflow: ellipsis
+		width: 95px
+		display: inline-block
+		vertical-align: middle
+	.away
 		text-align: right
+	&.active
+		background-color: #f5f5f5
+
+.pagination-sm>li>a
+	+user-select(none)
+	cursor: default
 
 .leagueEdit
 	.players
