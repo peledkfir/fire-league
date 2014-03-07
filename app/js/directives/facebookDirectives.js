@@ -18,7 +18,7 @@ fApp.directive('fbAvatar', function() {
 
 	return {
 		restrict: 'E',
-		replace: false,
+		replace: true,
 		templateUrl: 'templates/directives/FacebookFriendsTypeahead.html',
 		scope: {
 			filter: '=',
