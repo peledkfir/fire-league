@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Builds soccer leagues tables</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="css/sb-admin.custom.css"/>
   <link rel="stylesheet" href="css/social-buttons.css"/>
@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha 0.0.1</small></a>
+        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha 0.0.1.1</small></a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <ul class="nav navbar-top-links navbar-right" ng-cloak>
@@ -42,9 +42,9 @@
             </li>
           </ul>
         </li>
-        <li class="dropdown" ng-show="$root.auth.user">
+        <li class="dropdown" ng-if="$root.auth.user">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <img class="profile_24" ng-src="http://graph.facebook.com/{{$root.auth.user.username}}/picture?type=square&width=16&height=16">  <i class="fa fa-caret-down"></i>
+            <fb-avatar size="24" id="$root.auth.user.id"></fb-avatar> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
               <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -114,15 +114,15 @@
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular/ui/ui-bootstrap-0.9.0.min.js"></script>
 -->
-<script src="lib/underscore/lodash.min.js"></script>
-<script src="lib/underscore/underscore.string.min.js"></script>
-<script src="lib/jquery/jquery-2.0.3.min.js"></script> <!-- used by mentisMenu, sortable -->
-<script src="lib/bootstrap/bootstrap.min.js"></script> <!-- used by mentisMenu -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- used by mentisMenu, sortable -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> <!-- used by mentisMenu -->
 <script src="lib/jquery/jquery-ui-1.10.4.custom.min.js"></script> <!-- used by sortable -->
 <script src="lib/string/sprintf.js"></script>
 
-<script src="//static.firebase.com/v0/firebase.js"></script>
-<script src="//cdn.firebase.com/v0/firebase-simple-login.js"></script>
+<script src="//cdn.firebase.com/js/client/1.0.5/firebase.js"></script>
+<script src="//cdn.firebase.com/js/simple-login/1.2.5/firebase-simple-login.js"></script>
 
 <!--
 <script src='lib/firebase/firebase.js'></script>
@@ -138,7 +138,7 @@
 <script src="lib/angular/ui/ui-bootstrap-0.10.0.js"></script>
 <script src="lib/jquery/sortable.js"></script>
 <script src="lib/jquery/plugins/jquery.metisMenu.js"></script>
-<script src="lib/firebase/angularfire.js"></script>
+<script src="//cdn.firebase.com/libs/angularfire/0.7.0/angularfire.js"></script>
 <script src="lib/facebook/angular-facebook.js"></script>
 
 <!--

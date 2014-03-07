@@ -4,7 +4,7 @@ fApp.directive('leagueTablePanel', function() {
 	
 	return {
 		restrict: 'E',
-		replace: false,// workaround for firebase hosting
+		replace: true,
 		templateUrl: 'templates/directives/LeagueTablePanel.html',
 		scope: {
 			table: '='
@@ -16,7 +16,7 @@ fApp.directive('leagueTablePanel', function() {
 	
 	return {
 		restrict: 'E',
-		replace: false,// workaround for firebase hosting
+		replace: true,
 		templateUrl: 'templates/directives/LeagueCurrRoundPanel.html',
 		scope: {
 			stats: '='
