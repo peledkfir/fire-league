@@ -31,10 +31,12 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					if (filter && filter.length > 0) {
 						filter = sprintf('NOT (uid IN (%s)) AND ', filter);
 					}
+
 					if (groups && groups.length > 0) {
 						groups = sprintf(' OR uid in (SELECT uid FROM group_member WHERE gid IN (%s))', groups);
 					}
 					var fql = sprintf("SELECT uid, name, pic_square FROM user WHERE %s(uid = me() OR uid IN (SELECT uid2 FROM friend WHERE uid1 = me())%s) AND strpos(lower(name), lower('%s')) >=0 ORDER BY strpos(lower(name), lower('%s')) LIMIT 10", filter, groups, query, query);
+
 					return fql;
 				}
 			}
