@@ -119,6 +119,23 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			},
 
 			league: {
+				$set: function(network, leagueObj) {
+					var sync = this.sync(network, leagueObj.name);
+					sync.$set(leagueObj);
+				},
+
+				sync: function(network, league) {
+					var sync = syncData('network_leagues/' + network + '/' + league);
+					return sync;
+				},
+
+				players: {
+					sync: function(network, league) {
+						var sync = syncData('network_leagues/' + network + '/' + league + '/players');
+						return sync;
+					}
+				},
+
 				set: function(network, leagueObj) {
 					var ref = this.ref(network, leagueObj.name);
 					ref.set(leagueObj);

@@ -1,22 +1,23 @@
-'use strict';
 
 fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $state, $stateParams, leagueService) {
+	'use strict';
+
 	var network = $scope.network = $stateParams.network;
 	
 	$scope.create = function() {
 		// Prepare model
 		var teams = $scope.teams;
 		var newLeague = { name: $scope.name };
-		newLeague.players = [];
+		newLeague.players = {};
 
 		for (var i = 0; i < teams.length; i++) {
-			newLeague.players.push(angular.copy(teams[i]));
+			newLeague.players[leagueService.ids.facebook(teams[i].id)] = _.extend(angular.copy(teams[i]), { $priority: i });
 		}
 
 		console.log(newLeague);
 
 		// Creates the league
-		leagueService.res.league.set(network, newLeague);
+		leagueService.res.league.$set(network, newLeague);
 
 		// Connects the users to the league
 		for (var j = teams.length - 1; j >= 0; j--) {

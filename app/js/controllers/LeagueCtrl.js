@@ -7,6 +7,10 @@
  */
 fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
 	'use strict';
+
+	var league = $stateParams.league;
+	var network = $stateParams.network;
+
 	var state = {
 
 	};
@@ -27,12 +31,12 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	};
 
 	var syncStats = function() {
-		if (state.leagueStructure) {
+		if (state.players) {
 			// saves ui state aside
 			var roundTabInfo = _.map($scope.league.rounds, function(round) { return _.pick(round, 'active'); });
 			
 			// rebuild league as merge is not sufficient when result is deleted
-			var league = leagueService.build(state.leagueStructure.name, state.leagueStructure.players, matchMixin);
+			var league = leagueService.build(league, state.players, matchMixin);
 			var roundsData = _.pick(state.$leagueData, 'rounds');
 			
 			// merge matches results to league structure
@@ -52,6 +56,16 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 			// update scope
 			$scope.league = league;
 			$scope.stats = leagueService.stats($scope.league);
+		} else if (_.isArray(state.$players.$getIndex()) && state.$players.$getIndex().length > 0) {
+			var keys = state.$players.$getIndex();
+			var players = [];
+			keys.forEach(function(key, i) {
+				players.push(state.$players[key]);
+			});
+
+			state.players = players;
+
+			syncStats();
 		}
 	};
 
@@ -97,10 +111,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		state.$leagueData.$save();
 	};
 
-	var league = $stateParams.league;
-	var network = $stateParams.network;
-
-	var leagueRef = leagueService.res.league.ref(network, league);
+	state.$players = leagueService.res.league.players.sync(network, league);
 	var ownersRef = leagueService.res.network.owners.ref(network);
 
 	$scope.loading = false;
@@ -117,10 +128,9 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		}
 	});
 
-	leagueRef.once('value', function(snap) {
-		state.leagueStructure = snap.val();
-		
+	state.$players.$on('loaded', function() {
 		state.$leagueData = leagueService.res.league.table.sync(network, league);
+
 		state.$leagueData.$on('loaded', function() {
 			$scope.loading = false;
 			$timeout.cancel(promise);

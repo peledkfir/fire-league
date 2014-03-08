@@ -7,7 +7,8 @@
 		</ul>
 	</div><!-- /btn-group -->
 
-	<input id="facebookSearch" type="text" placeholder="Search.." ng-model="selectedFriend" typeahead="friend as friend.name for friend in searchFriend($viewValue) | filter:$viewValue" typeahead-template-url="templates/TypeAheadFriend.html" typeahead-loading="searchingFriend" typeahead-wait-ms="100" typeahead-on-select="onSelect($item, $model, $label)" class="form-control">
-</div><!-- /input-group -->
+	<i ng-show="searchingFriend" class="fa fa-refresh"></i>
 
-<i ng-show="searchingFriend" class="fa fa-refresh"></i>
+	<input id="facebookSearch" type="text" placeholder="Search.." ng-model="selectedFriend" typeahead="friend as friend.name for friend in searchFriend($viewValue) | filter:$viewValue" typeahead-template-url="templates/TypeAheadFriend.html" typeahead-loading="searchingFriend" typeahead-wait-ms="100" typeahead-on-select="onSelect($item, $model, $label)" class="form-control">
+	
+</div>
