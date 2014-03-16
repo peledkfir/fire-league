@@ -1,0 +1,23 @@
+<div>
+<div class="form-group">
+	<label for="facebookSearch">Network friends</label>
+	<fb-friends-typeahead on-add-friend="addFriend(item, model, label)" filter="friends"></fb-friends-typeahead>
+</div>
+<div class="form-group">
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="friend in friends">
+			{{$index + 1}}. <fb-avatar size="24" id="friend.id"></fb-avatar> {{friend.name}}
+
+			<span class="pull-right">
+				<span class="label label-success" ng-if="friend.isNew">New</span>
+				<button type="button" class="btn-link" ng-if="!friend.isOwner && !friend.isDeleted" tooltip="Remove" ng-click="removeFriend($index)"><i class="fa fa-trash-o"></i></button>
+				<span class="label label-danger" ng-if="friend.isDeleted">Delete</span>
+				<button type="button" class="btn-link" ng-if="friend.isDeleted" ng-click="reAddFriend($index)" tooltip="Undo">
+					<i class="fa fa-undo"></i>
+				</button>
+				<span class="label label-default" ng-if="friend.isOwner">Owner</span>
+			</span>
+		</li>
+	</ul>
+</div>
+</div>

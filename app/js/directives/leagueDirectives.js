@@ -30,4 +30,33 @@ fApp.directive('leagueTablePanel', function() {
 			});
 		}
 	};
+})
+.directive('editableFriendsList', function() {
+	'use strict';
+
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/EditableFriendsList.html',
+		scope: {
+			friends: '='
+		},
+		controller: function($scope) {
+			$scope.addFriend = function(item, model, label) {
+				$scope.friends.push({id: parseInt(item.uid), name: item.name, isNew: true});
+			};
+			
+			$scope.removeFriend = function(index) {
+				if ($scope.friends[index].isNew) {
+					$scope.friends.splice(index, 1);
+				} else {
+					$scope.friends[index].isDeleted = true;
+				}
+			};
+
+			$scope.reAddFriend = function(index) {
+				$scope.friends[index].isDeleted = false;
+			};
+		}
+	};
 });

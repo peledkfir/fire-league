@@ -7,95 +7,79 @@
   <title>Builds soccer leagues tables</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css"/>
-  <link rel="stylesheet" href="css/sb-admin.custom.css"/>
   <link rel="stylesheet" href="css/social-buttons.css"/>
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 <body ng-cloak ng-controller="LoginCtrl">
-  <div id="wrapper">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha 0.0.1.1</small></a>
+        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha 0.0.2</small></a>
       </div>
+
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-top-links navbar-right" ng-cloak>
-        <li ng-show="loading">
-          <a><i class="fa fa-cog fa-spin fa-lg fa-fw"></i></a>
-        </li>
-        <li class="dropdown" ng-show="$root.auth.user && $state.includes('network')"> 
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-cog fa-lg fa-fw"></i> <i class="fa fa-caret-down"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-                <a ui-sref="network.edit({network: $state.params.network})"><i class="fa fa-edit fa-fw"></i> Edit Network</a>
-              </li> 
-            <li>
-                <a ui-sref="network.delete({network: $state.params.network})" ui-sref-opts="{ location: false }"><i class="fa fa-times-circle fa-fw"></i> Delete Network</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown" ng-if="$root.auth.user">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <fb-avatar size="24" id="$root.auth.user.id"></fb-avatar> <i class="fa fa-caret-down"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-              <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-              </li>
-              <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-              </li>
-              <li class="divider"></li>
-              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Sign Out</a>
-              </li>
-          </ul>
-          <!-- /.dropdown-user -->
-        </li>
-        <li ng-hide="loading || $root.auth.user">
-          <a href="" ng-click="openLoginModal()" ng-enabled="facebookReady">
-            <i class="fa fa-sign-in fa-fw"></i> Sign In
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <nav class="navbar-default navbar-static-side" role="navigation">
-      <div class="sidebar-collapse" style="height: 0px;" metis-menu-collapse="768">
-          <ul class="nav" id="side-menu" metis-menu>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li ui-sref-active="active">
+            <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
+          </li>
+          <li class="dropdown" ui-sref-active="active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <li>
-                  <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
+                <a ui-sref="networkCreate">Network</a>
               </li>
-              <li ng-show="$root.auth.user">
-                  <a href="#"><i class="fa fa-copy fa-fw"></i> Create<span class="fa arrow"></span></a>
-                  <ul class="nav nav-second-level collapse" style="height: 0px;">
-                      <li>
-                          <a ui-sref="networkCreate">Network</a>
-                      </li>
-                      <li ng-show="$state.includes('network')">
-                          <a ui-sref="leagueCreate({network: $state.params.network})">League</a>
-                      </li>
-                  </ul>
-                  <!-- /.nav-second-level -->
+              <li>
+                <li ng-show="$state.includes('network')">
+                    <a ui-sref="leagueCreate({network: $state.params.network})">League</a>
+                </li>
               </li>
-              <li ng-show="$root.auth.user">
-                <a ui-sref="favorites"><i class="fa fa-star fa-fw"></i> Favorites</a>
-              </li>
-          </ul>
-          <!-- /#side-menu -->
-      </div>
-      <!-- /.sidebar-collapse -->
-    </nav>
+            </ul>
+          </li>
+          <li ui-sref-active="active" ng-show="$root.auth.user">
+            <a ui-sref="favorites"><i class="fa fa-star fa-fw"></i> Favorites</a>
+          </li>
+        </ul>
 
-    <div ui-view id="page-wrapper" class="container" autoscroll="false">
-    </div>
-  </div> <!-- /#wrapper --> 
+        <ul class="nav navbar-nav navbar-right" ng-cloak>
+          <li ng-show="loading">
+            <a><i class="fa fa-cog fa-spin fa-lg fa-fw"></i></a>
+          </li>
+          <li class="dropdown" ng-if="$root.auth.user">
+            <a class="dropdown-toggle dropdown-24" data-toggle="dropdown" href="#">
+              <fb-avatar size="24" id="$root.auth.user.id"></fb-avatar> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Sign Out</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+          </li>
+          <li ng-hide="loading || $root.auth.user">
+            <a href="" ng-click="openLoginModal()" ng-enabled="facebookReady">
+              <i class="fa fa-sign-in fa-fw"></i> Sign In
+            </a>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
+  <div ui-view class="container" autoscroll="false">
+  </div>
  
 <!--
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap-tpls.min.js"></script>
@@ -104,7 +88,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- used by mentisMenu, sortable -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> <!-- used by mentisMenu -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>  --><!-- used by mentisMenu -->
 <script src="lib/jquery/jquery-ui-1.10.4.custom.min.js"></script> <!-- used by sortable -->
 <script src="lib/string/sprintf.js"></script>
 
@@ -131,7 +115,7 @@
 <script src="js/controllers/LeagueCtrl.js"></script>  
 <script src="js/services/firebaseHelper.js"></script>  
 <script src="js/services/leagueService.js"></script>  
-<script src="js/directives/metisMenu.js"></script>  
+<!-- <script src="js/directives/metisMenu.js"></script>   -->
 <script src="js/directives/leagueDirectives.js"></script>  
 <script src="js/directives/facebookDirectives.js"></script>  
 </body>

@@ -1,9 +1,9 @@
-<div class="row">
-    <div class="col-lg-12">
-	    <h1 class="page-header">{{league.name}}</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+<ol class="breadcrumb">
+  <li><a ui-sref="browse">Networks</a></li>
+  <li><a ui-sref="network({network: networkName})">{{networkName}}</a></li>
+  <li class="active">{{league.name}}</li>
+</ol>
+
 <div ng-show="loading || !stats">
 	<i class="fa fa-cog fa-spin fa-5x"></i>
 </div>

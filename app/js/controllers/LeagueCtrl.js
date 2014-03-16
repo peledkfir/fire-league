@@ -8,8 +8,8 @@
 fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
 	'use strict';
 
-	var league = $stateParams.league;
-	var network = $stateParams.network;
+	var leagueName = $stateParams.league;
+	var networkName = $stateParams.network;
 
 	var state = {
 
@@ -36,7 +36,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 			var roundTabInfo = _.map($scope.league.rounds, function(round) { return _.pick(round, 'active'); });
 			
 			// rebuild league as merge is not sufficient when result is deleted
-			var league = leagueService.build(league, state.players, matchMixin);
+			var league = leagueService.build(leagueName, state.players, matchMixin);
 			var roundsData = _.pick(state.$leagueData, 'rounds');
 			
 			// merge matches results to league structure
@@ -111,11 +111,12 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		state.$leagueData.$save();
 	};
 
-	state.$players = leagueService.res.league.players.sync(network, league);
-	var ownersRef = leagueService.res.network.owners.ref(network);
+	state.$players = leagueService.res.league.players.sync(networkName, leagueName);
+	var ownersRef = leagueService.res.network.owners.ref(networkName);
 
 	$scope.loading = false;
-	$scope.league = { name: league };
+	$scope.league = { name: leagueName };
+	$scope.networkName = networkName;
 
 	var promise = $timeout(function(){
 		$scope.loading = true;
@@ -129,14 +130,14 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	});
 
 	state.$players.$on('loaded', function() {
-		state.$leagueData = leagueService.res.league.table.sync(network, league);
+		state.$leagueData = leagueService.res.league.table.sync(networkName, leagueName);
 
 		state.$leagueData.$on('loaded', function() {
 			$scope.loading = false;
 			$timeout.cancel(promise);
 			syncStats();
 		});
-
+		
 		state.$leagueData.$on('change', function() {
 			syncStats();
 		});

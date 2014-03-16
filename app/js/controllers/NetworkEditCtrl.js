@@ -1,27 +1,24 @@
 
 fApp.controller('NetworkEditCtrl', function NetworkEditCtrl($scope, $timeout, $state, $stateParams, leagueService) {
 	'use strict';
-	
-	$scope.addFriend = function(item, model, label) {
-		$scope.network.friends[leagueService.ids.facebook(item.uid)] = {id: item.uid, name: item.name};
-	};
-
-	$scope.isOwner = function(friend) {
-		return $scope.network && $scope.network.owners && !$scope.network.owners[leagueService.ids.facebook(friend.id)];
-	};
-	
-	$scope.removeFriend = function(friend) {
-		delete $scope.network.friends[leagueService.ids.facebook(friend.id)];
-	};
+	var networkName = $stateParams.network;
 
 	$scope.save = function() {
 		$scope.saving = true;
-		$scope.network.$save();
 
-		// Connects the users to the network
-		for (var id in $scope.network.friends) {
-			leagueService.res.favorites.network.set(id, $scope.network.name);
-		}
+		var friendsRef = leagueService.res.network.friends.ref(networkName);
+		var newFriends = _.filter($scope.friends, 'isNew');
+		var deletedFriends = _.filter($scope.friends, 'isDeleted');
+
+		_.each(newFriends, function(friend) {
+			var uid = leagueService.ids.facebook(friend.id);
+			friendsRef.child(uid).set({id: friend.id, name: friend.name});
+			leagueService.res.favorites.network.set(uid, networkName);
+		});
+
+		_.each(deletedFriends, function(friend) {
+			friendsRef.child(leagueService.ids.facebook(friend.id)).remove();
+		});
 
 		$state.go('^');
 	};
@@ -32,10 +29,18 @@ fApp.controller('NetworkEditCtrl', function NetworkEditCtrl($scope, $timeout, $s
 		$scope.loading = true;
 	}, 50);
 	
-	var $network = $scope.network = leagueService.res.network.sync($stateParams.network);
-	$network.$on('loaded', function() {
+	var networkRef = leagueService.res.network.ref(networkName);
+	networkRef.once('value', function(snap) {
 		$timeout.cancel(promise);
 		$scope.loading = false;
+
+		var friends = [];
+		var network = snap.val();
+		_.each(network.friends, function(friend, uid) {
+			friends.push({id: friend.id, name: friend.name, isOwner: !_.isUndefined(network.owners[uid])});
+		});
+
+		$scope.friends = friends;
 	});
 
 	$scope.saving = false;

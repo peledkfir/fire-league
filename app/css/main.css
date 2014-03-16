@@ -1,26 +1,26 @@
-/* line 8, ../sass/main.sass */
-#navbar-top .navbar-right {
-  padding-right: 10px;
-}
-
 /* line 11, ../sass/main.sass */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
-/* line 19, ../sass/main.sass */
+/* line 14, ../sass/main.sass */
+.dropdown-toggle.dropdown-24 {
+  padding: 13px 0;
+}
+
+/* line 22, ../sass/main.sass */
 .profile_16 {
   width: 16px;
   height: 16px;
 }
 
-/* line 19, ../sass/main.sass */
+/* line 22, ../sass/main.sass */
 .profile_24 {
   width: 24px;
   height: 24px;
 }
 
-/* line 23, ../sass/main.sass */
+/* line 26, ../sass/main.sass */
 .list-group-item .home, .list-group-item .away {
   overflow: hidden;
   white-space: nowrap;
@@ -29,16 +29,16 @@
   display: inline-block;
   vertical-align: middle;
 }
-/* line 30, ../sass/main.sass */
+/* line 33, ../sass/main.sass */
 .list-group-item .away {
   text-align: right;
 }
-/* line 32, ../sass/main.sass */
+/* line 35, ../sass/main.sass */
 .list-group-item.active {
   background-color: whitesmoke;
 }
 
-/* line 35, ../sass/main.sass */
+/* line 38, ../sass/main.sass */
 .pagination-sm > li > a {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -46,25 +46,25 @@
   cursor: default;
 }
 
-/* line 40, ../sass/main.sass */
+/* line 43, ../sass/main.sass */
 .leagueEdit .players {
   border: 2px dashed blue;
   margin: 10px 10px 0 0;
   padding: 5px;
 }
-/* line 45, ../sass/main.sass */
+/* line 48, ../sass/main.sass */
 .leagueEdit .player {
   border: 1px solid black;
   cursor: move;
 }
-/* line 49, ../sass/main.sass */
+/* line 52, ../sass/main.sass */
 .leagueEdit .playerPlaceholder {
   border: 4px dashed #cfcfcf;
   opacity: 0.8;
   text-align: center;
   vertical-align: middle;
 }
-/* line 55, ../sass/main.sass */
+/* line 58, ../sass/main.sass */
 .leagueEdit .playerPlaceholder:before {
   color: #cfcfcf;
   content: "HERE";

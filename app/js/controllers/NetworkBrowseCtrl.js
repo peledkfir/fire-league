@@ -1,6 +1,17 @@
-'use strict';
 
-fApp.controller('NetworkBrowseCtrl', function NetworkBrowseCtrl($scope, $timeout, leagueService) {
+fApp.controller('NetworkBrowseCtrl', function NetworkBrowseCtrl($scope, $rootScope, $timeout, leagueService) {
+	'use strict';
+	
+	$scope.isOwner = function(network) {
+		var isOwner = false;
+
+		if ($rootScope.auth.user) {
+			isOwner = network.owners[$rootScope.auth.user.uid] !== null;
+		}
+
+		return isOwner;
+	};
+
 	$scope.getOwners = function(network) {
 		return _.map(network.owners, function(owner) {
 			return owner.name;

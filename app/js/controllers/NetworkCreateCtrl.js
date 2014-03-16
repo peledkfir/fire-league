@@ -1,26 +1,19 @@
-'use strict';
 
-fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, $state, leagueService) {	
-	$scope.addFriend = function(item, model, label) {
-		network.friends.push({id: item.uid, name: item.name});
-	};
-
-	$scope.removeFriend = function(index) {
-		$scope.network.friends.splice(index, 1);
-	};
-
+fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootScope, $state, leagueService) {
+	'use strict';
+	
 	$scope.create = function() {
 		// Prepare model
 		var newNetwork = { name: network.name };
 		newNetwork.friends = {};
 		
 		for (var i = network.friends.length - 1; i >= 0; i--) {
-			var friend = angular.copy(network.friends[i]);
+			var friend = { id: network.friends[i].id, name: network.friends[i].name };
 			newNetwork.friends[leagueService.ids.facebook(friend.id)] = friend;
 		}
 
 		newNetwork.owners = {};
-		newNetwork.owners[$rootScope.auth.user.uid] = angular.copy(owner);
+		newNetwork.owners[$rootScope.auth.user.uid] = _.pick(owner, 'id', 'name');
 		
 		console.log(newNetwork);
 
@@ -40,6 +33,6 @@ fApp.controller('NetworkCreateCtrl', function NetworkCreateCtrl($scope, $rootSco
 		name: '',
 		friends: []
 	};
-	var owner = { id: Number($rootScope.auth.user.id), name: $rootScope.auth.user.name };
+	var owner = { id: Number($rootScope.auth.user.id), name: $rootScope.auth.user.name, isOwner: true };
 	network.friends.push(owner);
 });

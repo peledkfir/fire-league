@@ -1,6 +1,7 @@
-'use strict';
 
 fApp.controller('NetworkLeaguesCtrl', function NetworkLeaguesCtrl($scope, $stateParams, $timeout, leagueService) {
+	'use strict';
+
 	$scope.getPlayersNum = function(league) {
 		return Object.keys(league.players).length;
 	};
