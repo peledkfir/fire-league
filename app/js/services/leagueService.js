@@ -50,6 +50,10 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			},
 
 			favorites: {
+				sync: function(uid) {
+					return syncData('user_favorites/' + uid);
+				},
+
 				network: {
 					ref: function(uid, name) {
 						return firebaseRef('user_favorites/' + uid + '/networks/' + name);
