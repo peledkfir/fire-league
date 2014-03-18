@@ -9,15 +9,15 @@
 </div>
 
 <div class="row" ng-hide="loading || !stats" ng-cloak>
-	<div class="col-lg-8">
+	<div class="col-md-7 col-lg-8">
 		<league-table-panel table="stats.table"></league-table-panel>
 	</div>
-	<div class="col-lg-4">
+	<div class="col-md-5 col-lg-4">
 		<league-curr-round-panel stats="stats"></league-curr-round-panel>
 	</div>
 </div>
 
-<div class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
+<div ng-if="isOwner" class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
 	<div class="col-lg-8">
 		<tabset>
 			<tab ng-repeat="round in league.rounds" active="round.active">

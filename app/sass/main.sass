@@ -18,7 +18,7 @@
 	width: #{$size}px
 	height: #{$size}px
 
-@each $size in (16, 24)
+@each $size in (16, 24, 48, 64)
 	.profile_#{$size}
 		+square_size($size)
 
@@ -32,8 +32,15 @@
 		vertical-align: middle
 	.away
 		text-align: right
+	.score
+		position: absolute
+		left: 0
+		right: 0
+		display: inline-block
 	&.active
 		background-color: #f5f5f5
+	.buttons
+		padding-top: 6px
 
 .pagination-sm>li>a
 	+user-select(none)
