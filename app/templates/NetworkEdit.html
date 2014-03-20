@@ -4,14 +4,14 @@
   <li class="active">Edit</li>
 </ol>
 
-<div ng-show="loading">
+<div class="text-center" ng-show="loading">
 	<i class="fa fa-cog fa-spin fa-5x"></i>
 </div>
 
 <div class="row">
 	<div class="col-lg-offset-2 col-lg-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-edit"></i> Edit '{{$state.params.network}}' Network</div>
+			<div class="panel-heading"><i class="fa fa-fw fa-edit"></i> Edit '{{$state.params.network}}' Network</div>
 			<div class="panel-body">
 				<form ng-hide="loading" ng-cloak ng-submit="save()">
 					<div class="form-group">

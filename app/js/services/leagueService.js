@@ -101,6 +101,10 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				owners: {
 					ref: function(name){
 						return firebaseRef('networks/' + name + '/owners');
+					},
+
+					sync: function(name){
+						return syncData('networks/' + name + '/owners');
 					}
 				},
 

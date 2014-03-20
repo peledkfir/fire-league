@@ -1,54 +1,77 @@
 <ol class="breadcrumb">
   <li><a ui-sref="browse">Networks</a></li>
   <li><a ui-sref="network({network: network})">{{network}}</a></li>
-  <li class="active">Create</li>
+  <li class="active">Create league</li>
 </ol>
 
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">New League in {{network}}</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<br />
-<div class="row">	
-<form ng-submit="create()" class="leagueEdit">
-
-	<fieldset>
-		<label for="leagueName">League name:</label>
-		<input id="leagueName" type="text" placeholder="Name your league.." ng-model="name" required>
-
-		<div class="container">
-			<div class="row">
-				<div class="players col-md-4" ui-sortable="sortableOptions" ng-model="teams">
-		  			<div class="player" ng-repeat="team in teams">{{$index + 1}} <fb-avatar size="24" id="team.id"></fb-avatar> {{team.name}}</div>
+	<div class="col-lg-8">
+		<div class="panel panel-default">
+			<div class="panel-heading"><i class="fa fa-fw fa-pencil"></i> Create New League</div>
+			<div class="panel-body">
+				<div class="text-center" ng-show="loading">
+					<i class="fa fa-cog fa-spin fa-5x"></i>
 				</div>
-				<div class="players col-md-4" ui-sortable="sortableOptions" ng-model="bench">
-		  			<div class="player" ng-repeat="team1 in bench">{{$index + 1}} {{team1.name}}</div>
-				</div>
+				<form ng-hide="loading" ng-submit="create()" class="leagueEdit">
+					<div class="form-group">
+						<label for="networkName">Network</label>
+						<input id="networkName" class="form-control" type="text" value="{{network}}" disabled>
+					</div>
+					<div class="form-group">
+						<label for="leagueName">League name</label>
+						<input id="leagueName" class="form-control" type="text" ng-model="name" required>
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+						<div class="col-md-5">
+							<h3 class="text-center"><i class="icon-registration"></i> Playing</h3>
+							<div class="players list-group" ui-sortable="sortableOptions" ng-model="teams">
+				  				<div class="player list-group-item" ng-repeat="team in teams">
+				  					{{$index + 1}} <fb-avatar size="24" id="team.id"></fb-avatar> {{team.name}}
+				  					<span class="pull-right">
+				  						<button type="button" tooltip="Bench" class="btn btn-default btn-xs" ng-click="benchPlayer($index)">
+				  							<i class="icon-bench fa-lg"></i>    <i class="fa fa-angle-right"></i>
+				  						</button>
+			  						</span>
+				  				</div>
+							</div>
+						</div>
+						<div class="col-md-offset-2 col-md-5">
+							<h3 class="text-center"><i class="icon-bench"></i> Bench</h3>
+							<div class="players list-group" ui-sortable="sortableOptions" ng-model="bench">
+				  				<div class="player list-group-item" ng-repeat="benched in bench"><fb-avatar size="24" id="benched.id"></fb-avatar> {{benched.name}}</div>
+							</div>
+						</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" data-loading-text="Loading..." class="btn btn-primary">Save</button>
+						<button type="button" ui-sref="network({network: network})" class="btn btn-default">Cancel</button>
+					</div>
+				</form>				
 			</div>
 		</div>
-	</fieldset>
+	</div>
+	<div class="col-lg-4" ng-hide="loading">
+		<div class="panel panel-default">
+			<div class="panel-heading"><i class="fa fa-fw fa-eye"></i> Matches Preview</div>
+			<div class="panel-body">
+				<div class="text-center">
+					<pagination total-items="leaguePreview.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm" boundary-links="true"></pagination>
+				</div>
 
-	<div>
-		<h2>Preview</h2>
-		<div>
-			<h3>Matches</h3>
-			<tabset>
-				<tab ng-repeat="round in leaguePreview.rounds">
-					<tab-heading>{{round.number}}</tab-heading>
-					<h2>Round {{round.number}}</h2>
+				<div class="list-group">
+					<div class="list-group-item" ng-repeat="match in leaguePreview.rounds[currPage-1].matches">
+			        	<span class="small"><fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="home">{{match.home.name}}</span></span>
+						<span class="score text-center">vs.</span>
+						<span class="pull-right small"><span class="away">{{match.away.name}}</span> <fb-avatar size="24" id="match.away.id"></fb-avatar>
+					</div>
+				</div>
 
-		            <div class="col-md-12" ng-repeat="match in round.matches">
-		              <div class="col-md-2">{{match.home.name}}</div>
-		              <div class="col-md-1">-</div>
-		              <div class="col-md-2">{{match.away.name}}</div>
-		            </div>
-				</tab>
-			</tabset>
+				<p>Total rounds: {{leaguePreview.rounds.length}}</p>
+			</div>
 		</div>
 	</div>
-
-	<button type="submit" data-loading-text="Loading..." class="btn btn-primary">Save</button>
-</form>
 </div>

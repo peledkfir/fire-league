@@ -12,7 +12,7 @@
 	display: none !important
 
 .dropdown-toggle.dropdown-24
-	padding: 13px 0
+	padding: 13px 13px
 
 =square_size($size)
 	width: #{$size}px
@@ -21,6 +21,68 @@
 @each $size in (16, 24, 48, 64)
 	.profile_#{$size}
 		+square_size($size)
+
+
+html, body
+	margin: 0
+	padding: 0
+	height: 100%
+
+#main
+	$footerHeight: 50px
+	min-height: 100%
+	position: relative
+
+	#ui-view
+		padding-bottom: $footerHeight
+
+	footer.bottom-page
+		position: absolute
+		bottom: 0
+		width: 100%
+		height: $footerHeight
+
+		.navbar
+			border-radius: 0
+			margin-bottom: 0
+			bottom: 0
+			border-width: 1px 0 0
+
+.navbar-center
+	+stretch-x
+	text-align: center
+
+	&>li
+		color: #777
+		float: none
+		display: inline-block
+
+		&.delimiter:before
+			content: "·"
+
+		&.text
+			padding: 10px 15px
+
+.icon-bench:before 
+	position: relative
+	top: 0.2em
+	left: 0.1em
+	
+.icon-player:before 
+	position: relative
+	font-size: 15px
+	left: -6px
+	top: -10px
+
+.icon-registration:before 
+	position: relative
+	top: 2px
+	font-size: smaller
+
+.icon-field-o:before, .icon-field:before 
+	position: relative
+	left: -3px
+	top: 1px
 
 .list-group-item
 	.home,.away
@@ -40,7 +102,9 @@
 	&.active
 		background-color: #f5f5f5
 	.buttons
-		padding-top: 6px
+		padding-top: 4px
+		margin-top: 10px
+		border-top: 1px #EEE solid
 
 .pagination-sm>li>a
 	+user-select(none)
@@ -48,15 +112,17 @@
 
 .leagueEdit
 	.players
-		border: 2px dashed blue
+		border-radius: 5px
+		border: 2px dashed rgb(134,134,134)
 		margin: 10px 10px 0 0
 		padding: 5px
 
 	.player
-		border: 1px solid black
 		cursor: move
+		padding: 10px 15px
 
-	.playerPlaceholder
+	.player-placeholder
+		padding: 5px 15px
 		border: 4px dashed #cfcfcf
 		opacity: 0.8
 		text-align: center
@@ -64,4 +130,14 @@
 
 		&:before
 			color: #cfcfcf
-			content: "HERE"
+			content: "DROP HERE"
+
+.table.fixtures-table
+	tbody
+		tr:first-child
+			border-bottom-color: #3291F8
+			border-bottom-style: solid
+			border-bottom-width: 2px
+		tr:last-child
+			border-top-style: double
+			border-top-color: rgb(233, 115, 115)

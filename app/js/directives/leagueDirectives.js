@@ -1,5 +1,12 @@
 
-fApp.directive('leagueTablePanel', function() {
+fApp.directive('appVersion', ['version', function(version) {
+	'use strict';
+    
+	return function(scope, elm) {
+		elm.text(version);
+	};
+}])
+.directive('leagueTablePanel', function() {
 	'use strict';
 	
 	return {

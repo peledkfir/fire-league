@@ -2,6 +2,7 @@
 
 // Declare app level module which depends on filters, and services
 var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
+	.value('version', '0.0.2a')
 	.config(function($stateProvider, $urlRouterProvider) {
 		'use strict';
 		
@@ -40,9 +41,20 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			templateUrl: 'templates/League.html',
 			controller: 'LeagueCtrl'
 		})
-		.state('favorites', {
-			url: '/favorites',
-			template: '<div>Coming Soon..</div>'
+		.state('about', {
+			url: '/about',
+			templateUrl: 'templates/About.html',
+			controller: function($scope) {
+				$scope.atts = [
+					'Soccer Field by Jule Steffen & Matthias Schmidt from The Noun Project',
+					'Goal by Uriel Sosa from The Noun Project',
+					'Trophy by Amir Neiman from The Noun Project',
+					'Creation by Jakob Vogel from The Noun Project',
+					'Soccer Field by Erik Wagner from The Noun Project',
+					'Soccer by Juan Pablo Bravo from The Noun Project',
+					'Goalkeeper by Juan Pablo Bravo from The Noun Project'
+				];
+			}
 		})
 		.state('unknown', {
 			url: '/pageNotFound',

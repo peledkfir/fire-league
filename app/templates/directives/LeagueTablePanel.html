@@ -3,7 +3,7 @@
 		<i class="fa fa-bar-chart-o fa-fw"></i> Table
 	</div>
 	<div class="panel-body table-responsive">
-		<table class="table">
+		<table class="table table-hover fixtures-table">
 			<thead>
 				<tr>
 					<th>Pos</th>
@@ -19,7 +19,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-class="{info: $first, danger: $last, active: row.team.id == $root.auth.user.id}" ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
+				<tr ng-class="{info: row.team.id == $root.auth.user.id}" ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
 					<th>{{$index + 1}}</th>
 					<th><fb-avatar size="24" id="row.team.id"></fb-avatar> {{row.team.name}}</th>
 					<th>{{row.p}}</th>

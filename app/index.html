@@ -7,10 +7,12 @@
   <title>Builds soccer leagues tables</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/thenounproject.css"/>
   <link rel="stylesheet" href="css/social-buttons.css"/>
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 <body ng-cloak ng-controller="LoginCtrl">
+  <div id="main">
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
@@ -22,7 +24,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha 0.0.2</small></a>
+        <a class="navbar-brand" ui-sref="browse">FireLeague <small>alpha</small></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,20 +33,18 @@
           <li ui-sref-active="active">
             <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
           </li>
-          <li class="dropdown" ui-sref-active="active">
+          <li class="dropdown" ui-sref-active="active" ng-if="$root.auth.user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li>
                 <a ui-sref="networkCreate">Network</a>
               </li>
-              <li>
-                <li ng-show="$state.includes('network')">
-                    <a ui-sref="leagueCreate({network: $state.params.network})">League</a>
-                </li>
+              <li ng-show="$state.params.network">
+                  <a ui-sref="leagueCreate({network: $state.params.network})">League</a>
               </li>
             </ul>
           </li>
-          <li ui-sref-active="active" class="dropdown" ng-show="$root.auth.user">
+          <li ui-sref-active="active" class="dropdown" ng-if="$root.auth.user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-star fa-fw"></i> Favorites <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li ui-sref-active="active" role="presentation" ng-class="{'dropdown-header':networkObj !== true}" ng-repeat-start="(network, networkObj) in favorites.networks">
@@ -88,8 +88,29 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div ui-view class="container" autoscroll="false">
+  <div id="ui-view" ui-view class="container" autoscroll="false">
   </div>
+
+  <footer class="bottom-page">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <ul class="nav navbar-nav navbar-center">
+          <li class="delimiter"></li>
+          <li class="text"><small>Currently v<span app-version></span></small></li>
+          <li class="delimiter"></li>
+          <li><a target="_blank" href="https://github.com/peledkfir/fire-league" class="btn btn-xs btn-link"><i class="fa fa-github"></i> Github</a></li>
+          <li class="delimiter"></li>
+          <li><a ui-sref="about" class="btn btn-xs btn-link">About</a></li>
+          <li class="delimiter"></li>
+          <li><a target="_blank" href="https://github.com/peledkfir/fire-league/issues?state=open" class="btn btn-xs btn-link">Issues</a></li>
+          <li class="delimiter"></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+
+  </div>
+
  
 <!--
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.9.0/ui-bootstrap-tpls.min.js"></script>
@@ -108,8 +129,8 @@
 
 <script src="lib/angular/ui/angular-ui-router.js"></script> <!-- custom -->
 <script src="lib/angular/ui/ui-bootstrap-0.10.0.js"></script>
-<script src="lib/jquery/sortable.js"></script>
-<script src="lib/jquery/plugins/jquery.metisMenu.js"></script>
+<script src="lib/jquery/sortable.min.js"></script>
+<!-- <script src="lib/jquery/plugins/jquery.metisMenu.js"></script> -->
 <script src="//cdn.firebase.com/libs/angularfire/0.7.0/angularfire.js"></script>
 <script src="lib/facebook/angular-facebook.js"></script>
 

@@ -4,7 +4,7 @@
   <li class="active">{{league.name}}</li>
 </ol>
 
-<div ng-show="loading || !stats">
+<div class="text-center" ng-show="loading || !stats">
 	<i class="fa fa-cog fa-spin fa-5x"></i>
 </div>
 
@@ -17,7 +17,7 @@
 	</div>
 </div>
 
-<div ng-if="isOwner" class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
+<div ng-if="isOwner()" class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
 	<div class="col-lg-8">
 		<tabset>
 			<tab ng-repeat="round in league.rounds" active="round.active">

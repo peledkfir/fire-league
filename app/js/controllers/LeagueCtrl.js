@@ -26,7 +26,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		},
 
 		canEdit: function() {
-			return state.isOwner || this.currentUserMatch();
+			return $scope.isOwner() || this.currentUserMatch();
 		}
 	};
 
@@ -111,8 +111,16 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		state.$leagueData.$save();
 	};
 
+	$scope.isOwner = function() {
+		if ($rootScope.auth.user) {
+			return _.has(state.$owners, $rootScope.auth.user.uid);
+		}
+
+		return false;
+	};
+
 	state.$players = leagueService.res.league.players.sync(networkName, leagueName);
-	var ownersRef = leagueService.res.network.owners.ref(networkName);
+	state.$owners = leagueService.res.network.owners.sync(networkName);
 
 	$scope.loading = false;
 	$scope.league = { name: leagueName };
@@ -121,13 +129,6 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 	var promise = $timeout(function(){
 		$scope.loading = true;
 	}, 50);
-
-	// TODO: update when logged in
-	ownersRef.once('value', function(snap) {
-		if ($rootScope.auth.user) {
-			state.isOwner = _.has(snap.val(), $rootScope.auth.user.uid);
-		}
-	});
 
 	state.$players.$on('loaded', function() {
 		state.$leagueData = leagueService.res.league.table.sync(networkName, leagueName);

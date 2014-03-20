@@ -1,9 +1,14 @@
 
-fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $state, $stateParams, leagueService) {
+fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $state, $timeout, $stateParams, leagueService) {
 	'use strict';
 
 	var network = $scope.network = $stateParams.network;
 	
+	$scope.benchPlayer = function($index) {
+		var benched = $scope.teams.splice($index, 1);
+		$scope.bench.push(benched[0]);
+	};
+
 	$scope.create = function() {
 		// Prepare model
 		var teams = $scope.teams;
@@ -32,17 +37,32 @@ fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $state, $s
 	});
 
 	$scope.sortableOptions = {
+		helper: function(ev, el) {
+			var $el = $(el);
+			$el.css({width: $el.outerWidth() + 'px', height: $el.outerHeight() + 'px'});
+			return $el;
+		},
 		connectWith: '.players',
-		placeholder: 'playerPlaceholder'
+		placeholder: 'player-placeholder'
 	};
 
 	$scope.bench = [];
 	$scope.teams =[];
 
+	$scope.loading = false;
+	$scope.currPage = 1;
+
+	var promise = $timeout(function(){
+		$scope.loading = true;
+	}, 50);
+
 	// Loading network friends
 	var networkFriends = leagueService.res.network.friends.ref(network);
 	
 	networkFriends.once('value', function(snap) {
+		$timeout.cancel(promise);
+		$scope.loading = false;
 		$scope.teams = _.toArray(snap.val());
+		$scope.$digest();
 	});
 });
