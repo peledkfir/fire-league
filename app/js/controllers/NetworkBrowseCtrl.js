@@ -13,12 +13,20 @@ fApp.controller('NetworkBrowseCtrl', function NetworkBrowseCtrl($scope, $rootSco
 	};
 
 	$scope.getOwners = function(network) {
-		return _.map(network.owners, function(owner) {
-			return owner.name;
-		}).join(', ');
+		if (network.owners) {
+			return _.map(network.owners, function(owner) {
+				return owner.name;
+			}).join(', ');			
+		}
+
+		return '';
 	};
 	$scope.getFriendsNum = function(network) {
-		return Object.keys(network.friends).length;
+		if (network.friends) {
+			return Object.keys(network.friends).length;
+		}
+
+		return 0;
 	};
 	$scope.loading = false;
 	

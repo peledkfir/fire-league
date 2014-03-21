@@ -3,7 +3,11 @@ fApp.controller('NetworkLeaguesCtrl', function NetworkLeaguesCtrl($scope, $rootS
 	'use strict';
 
 	$scope.getPlayersNum = function(league) {
-		return Object.keys(league.players).length;
+		if (league.players) {
+			return Object.keys(league.players).length;
+		}
+
+		return 0;
 	};
 
 	var name = $scope.networkName = $stateParams.network;
