@@ -324,7 +324,13 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					}
 				}
 
-				var positions = _.sortBy(_.toArray(tblHash), ['pts', 'gd', 'f']);
+				// workaround until lodash support sort by functions
+				_.each(tblHash, function(row) {
+					row.ptsR = row.pts();
+					row.gdR = row.gd();
+				});
+
+				var positions = _.sortBy(_.toArray(tblHash), ['ptsR', 'gdR', 'f']);
 
 				_.each(positions, function(tableRow, posReversed, col) {
 					var pos = col.length - posReversed;
