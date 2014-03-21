@@ -265,6 +265,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 
 		stats: function (league) {
 			var tblHash = {};
+			var teamPosPerRound = {};
 
 			for (var t = 0; t < league.teams.length; t++) {
 				var team = league.teams[t];
@@ -278,19 +279,19 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					f: 0,
 					a: 0
 				}, mixinTableRow);
+
+				teamPosPerRound[team.name] = [];
 			}
 
-			var currentRoundSet = false;
 			var currentRound = 1;
 
 			_.each(league.rounds, function(round) {
-				if (!currentRoundSet) {
-					currentRound = round.number;
-				}
-
 				if (round.matches) {
+					var resultCount = 0;
+
 					_.each(round.matches, function(match) {
 						if (match.result) {
+							resultCount++;
 							var h = tblHash[match.home.name];
 							var a = tblHash[match.away.name];
 							h.p++;
@@ -311,25 +312,39 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 								winner.w++;
 								looser.l++;
 							}
-						} else {
-							currentRoundSet = true;
 						}
 					});
-				} else {
-					currentRoundSet = true;
+
+					if (resultCount > 0) {
+						currentRound = round.number;
+
+						if (resultCount  == league.matchInRound && round.number < league.rounds.length) {
+							currentRound++;
+						}
+					}
 				}
+
+				var positions = _.sortBy(_.toArray(tblHash), ['pts', 'gd', 'f']);
+
+				_.each(positions, function(tableRow, posReversed, col) {
+					var pos = col.length - posReversed;
+					teamPosPerRound[tableRow.team.name].push(pos);
+				});
 			});
 
-			var table = [];
+			if (currentRound > 1) {
+				_.each(teamPosPerRound, function(positions, team) {
+					tblHash[team].posChange = positions[currentRound-2] - positions[currentRound-1];
+				});
+			}
 			
-			$.each(tblHash, function(key, value) {
-				table.push(value);
-			});
-
+			var table = _.sortBy(_.toArray(tblHash), function(row) { return teamPosPerRound[row.team.name][league.rounds.length - 1]; });
+			
 			return {
 				table: table,
 				league: league,
-				currentRound: currentRound
+				currentRound: currentRound,
+				teamPosPerRound: teamPosPerRound
 			};
 		}
 	};

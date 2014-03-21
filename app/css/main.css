@@ -191,3 +191,11 @@ html, body {
   border-top-style: double;
   border-top-color: #e97373;
 }
+/* line 145, ../sass/main.sass */
+.table.fixtures-table .red {
+  color: red;
+}
+/* line 148, ../sass/main.sass */
+.table.fixtures-table .green {
+  color: green;
+}

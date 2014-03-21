@@ -19,8 +19,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-class="{info: row.team.id == $root.auth.user.id}" ng-repeat="row in table | orderBy:['-pts()', '-gd()', '-f'] ">
-					<th>{{$index + 1}}</th>
+				<tr ng-class="{info: row.team.id == $root.auth.user.id}" ng-repeat="row in table">
+					<th>{{$index + 1}}<span ng-if="row.posChange" ng-class="{'green': row.posChange > 0, 'red': row.posChange < 0}"><i ng-class="{'fa-caret-up': row.posChange > 0, 'fa-caret-down': row.posChange < 0}" class="fa fa-fw"></i><small>{{abs(row.posChange)}}</small></span></th>
 					<th><fb-avatar size="24" id="row.team.id"></fb-avatar> {{row.team.name}}</th>
 					<th>{{row.p}}</th>
 					<th>{{row.w}}</th>
