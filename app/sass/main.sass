@@ -28,19 +28,54 @@ html, body
 	padding: 0
 	height: 100%
 
-#main
+
+.nav .visible-xs
+	display: none!important
+
+@media screen and (max-width: 767px) 
+	.nav .visible-xs
+		display: inline-block!important
+
+#page-main
 	$footerHeight: 50px
 	min-height: 100%
 	position: relative
 
-	#ui-view
+	#page-ui-view
 		padding-bottom: $footerHeight
 
-	footer.bottom-page
-		position: absolute
+
+	.page-footer
+
+		&.navbar-default
+			border-top: 1px #e7e7e7 solid
+
+		ul, ol
+			-webkit-padding-start: 0
+			-webkit-margin-after: 0
+
+		+stretch-x
 		bottom: 0
-		width: 100%
 		height: $footerHeight
+
+		.footer-links		
+			&>li
+				float: none
+				display: inline-block
+
+				&>a:hover, &>a:focus 
+					color: #333
+					text-decoration: none
+					background-color: transparent
+				
+				&.delimiter:before
+					color: #777
+					content: "·"
+		
+				&.text, &>a
+					color: #777
+					padding: 15px 15px
+
 
 		.navbar
 			border-radius: 0

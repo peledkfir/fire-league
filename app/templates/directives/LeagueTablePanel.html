@@ -28,7 +28,7 @@
 					<th>{{row.l}}</th>
 					<th>{{row.f}}</th>
 					<th>{{row.a}}</th>
-					<th>{{row.gd()}}</th>
+					<th ng-class="{'red': row.gd() < 0}">{{row.gd()}}</th>
 					<th>{{row.pts()}}</th>
 				</tr>
 			</tbody>

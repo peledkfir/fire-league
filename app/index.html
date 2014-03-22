@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 <body ng-cloak ng-controller="LoginCtrl">
-  <div id="main">
+  <div id="page-main">
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -28,7 +28,7 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navbar">
+      <div collapse="navCollapsed" class="collapse navbar-collapse" id="navbar">
         <ul class="nav navbar-nav">
           <li ui-sref-active="active">
             <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
@@ -65,7 +65,7 @@
           </li>
           <li class="dropdown" ng-if="$root.auth.user">
             <a class="dropdown-toggle dropdown-24" data-toggle="dropdown" href="#">
-              <fb-avatar size="24" id="$root.auth.user.id"></fb-avatar> <i class="fa fa-caret-down"></i>
+              <fb-avatar size="24" id="$root.auth.user.id"></fb-avatar><span> <span class="visible-xs"> {{$root.auth.user.name}}</span></span> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -88,25 +88,23 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div id="ui-view" ui-view class="container" autoscroll="false">
+  <div id="page-ui-view" ui-view class="container" autoscroll="false">
   </div>
 
-  <footer class="bottom-page">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        <ul class="nav navbar-nav navbar-center">
-          <li class="delimiter"></li>
-          <li class="text"><small>Currently v<span app-version></span></small></li>
-          <li class="delimiter"></li>
-          <li><a target="_blank" href="https://github.com/peledkfir/fire-league" class="btn btn-xs btn-link"><i class="fa fa-github"></i> Github</a></li>
-          <li class="delimiter"></li>
-          <li><a ui-sref="about" class="btn btn-xs btn-link">About</a></li>
-          <li class="delimiter"></li>
-          <li><a target="_blank" href="https://github.com/peledkfir/fire-league/issues?state=open" class="btn btn-xs btn-link">Issues</a></li>
-          <li class="delimiter"></li>
-        </ul>
-      </div>
-    </nav>
+  <footer class="page-footer navbar-default"> <!-- duplicate navbar-default to color background when line overflow-->
+    <div class="container text-center navbar-default">
+    <ul class="footer-links">
+      <li class="delimiter"></li>
+      <li class="text"><small>Currently v<span app-version></span></small></li>
+      <li class="delimiter"></li>
+      <li><a target="_blank" href="https://github.com/peledkfir/fire-league" class="btn btn-xs btn-link"><i class="fa fa-github"></i> Github</a></li>
+      <li class="delimiter"></li>
+      <li><a ui-sref="about" class="btn btn-xs btn-link">About</a></li>
+      <li class="delimiter"></li>
+      <li><a target="_blank" href="https://github.com/peledkfir/fire-league/issues?state=open" class="btn btn-xs btn-link">Issues</a></li>
+      <li class="delimiter"></li>
+    </ul>
+    </div>
   </footer>
 
   </div>
@@ -114,8 +112,7 @@
  
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.string/2.3.3/underscore.string.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- used by mentisMenu, sortable -->
-<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>  --><!-- used by mentisMenu -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- used by sortable -->
 <script src="lib/jquery/jquery-ui-1.10.4.custom.min.js"></script> <!-- used by sortable -->
 <script src="lib/string/sprintf.js"></script>
 
