@@ -29,12 +29,18 @@ html, body
 	height: 100%
 
 
-.nav .visible-xs
+.hidden-xs-inline
+	display: inline-block!important
+
+.visible-xs-inline
 	display: none!important
 
 @media screen and (max-width: 767px) 
-	.nav .visible-xs
+	.visible-xs-inline
 		display: inline-block!important
+
+	.hidden-xs-inline
+		display: none!important
 
 #page-main
 	$footerHeight: 50px
@@ -120,15 +126,19 @@ html, body
 	top: 1px
 
 .list-group-item
+	.home
+		width: 30%
+
 	.home,.away
 		overflow: hidden
 		white-space: nowrap
 		text-overflow: ellipsis
-		width: 95px
 		display: inline-block
 		vertical-align: middle
 	.away
 		text-align: right
+		width: 95px
+		
 	.score
 		position: absolute
 		left: 0
