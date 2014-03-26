@@ -1,0 +1,31 @@
+@import compass/css3/user-interface
+
+.list-group-item
+	.home
+		width: 30%
+
+	.home,.away
+		overflow: hidden
+		white-space: nowrap
+		text-overflow: ellipsis
+		display: inline-block
+		vertical-align: middle
+	.away
+		text-align: right
+		width: 95px
+		
+	.score
+		position: absolute
+		left: 0
+		right: 0
+		display: inline-block
+	&.active
+		background-color: #f5f5f5
+	.buttons
+		padding-top: 4px
+		margin-top: 10px
+		border-top: 1px #EEE solid
+
+.pagination-sm>li>a
+	+user-select(none)
+	cursor: default

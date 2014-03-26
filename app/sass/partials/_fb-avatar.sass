@@ -1,0 +1,7 @@
+=square_size($size)
+	width: #{$size}px
+	height: #{$size}px
+
+@each $size in (16, 24, 48, 64)
+	.profile_#{$size}
+		+square_size($size)
