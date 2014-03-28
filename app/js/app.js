@@ -22,6 +22,7 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			templateUrl: 'templates/LeagueCreate.html',
 			controller: 'LeagueCreateCtrl'
 		})
+
 		.state('network', {
 			url: '/network/:network',
 			templateUrl: 'templates/NetworkLeagues.html',
@@ -36,11 +37,22 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 				}
 			}
 		})
+
 		.state('league', {
+			abstract: true,
 			url: '/network/:network/league/:league',
 			templateUrl: 'templates/League.html',
 			controller: 'LeagueCtrl'
 		})
+		.state('league.dashboard', {
+			url: '',
+			templateUrl: 'templates/LeagueDashboard.html'
+		})
+		.state('league.player', {
+			url: '/player/:player',
+			templateUrl: 'templates/LeaguePlayer.html'
+		})
+
 		.state('about', {
 			url: '/about',
 			templateUrl: 'templates/About.html',
@@ -96,7 +108,7 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		// cache modals
 		_.delay(function() {
 			$http.get('templates/LoginModal.html', {cache: $templateCache});
-			$http.get('templates/NetworkDeleteModal.html', {cache: $templateCache});
+			//$http.get('templates/NetworkDeleteModal.html', {cache: $templateCache});
 		}, 2000);
 	})
 	.run(function($rootScope, Facebook) {

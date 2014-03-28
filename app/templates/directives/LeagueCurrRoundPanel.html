@@ -4,14 +4,16 @@
 	</div>
 	<div class="panel-body">
 		<div class="text-center">
-			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm" boundary-links="true"></pagination>
+			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm hidden-xs-inline" boundary-links="true"></pagination>
+			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="visible-xs-inline" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 		</div>
 
 		<div class="list-group">
 			<div ng-class="{info: match.currentUserMatch()}" class="list-group-item" ng-repeat="match in stats.league.rounds[currPage - 1].matches">
 				<span class="small"><fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="home">{{match.home.name}}</span></span>
-				<span class="score text-center">{{match.result.home}} - {{match.result.away}}</span>
+				<span class="score text-center hidden-xs-inline">{{match.result.home}} - {{match.result.away}}</span>
 				<span class="pull-right small"><span class="away">{{match.away.name}}</span> <fb-avatar size="24" id="match.away.id"></fb-avatar></span>
+				<div class="score text-center visible-xs-inline">{{match.result.home}} - {{match.result.away}}</div>
 			
 				<div class="buttons" ng-if="match.canEdit()"><button class="btn btn-xs btn-link"><i class="fa fa-fw fa-edit"></i>Edit</button></div>
 			</div>

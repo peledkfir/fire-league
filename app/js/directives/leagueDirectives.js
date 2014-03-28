@@ -41,6 +41,19 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('leaguePlayerCompetition', function() {
+	'use strict';
+	
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/LeaguePlayerCompetition.html',
+		scope: {
+			stats: '=',
+			player: '='
+		}
+	};
+})
 .directive('editableFriendsList', function() {
 	'use strict';
 

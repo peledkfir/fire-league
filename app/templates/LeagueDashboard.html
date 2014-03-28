@@ -1,0 +1,51 @@
+<div class="row" ng-hide="loading || !stats" ng-cloak>
+	<div class="col-md-7 col-lg-8">
+		<league-table-panel table="stats.table"></league-table-panel>
+	</div>
+	<div class="col-md-5 col-lg-4">
+		<league-curr-round-panel stats="stats"></league-curr-round-panel>
+	</div>
+</div>
+
+<div ng-if="isOwner()" class="row" ng-hide="!$root.auth.user || loading || !stats" ng-cloak>
+	<div class="col-lg-8">
+		<tabset>
+			<tab ng-repeat="round in league.rounds" active="round.active">
+				<tab-heading>{{round.number}}</tab-heading>
+				<h2>Round {{round.number}}</h2>
+            	
+
+				<table>
+					<thead>
+						<tr>
+							<th>HOME</th>
+							<th colspan="3">SCORE</th>
+							<th>AWAY</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+	            		<tr ng-dblclick="editMatch(match)" ng-repeat="match in round.matches">
+	            			<th>{{match.home.name}}</th>
+	            			<th ng-hide="match == editedMatch">{{match.result.home}}</th>
+							<th ng-show="match == editedMatch"><input form="m{{match.matchIdx}}" type="number" min="0" max="99" ng-model="editedResult.home"></th>
+	            			<th>-</th>
+	            			<th ng-hide="match == editedMatch">{{match.result.away}}</th>
+							<th ng-show="match == editedMatch"><input form="m{{match.matchIdx}}" type="number" min="0" max="99" ng-model="editedResult.away"></th>
+	            			<th>{{match.away.name}}</th>
+	            			<th ng-hide="match == editedMatch || !match.canEdit()" ng-click="editMatch(match)">
+	            				<i class="fa fa-edit" tooltip="Edit"></i>
+	            			</th>
+	            			<th ng-show="match == editedMatch">
+	            				<form id="m{{match.matchIdx}}" ng-submit="doneEditing(match)">
+				            		<button type="submit" class="btn btn-default btn-link"><i class="fa fa-check" tooltip="Save"></i></button>
+			            			<button type="button" class="btn btn-default btn-link" ng-click="cancelEdit()"><i class="fa fa-times" tooltip="Discard"></i></button>
+			            		</form>
+	            			</th>
+						</tr>
+					</tbody>
+				</table>
+			</tab>
+		</tabset>
+	</div>
+</div>

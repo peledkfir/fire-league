@@ -52,7 +52,8 @@
                 <a ng-if="!(networkObj !== true)" ui-sref="network({network: network})"><i class="fa fa-sitemap fa-fw"></i> {{network}}</a>
               </li>
               <li ui-sref-active="active" ng-repeat="(league, value) in networkObj.leagues">
-                <a ui-sref="league({network: network, league: league})"><i class="fa fa-caret-right fa-fw"></i> {{league}}</a>
+                <!-- state ref to child dashboard state till it gets fixed: https://github.com/angular-ui/ui-router/issues/948 -->
+                <a ui-sref="league.dashboard({network: network, league: league})"><i class="fa fa-caret-right fa-fw"></i> {{league}}</a>
               </li>
               <li ng-repeat-end ng-if="!$last" class="divider"></li>
             </ul>
@@ -92,7 +93,7 @@
   </div>
 
   <footer class="page-footer navbar-default"> <!-- duplicate navbar-default to color background when line overflow-->
-    <div class="container text-center navbar-default">
+    <div class="container navbar-default">
     <ul class="footer-links">
       <li class="delimiter"></li>
       <li class="text"><small>Currently v<span app-version></span></small></li>
@@ -141,5 +142,6 @@
 <script src="js/services/leagueService.js"></script>  
 <script src="js/directives/leagueDirectives.js"></script>  
 <script src="js/directives/facebookDirectives.js"></script>  
+<script src="js/filters/leagueFilters.js"></script>  
 </body>
 </html>

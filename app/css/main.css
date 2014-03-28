@@ -68,9 +68,122 @@
 }
 
 /* line 6, ../sass/partials/_fb-avatar.sass */
+.profile_56 {
+  width: 56px;
+  height: 56px;
+}
+
+/* line 6, ../sass/partials/_fb-avatar.sass */
 .profile_64 {
   width: 64px;
   height: 64px;
+}
+
+/* line 7, ../sass/partials/_fl-league.sass */
+.list-group-item .home {
+  width: 30%;
+}
+/* line 10, ../sass/partials/_fl-league.sass */
+.list-group-item .home, .list-group-item .away {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 16, ../sass/partials/_fl-league.sass */
+.list-group-item .away {
+  text-align: right;
+  width: 95px;
+}
+/* line 20, ../sass/partials/_fl-league.sass */
+.list-group-item .score {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: inline-block;
+}
+/* line 26, ../sass/partials/_fl-league.sass */
+.list-group-item .score.visible-xs-inline {
+  bottom: 0;
+}
+/* line 28, ../sass/partials/_fl-league.sass */
+.list-group-item.active {
+  background-color: whitesmoke;
+}
+/* line 30, ../sass/partials/_fl-league.sass */
+.list-group-item .buttons {
+  padding-top: 4px;
+  margin-top: 10px;
+  border-top: 1px #eeeeee solid;
+}
+
+/* line 35, ../sass/partials/_fl-league.sass */
+.pagination-sm > li > a {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+/* line 42, ../sass/partials/_fl-league.sass */
+.league-links {
+  text-align: center;
+  -webkit-padding-start: 0;
+  -webkit-margin-after: 0;
+}
+/* line 47, ../sass/partials/_fl-league.sass */
+.league-links li {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+}
+/* line 52, ../sass/partials/_fl-league.sass */
+.league-links li a {
+  color: black;
+}
+
+/* line 60, ../sass/partials/_fl-league.sass */
+.table.fixtures-table tbody tr:first-child {
+  border-bottom-color: #3291f8;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+/* line 64, ../sass/partials/_fl-league.sass */
+.table.fixtures-table tbody tr:last-child {
+  border-top-style: double;
+  border-top-color: #e97373;
+}
+/* line 68, ../sass/partials/_fl-league.sass */
+.table.fixtures-table .red {
+  color: red;
+}
+/* line 71, ../sass/partials/_fl-league.sass */
+.table.fixtures-table .green {
+  color: green;
+}
+
+/* line 78, ../sass/partials/_fl-league.sass */
+.table.competition-table th {
+  text-align: center;
+}
+/* line 80, ../sass/partials/_fl-league.sass */
+.table.competition-table .red-o {
+  background-color: #e97373;
+  color: white;
+}
+/* line 83, ../sass/partials/_fl-league.sass */
+.table.competition-table .blue-o {
+  background-color: #3291f8;
+  color: white;
+}
+/* line 86, ../sass/partials/_fl-league.sass */
+.table.competition-table .red {
+  color: red;
+}
+/* line 89, ../sass/partials/_fl-league.sass */
+.table.competition-table .green {
+  color: green;
 }
 
 /* line 2, ../sass/partials/_fl-league-edit.sass */
@@ -97,49 +210,6 @@
 .leagueEdit .player-placeholder:before {
   color: #cfcfcf;
   content: "DROP HERE";
-}
-
-/* line 4, ../sass/partials/_fl-match-preview.sass */
-.list-group-item .home {
-  width: 30%;
-}
-/* line 7, ../sass/partials/_fl-match-preview.sass */
-.list-group-item .home, .list-group-item .away {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: inline-block;
-  vertical-align: middle;
-}
-/* line 13, ../sass/partials/_fl-match-preview.sass */
-.list-group-item .away {
-  text-align: right;
-  width: 95px;
-}
-/* line 17, ../sass/partials/_fl-match-preview.sass */
-.list-group-item .score {
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: inline-block;
-}
-/* line 22, ../sass/partials/_fl-match-preview.sass */
-.list-group-item.active {
-  background-color: whitesmoke;
-}
-/* line 24, ../sass/partials/_fl-match-preview.sass */
-.list-group-item .buttons {
-  padding-top: 4px;
-  margin-top: 10px;
-  border-top: 1px #eeeeee solid;
-}
-
-/* line 29, ../sass/partials/_fl-match-preview.sass */
-.pagination-sm > li > a {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  cursor: default;
 }
 
 /* line 3, ../sass/partials/_fl-index.sass */
@@ -185,51 +255,35 @@ html, body {
   -webkit-padding-start: 0;
   -webkit-margin-after: 0;
 }
-/* line 36, ../sass/partials/_fl-index.sass */
+/* line 35, ../sass/partials/_fl-index.sass */
+#page-main .page-footer .footer-links {
+  text-align: center;
+}
+/* line 38, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li {
   float: none;
   display: inline-block;
 }
-/* line 40, ../sass/partials/_fl-index.sass */
+/* line 42, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li > a:hover, #page-main .page-footer .footer-links > li > a:focus {
   color: #333333;
   text-decoration: none;
   background-color: transparent;
 }
-/* line 45, ../sass/partials/_fl-index.sass */
+/* line 47, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li.delimiter:before {
   color: #777777;
   content: "·";
 }
-/* line 49, ../sass/partials/_fl-index.sass */
+/* line 51, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li.text, #page-main .page-footer .footer-links > li > a {
   color: #777777;
   padding: 15px 15px;
 }
-/* line 54, ../sass/partials/_fl-index.sass */
+/* line 56, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .navbar {
   border-radius: 0;
   margin-bottom: 0;
   bottom: 0;
   border-width: 1px 0 0;
-}
-
-/* line 4, ../sass/partials/_fl-fixtures-table.sass */
-.table.fixtures-table tbody tr:first-child {
-  border-bottom-color: #3291f8;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-}
-/* line 8, ../sass/partials/_fl-fixtures-table.sass */
-.table.fixtures-table tbody tr:last-child {
-  border-top-style: double;
-  border-top-color: #e97373;
-}
-/* line 12, ../sass/partials/_fl-fixtures-table.sass */
-.table.fixtures-table .red {
-  color: red;
-}
-/* line 15, ../sass/partials/_fl-fixtures-table.sass */
-.table.fixtures-table .green {
-  color: green;
 }

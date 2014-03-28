@@ -27,6 +27,24 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 
 		canEdit: function() {
 			return $scope.isOwner() || this.currentUserMatch();
+		},
+
+		versus: function(team) {
+			return this.home.name == team ? this.away : this.home;
+		},
+
+		conclude: function(team) {
+			if (this.result) {
+				if (this.result.home == this.result.away) {
+					return 'D';
+				}
+
+				if (this.result.home > this.result.away) {
+					return this.home.name == team ? 'W' : 'L';
+				}
+
+				return this.home.name == team ? 'L' : 'W';
+			}
 		}
 	};
 

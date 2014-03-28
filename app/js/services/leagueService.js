@@ -205,6 +205,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			var matchesInRound = Math.floor(cnt/2);
 
 			var rounds = [];
+			var allMatches = [];
 
 			var p = 0; // pinned
 
@@ -240,13 +241,15 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 						}
 
 						//console.log('r' + (r+1) + 'm' + (m+1) + 'hi'+ hi + 'ai'+ ai+ 'h' + h + 'a' + a);
-						matches.push(_.extend({
+						var match = _.extend({
 							round: round,
 							match: m + 1,
 							matchIdx: (round - 1) * matchesInRound + m + 1,
 							home: teams[i === 0 ? h : a],
 							away: teams[i === 0 ? a : h]
-						}, matchMixin || {}));
+						}, matchMixin || {});
+						matches.push(match);
+						allMatches.push(match);
 					}
 
 					rounds.push({
@@ -258,6 +261,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 
 			league.matchInRound = matchesInRound;
 			league.rounds = rounds;
+			league.allMatches = allMatches;
 			league.totalMatches = league.matchInRound * rounds.length;
 
 			return league;
@@ -266,6 +270,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 		stats: function (league) {
 			var tblHash = {};
 			var teamPosPerRound = {};
+			var teamPtsPerRound = {};
 
 			for (var t = 0; t < league.teams.length; t++) {
 				var team = league.teams[t];
@@ -281,6 +286,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}, mixinTableRow);
 
 				teamPosPerRound[team.name] = [];
+				teamPtsPerRound[team.name] = [];
 			}
 
 			var currentRound = 1;
@@ -335,6 +341,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				_.each(positions, function(tableRow, posReversed, col) {
 					var pos = col.length - posReversed;
 					teamPosPerRound[tableRow.team.name].push(pos);
+					teamPtsPerRound[tableRow.team.name].push(tableRow.ptsR);
 				});
 			});
 
@@ -350,7 +357,8 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				table: table,
 				league: league,
 				currentRound: currentRound,
-				teamPosPerRound: teamPosPerRound
+				teamPosPerRound: teamPosPerRound,
+				teamPtsPerRound: teamPtsPerRound
 			};
 		}
 	};

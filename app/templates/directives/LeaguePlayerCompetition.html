@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<i class="fa fa-bar-chart-o fa-fw"></i> League Competition
+	</div>
+	<div class="panel-body table-responsive">
+		<table class="table table-hover table-condensed competition-table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Pt</th>
+					<th>P</th>
+					<th>VS</th>
+					<th>R</th>
+					<th colspan="3">Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="match in stats.league.allMatches | filter:player">
+					<th>{{$index + 1}}</th>
+					<th>{{stats.teamPtsPerRound[player][$index] | isDefined: match.result }}</th>
+					<th ng-class="{'blue-o': stats.teamPosPerRound[player][$index] == 1 && match.result, 'red-o': stats.teamPosPerRound[player][$index] == stats.league.teams.length && match.result}">{{stats.teamPosPerRound[player][$index] | isDefined: match.result }}</th>
+					<th style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
+					<th ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
+					<th>{{match.result.home}}</th>
+					<th>-</th>
+					<th>{{match.result.away}}</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
