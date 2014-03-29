@@ -5,7 +5,7 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, leagueName, networkName, $timeout, leagueService) {
+fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, leagueName, networkName, $timeout, notificationService, leagueService) {
 	'use strict';
 
 	var state = {
@@ -123,7 +123,11 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, le
 					}
 				}
 				
-				state.$leagueData.$save();
+				state.$leagueData.$save().then(function() {
+					notificationService.notify('success', 'Saved !', 2000);
+				}, function() {
+					notificationService.notify('danger', 'Failed !', 3500);
+				});
 			});
 		}
 	};
