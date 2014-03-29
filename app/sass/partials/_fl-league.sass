@@ -52,18 +52,21 @@
 		a
 			color: black
 
+$firstPlayerColor: #3291F8
+$lastPlayerColor: rgb(233, 115, 115)
+
 //
 // table fixtures
 //
 .table.fixtures-table
 	tbody
 		tr:first-child
-			border-bottom-color: #3291F8
+			border-bottom-color: $firstPlayerColor
 			border-bottom-style: solid
 			border-bottom-width: 2px
 		tr:last-child
 			border-top-style: double
-			border-top-color: rgb(233, 115, 115)
+			border-top-color: $lastPlayerColor
 
 	.red
 		color: red
@@ -78,13 +81,28 @@
 	th
 		text-align: center
 	.red-o
-		background-color: rgb(233, 115, 115)
+		background-color: $lastPlayerColor
 		color: white
 	.blue-o
-		background-color: #3291F8
+		background-color: $firstPlayerColor
 		color: white
 	.red
 		color: red
 
 	.green
 		color: green
+
+//
+// match edit
+//
+.match-modal
+	input
+		width: 75px
+		font-size: 230%
+
+	.vs
+		font-size: 150%
+		line-height: 10
+
+	.thumbnail
+		display: inline

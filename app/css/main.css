@@ -79,6 +79,12 @@
   height: 64px;
 }
 
+/* line 6, ../sass/partials/_fb-avatar.sass */
+.profile_128 {
+  width: 128px;
+  height: 128px;
+}
+
 /* line 7, ../sass/partials/_fl-league.sass */
 .list-group-item .home {
   width: 30%;
@@ -143,47 +149,62 @@
   color: black;
 }
 
-/* line 60, ../sass/partials/_fl-league.sass */
+/* line 63, ../sass/partials/_fl-league.sass */
 .table.fixtures-table tbody tr:first-child {
   border-bottom-color: #3291f8;
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
-/* line 64, ../sass/partials/_fl-league.sass */
+/* line 67, ../sass/partials/_fl-league.sass */
 .table.fixtures-table tbody tr:last-child {
   border-top-style: double;
   border-top-color: #e97373;
 }
-/* line 68, ../sass/partials/_fl-league.sass */
+/* line 71, ../sass/partials/_fl-league.sass */
 .table.fixtures-table .red {
   color: red;
 }
-/* line 71, ../sass/partials/_fl-league.sass */
+/* line 74, ../sass/partials/_fl-league.sass */
 .table.fixtures-table .green {
   color: green;
 }
 
-/* line 78, ../sass/partials/_fl-league.sass */
+/* line 81, ../sass/partials/_fl-league.sass */
 .table.competition-table th {
   text-align: center;
 }
-/* line 80, ../sass/partials/_fl-league.sass */
+/* line 83, ../sass/partials/_fl-league.sass */
 .table.competition-table .red-o {
   background-color: #e97373;
   color: white;
 }
-/* line 83, ../sass/partials/_fl-league.sass */
+/* line 86, ../sass/partials/_fl-league.sass */
 .table.competition-table .blue-o {
   background-color: #3291f8;
   color: white;
 }
-/* line 86, ../sass/partials/_fl-league.sass */
+/* line 89, ../sass/partials/_fl-league.sass */
 .table.competition-table .red {
   color: red;
 }
-/* line 89, ../sass/partials/_fl-league.sass */
+/* line 92, ../sass/partials/_fl-league.sass */
 .table.competition-table .green {
   color: green;
+}
+
+/* line 99, ../sass/partials/_fl-league.sass */
+.match-modal input {
+  width: 75px;
+  font-size: 230%;
+}
+/* line 103, ../sass/partials/_fl-league.sass */
+.match-modal .vs {
+  font-size: 150%;
+  line-height: 10;
+}
+/* line 107, ../sass/partials/_fl-league.sass */
+.match-modal .thumbnail {
+  display: inline;
 }
 
 /* line 2, ../sass/partials/_fl-league-edit.sass */

@@ -5,7 +5,7 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
+fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, $stateParams, $timeout, leagueService) {
 	'use strict';
 
 	var leagueName = $stateParams.league;
@@ -27,6 +27,10 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 
 		canEdit: function() {
 			return $scope.isOwner() || this.currentUserMatch();
+		},
+
+		edit: function() {
+			state.openEditMatchModal(this);
 		},
 
 		versus: function(team) {
@@ -87,46 +91,44 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $statePara
 		}
 	};
 
-	$scope.cancelEdit = function() {
-		$scope.editedMatch = null;
-	};
-
-	$scope.editMatch = function(match) {
+	state.openEditMatchModal = function (match) {
 		if (match.canEdit()) {
-			if ($scope.editedMatch) {
-				$scope.cancelEdit();
-			}
+			var modal = $modal.open({
+				templateUrl: 'templates/MatchEditModal.html',
+				resolve: {
+					$leagueCtrlScope: function() {
+						return $scope;
+					},
+					match: function() {
+						return match;
+					}
+				},
+				controller: 'MatchEditModalCtrl'
+			});
 
-			state.originalMatch = match;
-			$scope.editedMatch = match;
-			$scope.editedResult = angular.extend({}, match.result);
+			modal.result.then(function(result) {
+				if (result && _.isNumber(result.away) && _.isNumber(result.home) && result.away >= 0 && result.home >= 0) {
+					// checking if adding match result for the first time
+					if (!state.$leagueData.rounds) {
+						state.$leagueData.rounds = {};
+					}
+
+					if (!state.$leagueData.rounds[match.round - 1]) {
+						state.$leagueData.rounds[match.round - 1] = { matches: {} };
+					}
+
+					match.result = angular.copy(result);
+					state.$leagueData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(result) };
+				} else {
+					if (state.$leagueData.rounds && state.$leagueData.rounds[match.round - 1] && state.$leagueData.rounds[match.round - 1].matches) {
+						delete match.result;
+						delete state.$leagueData.rounds[match.round - 1].matches[match.match - 1];
+					}
+				}
+				
+				state.$leagueData.$save();
+			});
 		}
-	};
-
-	$scope.doneEditing = function(match) {
-		var result = $scope.editedResult;
-		$scope.cancelEdit();
-
-		if (result && _.isNumber(result.away) && _.isNumber(result.home) && result.away >= 0 && result.home >= 0) {
-			// checking if adding match result for the first time
-			if (!state.$leagueData.rounds) {
-				state.$leagueData.rounds = {};
-			}
-
-			if (!state.$leagueData.rounds[match.round - 1]) {
-				state.$leagueData.rounds[match.round - 1] = { matches: {} };
-			}
-
-			match.result = angular.copy(result);
-			state.$leagueData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(result) };
-		} else {
-			if (state.$leagueData.rounds && state.$leagueData.rounds[match.round - 1] && state.$leagueData.rounds[match.round - 1].matches) {
-				delete match.result;
-				delete state.$leagueData.rounds[match.round - 1].matches[match.match - 1];
-			}
-		}
-		
-		state.$leagueData.$save();
 	};
 
 	$scope.isOwner = function() {
