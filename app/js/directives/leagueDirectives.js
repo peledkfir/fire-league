@@ -14,7 +14,8 @@ fApp.directive('appVersion', ['version', function(version) {
 		replace: true,
 		templateUrl: 'templates/directives/LeagueTablePanel.html',
 		scope: {
-			table: '='
+			table: '=',
+			maximizeUrl: '@'
 		},
 		link: function($scope) {
 			$scope.abs = Math.abs;

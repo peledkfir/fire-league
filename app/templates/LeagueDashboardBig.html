@@ -1,0 +1,8 @@
+
+<div class="text-center" ng-show="loading || !stats">
+	<i class="fa fa-cog fa-spin fa-5x"></i>
+</div>
+
+<div ng-hide="loading || !stats" ng-cloak>
+	<league-table-panel table="stats.table"></league-table-panel>
+</div>

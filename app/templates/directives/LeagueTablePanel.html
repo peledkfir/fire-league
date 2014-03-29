@@ -1,6 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<i class="fa fa-bar-chart-o fa-fw"></i> Table
+		<div ng-if="maximizeUrl" class="pull-right"><a target="_blank" ng-href="{{maximizeUrl}}" class="btn btn-default btn-xs" tooltip="Full Screen"><i class="fa fa-expand"></i></a></div>
 	</div>
 	<div class="panel-body table-responsive">
 		<table class="table table-hover table-condensed fixtures-table">

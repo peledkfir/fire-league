@@ -5,11 +5,8 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, $stateParams, $timeout, leagueService) {
+fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, leagueName, networkName, $timeout, leagueService) {
 	'use strict';
-
-	var leagueName = $stateParams.league;
-	var networkName = $stateParams.network;
 
 	var state = {
 
@@ -62,11 +59,11 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, $s
 			var roundsData = _.pick(state.$leagueData, 'rounds');
 			
 			// merge matches results to league structure
-			$.each(roundsData.rounds || [], function (r, round) {
+			_.each(roundsData.rounds || [], function (round, r) {
 				var roundObj = league.rounds[r];
 				
 				if (round) {
-					$.each(round.matches, function(m, match) {
+					_.each(round.matches, function(match, m) {
 						_.merge(roundObj.matches[m], match);
 					});
 				}
@@ -132,7 +129,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, $s
 	};
 
 	$scope.isOwner = function() {
-		if ($rootScope.auth.user) {
+		if ($rootScope.auth && $rootScope.auth.user) {
 			return _.has(state.$owners, $rootScope.auth.user.uid);
 		}
 

@@ -251,15 +251,21 @@ html, body {
 }
 
 /* line 14, ../sass/partials/_fl-index.sass */
+.dashboard-big {
+  position: absolute;
+  margin: 10%;
+}
+
+/* line 18, ../sass/partials/_fl-index.sass */
 #page-main {
   min-height: 100%;
   position: relative;
 }
-/* line 19, ../sass/partials/_fl-index.sass */
+/* line 23, ../sass/partials/_fl-index.sass */
 #page-main #page-ui-view {
   padding-bottom: 50px;
 }
-/* line 22, ../sass/partials/_fl-index.sass */
+/* line 26, ../sass/partials/_fl-index.sass */
 #page-main .page-footer {
   position: absolute;
   left: 0;
@@ -267,41 +273,41 @@ html, body {
   bottom: 0;
   height: 50px;
 }
-/* line 24, ../sass/partials/_fl-index.sass */
+/* line 28, ../sass/partials/_fl-index.sass */
 #page-main .page-footer.navbar-default {
   border-top: 1px #e7e7e7 solid;
 }
-/* line 27, ../sass/partials/_fl-index.sass */
+/* line 31, ../sass/partials/_fl-index.sass */
 #page-main .page-footer ul, #page-main .page-footer ol {
   -webkit-padding-start: 0;
   -webkit-margin-after: 0;
 }
-/* line 35, ../sass/partials/_fl-index.sass */
+/* line 39, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links {
   text-align: center;
 }
-/* line 38, ../sass/partials/_fl-index.sass */
+/* line 42, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li {
   float: none;
   display: inline-block;
 }
-/* line 42, ../sass/partials/_fl-index.sass */
+/* line 46, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li > a:hover, #page-main .page-footer .footer-links > li > a:focus {
   color: #333333;
   text-decoration: none;
   background-color: transparent;
 }
-/* line 47, ../sass/partials/_fl-index.sass */
+/* line 51, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li.delimiter:before {
   color: #777777;
   content: "·";
 }
-/* line 51, ../sass/partials/_fl-index.sass */
+/* line 55, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .footer-links > li.text, #page-main .page-footer .footer-links > li > a {
   color: #777777;
   padding: 15px 15px;
 }
-/* line 56, ../sass/partials/_fl-index.sass */
+/* line 60, ../sass/partials/_fl-index.sass */
 #page-main .page-footer .navbar {
   border-radius: 0;
   margin-bottom: 0;

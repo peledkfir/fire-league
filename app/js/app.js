@@ -42,7 +42,11 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			abstract: true,
 			url: '/network/:network/league/:league',
 			templateUrl: 'templates/League.html',
-			controller: 'LeagueCtrl'
+			controller: 'LeagueCtrl',
+			resolve: {
+				leagueName: function($stateParams) { return $stateParams.league; },
+				networkName: function($stateParams) { return $stateParams.network; }
+			}
 		})
 		.state('league.dashboard', {
 			url: '',
