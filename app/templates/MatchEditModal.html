@@ -4,22 +4,24 @@
 </div>
 <div class="modal-body match-modal">
   <div class="row">
-    <div class="col-md-5 text-center">
-      <fb-avatar size="128" id="match.home.id" clazz="thumbnail"></fb-avatar>
-      <p>{{match.home.name}}</p>
-      <div><input type="number" min="0" max="99" ng-model="result.home"></div>
-    </div>
-    <div class="col-md-2 text-center" >
-      <p class="vs">VS.</p>
-    </div>
-    <div class="col-md-5 text-center">
-      <fb-avatar size="128" id="match.away.id" clazz="thumbnail"></fb-avatar>
-      <p>{{match.away.name}}</p>
-      <div><input type="number" min="0" max="99" ng-model="result.away"></div>
-    </div>
+    <form id="m{{match.matchIdx}}" ng-submit="save()">
+      <div class="col-md-5 text-center">
+        <fb-avatar size="128" id="match.home.id" clazz="thumbnail"></fb-avatar>
+        <p>{{match.home.name}}</p>
+        <div><input type="number" min="0" max="99" ng-model="result.home"></div>
+      </div>
+      <div class="col-md-2 text-center" >
+        <p class="vs">VS.</p>
+      </div>
+      <div class="col-md-5 text-center">
+        <fb-avatar size="128" id="match.away.id" clazz="thumbnail"></fb-avatar>
+        <p>{{match.away.name}}</p>
+        <div><input type="number" min="0" max="99" ng-model="result.away"></div>
+      </div>
+    </form>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+  <button type="submit" form="m{{match.matchIdx}}" class="btn btn-primary" ng-click="save()">Save</button>
   <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
 </div>  
