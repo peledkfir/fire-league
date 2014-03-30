@@ -9,7 +9,8 @@
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+.icon {
+	display: inline-block;
 	font-family: 'thenounproject';
 	speak: none;
 	font-style: normal;

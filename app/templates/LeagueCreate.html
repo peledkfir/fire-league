@@ -25,20 +25,20 @@
 					<div class="form-group">
 						<div class="row">
 						<div class="col-md-5">
-							<h3 class="text-center"><i class="icon-registration"></i> Playing</h3>
+							<h3 class="text-center"><i class="icon icon-registration"></i> Playing</h3>
 							<div class="players list-group" ui-sortable="sortableOptions" ng-model="teams">
 				  				<div class="player list-group-item" ng-repeat="team in teams">
 				  					{{$index + 1}} <fb-avatar size="24" id="team.id"></fb-avatar> {{team.name}}
 				  					<span class="pull-right">
 				  						<button type="button" tooltip="Bench" class="btn btn-default btn-xs" ng-click="benchPlayer($index)">
-				  							<i class="icon-bench fa-lg"></i>    <i class="fa fa-angle-right"></i>
+				  							<i class="icon icon-bench fa-lg"></i>    <i class="fa fa-angle-right"></i>
 				  						</button>
 			  						</span>
 				  				</div>
 							</div>
 						</div>
 						<div class="col-md-offset-2 col-md-5">
-							<h3 class="text-center"><i class="icon-bench"></i> Bench</h3>
+							<h3 class="text-center"><i class="icon icon-bench"></i> Bench</h3>
 							<div class="players list-group" ui-sortable="sortableOptions" ng-model="bench">
 				  				<div class="player list-group-item" ng-repeat="benched in bench"><fb-avatar size="24" id="benched.id"></fb-avatar> {{benched.name}}</div>
 							</div>

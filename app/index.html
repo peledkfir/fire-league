@@ -34,13 +34,13 @@
             <a ui-sref="browse"><i class="fa fa-sitemap fa-fw"></i> Networks</a>
           </li>
           <li class="dropdown" ui-sref-active="active" ng-if="$root.auth.user">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil fa-fw"></i> Create <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li>
-                <a ui-sref="networkCreate">Network</a>
+                <a ui-sref="networkCreate"><i class="fa fa-sitemap fa-fw"></i> Network</a>
               </li>
               <li ng-show="$state.params.network">
-                  <a ui-sref="leagueCreate({network: $state.params.network})">League</a>
+                  <a ui-sref="leagueCreate({network: $state.params.network})"><i class="icon icon-field-o fa-fw"></i> League</a>
               </li>
             </ul>
           </li>
