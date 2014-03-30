@@ -15,9 +15,9 @@
 				<span class="pull-right small"><span class="away">{{match.away.name}}</span> <fb-avatar size="24" id="match.away.id"></fb-avatar></span>
 				<div class="score text-center visible-xs-inline">{{match.result.home}} - {{match.result.away}}</div>
 			
-				<div class="buttons" ng-if="match.canEdit()" ng-click="match.edit()"><button class="btn btn-xs btn-link"><i class="fa fa-fw fa-edit"></i>Edit</button></div>
+				<div class="buttons" ng-if="match.canEdit()"><button class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button></div>
 			</div>
 		</div>
-		<a class="btn btn-default btn-block" ng-click="currPage = stats.currentRound">Current round: {{stats.currentRound}}</a>
+		<a ng-class="{disabled: currPage == stats.currentRound}" class="btn btn-default btn-block" ng-click="currPage = stats.currentRound">Current round: {{stats.currentRound}}</a>
 	</div>
 </div>

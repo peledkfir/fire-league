@@ -5,8 +5,11 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, leagueName, networkName, $timeout, notificationService, leagueService) {
+fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, params, $timeout, notificationService, leagueService) {
 	'use strict';
+
+	var leagueName = params.leagueName,
+		networkName = params.networkName;
 
 	var state = {
 

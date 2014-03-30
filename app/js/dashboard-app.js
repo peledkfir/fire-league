@@ -8,8 +8,12 @@ var fApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebas
 				templateUrl: 'templates/LeagueDashboardBig.html',
 				controller: 'LeagueCtrl',
 				resolve: {
-					leagueName: ['$route', function($route) { return $route.current.params.league; }],
-					networkName: ['$route', function($route) { return $route.current.params.network; }]
+					params: ['$route', function($route) {
+						return {
+							leagueName: $route.current.params.league,
+							networkName: $route.current.params.network
+						};
+					}]
 				}
 			});
 	}]);
