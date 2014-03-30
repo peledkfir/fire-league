@@ -1,33 +1,10 @@
 
-fApp.controller('NetworkBrowseCtrl', function NetworkBrowseCtrl($scope, $rootScope, $timeout, leagueService) {
+fApp.controller('NetworkBrowseCtrl', function NetworkBrowseCtrl($scope, $timeout, leagueService) {
 	'use strict';
 	
-	$scope.isOwner = function(network) {
-		var isOwner = false;
+	$scope.isOwner = leagueService.logic.network.isOwner;
+	$scope.keys = Object.keys;
 
-		if ($rootScope.auth.user) {
-			isOwner = network.owners[$rootScope.auth.user.uid] !== null;
-		}
-
-		return isOwner;
-	};
-
-	$scope.getOwners = function(network) {
-		if (network.owners) {
-			return _.map(network.owners, function(owner) {
-				return owner.name;
-			}).join(', ');			
-		}
-
-		return '';
-	};
-	$scope.getFriendsNum = function(network) {
-		if (network.friends) {
-			return Object.keys(network.friends).length;
-		}
-
-		return 0;
-	};
 	$scope.loading = false;
 	
 	var promise = $timeout(function(){

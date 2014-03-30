@@ -42,6 +42,21 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			}
 		},
 
+		logic: {
+			network: {
+				isOwner: function(owners, auth) {
+					owners = (owners || {}).owners || owners;
+					var uid = _.isObject(auth) && auth.user ? auth.user.uid : auth;
+
+					if (uid && owners) {
+						return _.has(owners, uid);
+					}
+
+					return false;
+				}
+			}
+		},
+
 		res: {
 			root: {
 				ref: function() {

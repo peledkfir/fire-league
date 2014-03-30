@@ -23,7 +23,7 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, le
 		},
 
 		canEdit: function() {
-			return $scope.isOwner() || this.currentUserMatch();
+			return leagueService.logic.network.isOwner(state.$owners, $rootScope.auth) || this.currentUserMatch();
 		},
 
 		edit: function() {
@@ -130,14 +130,6 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, le
 				});
 			});
 		}
-	};
-
-	$scope.isOwner = function() {
-		if ($rootScope.auth && $rootScope.auth.user) {
-			return _.has(state.$owners, $rootScope.auth.user.uid);
-		}
-
-		return false;
 	};
 
 	state.$players = leagueService.res.league.players.sync(networkName, leagueName);

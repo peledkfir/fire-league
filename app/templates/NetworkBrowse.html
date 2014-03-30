@@ -17,9 +17,9 @@
 				<tbody>
 					<tr ng-repeat="network in networks" ui-sref="network({network: network.name})">
 						<td>{{network.name}}</td>
-						<td><span tooltip="Friends"><i class="fa fa-users"></i> {{getFriendsNum(network)}}</span></td>
-						<td ng-if="isOwner(network)">
-							<div class="pull-right">
+						<td><span tooltip="Friends"><i class="fa fa-users"></i> {{keys(network.friends).length}}</span></td>
+						<td>
+							<div class="pull-right" ng-if="isOwner(network, $root.auth)">
 				                <a class="btn btn-default btn-xs" ui-sref="network.edit({network: network.name})" ng-click="$event.stopPropagation()"><i class="fa fa-edit"></i> Edit</a>
 							    <a class="btn btn-danger btn-xs" ui-sref="network.delete({network: network.name})" ui-sref-opts="{ location: false }" ng-click="$event.stopPropagation()"><i class="fa fa-trash-o"></i> Delete</a>
 							</div>

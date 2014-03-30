@@ -37,7 +37,7 @@ fApp.controller('NetworkEditCtrl', function NetworkEditCtrl($scope, $timeout, $s
 		var friends = [];
 		var network = snap.val();
 		_.each(network.friends, function(friend, uid) {
-			friends.push({id: friend.id, name: friend.name, isOwner: !_.isUndefined(network.owners[uid])});
+			friends.push({id: friend.id, name: friend.name, isOwner: leagueService.logic.network.isOwner(network, uid)});
 		});
 
 		$scope.friends = friends;
