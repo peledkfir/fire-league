@@ -15,7 +15,7 @@
 			</div>
 			<table class="table table-hover" ng-hide="loading">
 				<tbody>
-					<tr ng-repeat="network in networks" ui-sref="network({network: network.name})">
+					<tr ng-repeat="network in networks" ui-sref="network({network: network.name})" class="clickable">
 						<td>{{network.name}}</td>
 						<td><span tooltip="Friends"><i class="fa fa-users"></i> {{keys(network.friends).length}}</span></td>
 						<td>

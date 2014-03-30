@@ -17,7 +17,7 @@
 			<table class="table table-hover" ng-hide="loading">
 				<tbody>
                 	<!-- state ref to child dashboard state till it gets fixed: https://github.com/angular-ui/ui-router/issues/948 -->
-					<tr ui-sref="league.dashboard({ network: networkName, league: league.name })" ng-repeat="league in leagues">
+					<tr ui-sref="league.dashboard({ network: networkName, league: league.name })" ng-repeat="league in leagues" class="clickable">
 						<td>{{league.name}}</td>
 						<td><span tooltip="Players"><i class="icon-player2"></i> {{keys(league.players).length}}</span></td>
 					</tr>

@@ -1,54 +1,4 @@
 @charset "UTF-8";
-/* line 2, ../sass/modules/_bs-custom.sass */
-.hidden-xs-inline {
-  display: inline-block !important;
-}
-
-/* line 5, ../sass/modules/_bs-custom.sass */
-.visible-xs-inline {
-  display: none !important;
-}
-
-@media screen and (max-width: 767px) {
-  /* line 9, ../sass/modules/_bs-custom.sass */
-  .visible-xs-inline {
-    display: inline-block !important;
-  }
-
-  /* line 12, ../sass/modules/_bs-custom.sass */
-  .hidden-xs-inline {
-    display: none !important;
-  }
-}
-/* line 2, ../sass/modules/_thenounproject.sass */
-.icon-bench:before {
-  position: relative;
-  top: 0.2em;
-  left: 0.1em;
-}
-
-/* line 7, ../sass/modules/_thenounproject.sass */
-.icon-player:before {
-  position: relative;
-  font-size: 15px;
-  left: -6px;
-  top: -10px;
-}
-
-/* line 13, ../sass/modules/_thenounproject.sass */
-.icon-registration:before {
-  position: relative;
-  top: 2px;
-  font-size: smaller;
-}
-
-/* line 18, ../sass/modules/_thenounproject.sass */
-.icon-field-o:before, .icon-field:before {
-  position: relative;
-  left: -3px;
-  top: 1px;
-}
-
 /* line 8, ../sass/partials/_fb-avatar.sass */
 .profile_16 {
   min-width: 16px;
@@ -359,4 +309,59 @@ html, body {
   margin-bottom: 0;
   bottom: 0;
   border-width: 1px 0 0;
+}
+
+/* line 2, ../sass/partials/_bs-custom.sass */
+.hidden-xs-inline {
+  display: inline-block !important;
+}
+
+/* line 5, ../sass/partials/_bs-custom.sass */
+.visible-xs-inline {
+  display: none !important;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 9, ../sass/partials/_bs-custom.sass */
+  .visible-xs-inline {
+    display: inline-block !important;
+  }
+
+  /* line 12, ../sass/partials/_bs-custom.sass */
+  .hidden-xs-inline {
+    display: none !important;
+  }
+}
+/* line 15, ../sass/partials/_bs-custom.sass */
+.clickable {
+  cursor: pointer;
+}
+
+/* line 2, ../sass/partials/_thenounproject.sass */
+.icon-bench:before {
+  position: relative;
+  top: 0.2em;
+  left: 0.1em;
+}
+
+/* line 7, ../sass/partials/_thenounproject.sass */
+.icon-player:before {
+  position: relative;
+  font-size: 15px;
+  left: -6px;
+  top: -10px;
+}
+
+/* line 13, ../sass/partials/_thenounproject.sass */
+.icon-registration:before {
+  position: relative;
+  top: 2px;
+  font-size: smaller;
+}
+
+/* line 18, ../sass/partials/_thenounproject.sass */
+.icon-field-o:before, .icon-field:before {
+  position: relative;
+  left: -3px;
+  top: 1px;
 }
