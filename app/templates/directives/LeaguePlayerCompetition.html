@@ -22,7 +22,7 @@
 					<th style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
 					<th ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
 					<th>{{match.result.home}}</th>
-					<th>-</th>
+					<th><span ng-if="match.result">-</span></th>
 					<th>{{match.result.away}}</th>
 				</tr>
 			</tbody>
