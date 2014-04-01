@@ -1,0 +1,36 @@
+// Responsive
+.hidden-xs-inline
+	display: inline-block!important
+
+.visible-xs-inline
+	display: none!important
+
+@media screen and (max-width: 767px) 
+	.visible-xs-inline
+		display: inline-block!important
+
+	.hidden-xs-inline
+		display: none!important
+
+
+// Cursors
+.clickable
+	cursor: pointer
+
+
+// Colors
+@import compass/css3/images
+
+.badge.danger
+	+background-image(radial-gradient(color-stops(#F41818 0%, #cf0404 100%), top))
+
+// Avatars
+=square_size($size)
+	min-width: #{$size}px
+	min-height: #{$size}px
+	width: #{$size}px
+	height: #{$size}px
+
+@each $size in (16, 24, 48, 56, 64, 128)
+	.profile_#{$size}
+		+square_size($size)

@@ -9,13 +9,22 @@
 		</div>
 
 		<div class="list-group">
-			<div ng-class="{'list-group-item-info': match.currentUserMatch()}" class="list-group-item" ng-repeat="match in stats.league.rounds[currPage - 1].matches">
-				<span class="small"><fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="home">{{match.home.name}}</span></span>
-				<span class="score text-center hidden-xs-inline">{{match.result.home}} - {{match.result.away}}</span>
-				<span class="pull-right small"><span class="away">{{match.away.name}}</span> <fb-avatar size="24" id="match.away.id"></fb-avatar></span>
-				<div class="score text-center visible-xs-inline">{{match.result.home}} - {{match.result.away}}</div>
-			
-				<div class="buttons" ng-if="match.canEdit()"><button class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button></div>
+			<div class="list-group-item" ng-repeat="match in stats.league.rounds[currPage - 1].matches">
+				<p class="clearfix home" ng-class="{'list-group-item-info': match.home.id == $root.auth.user.id}">
+					<span class="small"><fb-avatar size="24" id="match.home.id" clazz="pull-left"></fb-avatar> <span class="player-name pull-left">{{match.home.name}}</span></span>
+					<span class="score text-center pull-right">{{match.result.home}}</span>
+				</p>
+				<p class="clearfix away" ng-class="{'list-group-item-info': match.away.id == $root.auth.user.id}">
+					<span class="score text-center">{{match.result.away}}</span>
+					<span class="small">
+						<fb-avatar size="24" id="match.away.id" clazz="pull-right"></fb-avatar> <span class="player-name pull-right">{{match.away.name}}</span>
+					</span>
+				</p>
+
+				<div class="buttons" ng-if="match.canEdit() || match.isOverdue(stats.currentRound)">
+					<button ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button>
+					<span ng-if="match.isOverdue(stats.currentRound)" class="label label-danger pull-right">Overdue</span>
+				</div>
 			</div>
 		</div>
 		<a ng-class="{disabled: currPage == stats.currentRound}" class="btn btn-default btn-block" ng-click="currPage = stats.currentRound">Current round: {{stats.currentRound}}</a>

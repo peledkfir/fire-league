@@ -4,23 +4,32 @@
 // match preview
 // 
 .list-group-item
-	.home
-		width: 30%
+	.home, .away
+		position: relative
+		padding: 3px
+	
+		.player-name
+			width: 34%
+			overflow: hidden
+			white-space: nowrap
+			text-overflow: ellipsis
+			display: inline-block
+			vertical-align: middle
+			padding-top: 4px
 
-	.home,.away
-		overflow: hidden
-		white-space: nowrap
-		text-overflow: ellipsis
-		display: inline-block
-		vertical-align: middle
+	.home
+		.player-name
+			padding-left: 2px
 	.away
-		text-align: right
-		width: 95px
-		
+		.player-name
+			text-align: right
+			padding-right: 2px
+			
 	.score
 		position: absolute
 		left: 0
 		right: 0
+		top: 4px
 		display: inline-block
 
 		&.visible-xs-inline
@@ -33,6 +42,9 @@
 		padding-top: 4px
 		margin-top: 10px
 		border-top: 1px #EEE solid
+
+		.pull-right
+			margin-top: 3px
 
 	&.list-group-item-info .buttons
 		border-top: 1px #94bacc solid
@@ -50,12 +62,18 @@
 	-webkit-margin-after: 0
 
 	li
+		position: relative
 		display: inline-block
 		vertical-align: top
 		margin: 0 10px
 
 		a
 			color: black
+
+		.badge
+			position: absolute
+			bottom: 17px
+			right: -3px
 
 $firstPlayerColor: #3291F8
 $lastPlayerColor: rgb(233, 115, 115)
@@ -111,3 +129,29 @@ $lastPlayerColor: rgb(233, 115, 115)
 
 	.thumbnail
 		display: inline
+
+
+//
+// league edit
+//
+.leagueEdit
+	.players
+		border-radius: 5px
+		border: 2px dashed rgb(134,134,134)
+		margin: 10px 10px 0 0
+		padding: 5px
+
+	.player
+		cursor: move
+		padding: 10px 15px
+
+	.player-placeholder
+		padding: 5px 15px
+		border: 4px dashed #cfcfcf
+		opacity: 0.8
+		text-align: center
+		vertical-align: middle
+
+		&:before
+			color: #cfcfcf
+			content: "DROP HERE"

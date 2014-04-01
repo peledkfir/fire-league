@@ -31,24 +31,6 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, pa
 
 		edit: function() {
 			state.openEditMatchModal(this);
-		},
-
-		versus: function(team) {
-			return this.home.name == team ? this.away : this.home;
-		},
-
-		conclude: function(team) {
-			if (this.result) {
-				if (this.result.home == this.result.away) {
-					return 'D';
-				}
-
-				if (this.result.home > this.result.away) {
-					return this.home.name == team ? 'W' : 'L';
-				}
-
-				return this.home.name == team ? 'L' : 'W';
-			}
 		}
 	};
 
@@ -78,6 +60,12 @@ fApp.controller('LeagueCtrl', function LeagueCtrl($scope, $rootScope, $modal, pa
 			// update scope
 			$scope.league = league;
 			$scope.stats = leagueService.stats($scope.league);
+			// var stats = 
+			// stats.overdueRounds = _(stats.league.allMatches)
+			//	.filter(function(val) { return val.isOverdue(); })
+			//	.groupBy(function(val) { return val.round; })
+			//	.value();
+			// stats.overdueRoundsLength = _.size(stats.overdueRounds);
 		} else if (_.isArray(state.$players.$getIndex()) && state.$players.$getIndex().length > 0) {
 			var keys = state.$players.$getIndex();
 			var players = [];

@@ -11,8 +11,9 @@
 <div class="row" ng-if="!loading && stats && stats.league && stats.league.teams" ng-cloak>
 	<ul class="league-links">
 		<li><a ui-sref=".dashboard" ui-sref-active="active" class="thumbnail" tooltip="Dashboard"><i class="fa fa-dashboard fa-4x"></i></a></li>
-		<li ng-repeat="team in stats.league.teams">
-			<a ui-sref=".player({ player: team.name })" ui-sref-active="active" tooltip="{{team.name}}" class="thumbnail"><fb-avatar size="56" id="team.id"></fb-avatar></a>
+		<li tooltip="{{team.name}}" ng-repeat="team in stats.league.teams">
+			<a ui-sref=".player({ player: team.name })" ui-sref-active="active" class="thumbnail"><fb-avatar size="56" id="team.id"></fb-avatar></a>
+			<span ng-if="stats.teamStats[team.name].missingMatches" class="badge danger">{{stats.teamStats[team.name].missingMatches}}</span>
 		</li>
 	</ul>
 </div>

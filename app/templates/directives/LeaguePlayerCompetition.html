@@ -12,18 +12,25 @@
 					<th>VS</th>
 					<th>R</th>
 					<th colspan="3">Score</th>
+					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr ng-repeat="match in stats.league.allMatches | filter:player">
+			<tbody ng-init="playerStats = stats.teamStats[player]">
+				<tr ng-repeat="round in stats.league.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]">
 					<th>{{$index + 1}}</th>
-					<th>{{stats.teamPtsPerRound[player][$index] | isDefined: match.result }}</th>
-					<th ng-class="{'blue-o': stats.teamPosPerRound[player][$index] == 1 && match.result, 'red-o': stats.teamPosPerRound[player][$index] == stats.league.teams.length && match.result}">{{stats.teamPosPerRound[player][$index] | isDefined: match.result }}</th>
-					<th style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
-					<th ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
-					<th>{{match.result.home}}</th>
-					<th><span ng-if="match.result">-</span></th>
-					<th>{{match.result.away}}</th>
+					<th ng-if="!playing" colspan="2"></th>
+					<th ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</th>
+					<th ng-if="!playing" colspan="4"></th>
+					
+					<th ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</th>
+					<th ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.league.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</th>
+					<th ng-if="playing" style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
+					<th ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
+					<th ng-if="playing">{{match.result.home}}</th>
+					<th ng-if="playing"><span ng-if="match.result">-</span></th>
+					<th ng-if="playing">{{match.result.away}}</th>
+
+					<th><i ng-if="match.isOverdue(stats.currentRound)" class="fa fa-clock-o"></i></th>
 				</tr>
 			</tbody>
 		</table>
