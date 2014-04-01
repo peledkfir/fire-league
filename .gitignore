@@ -8,3 +8,4 @@ bower_components/*
 fire-league*
 firebase.json
 app/js/config.js
+*.patch
