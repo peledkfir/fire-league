@@ -1,4 +1,7 @@
 // Responsive
+.hidden-xxs-table-cell
+	display: table-cell!important
+
 .hidden-xs-inline
 	display: inline-block!important
 
@@ -12,6 +15,9 @@
 	.hidden-xs-inline
 		display: none!important
 
+@media screen and (max-width: 320px)
+	.hidden-xxs-table-cell
+		display: none!important
 
 // Cursors
 .clickable

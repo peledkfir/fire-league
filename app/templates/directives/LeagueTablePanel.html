@@ -13,8 +13,8 @@
 					<th>W</th>
 					<th>D</th>
 					<th>L</th>
-					<th>F</th>
-					<th>A</th>
+					<th class="hidden-xxs-table-cell">F</th>
+					<th class="hidden-xxs-table-cell">A</th>
 					<th>GD</th>
 					<th>Pts</th>
 				</tr>
@@ -27,8 +27,8 @@
 					<th>{{row.w}}</th>
 					<th>{{row.d}}</th>
 					<th>{{row.l}}</th>
-					<th>{{row.f}}</th>
-					<th>{{row.a}}</th>
+					<th class="hidden-xxs-table-cell">{{row.f}}</th>
+					<th class="hidden-xxs-table-cell">{{row.a}}</th>
 					<th ng-class="{'red': row.gd() < 0}">{{row.gd()}}</th>
 					<th>{{row.pts()}}</th>
 				</tr>

@@ -28,7 +28,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 4px;
+  top: 5px;
   display: inline-block;
 }
 /* line 35, ../sass/partials/_fl-league.sass */
@@ -283,32 +283,43 @@ html, body {
 }
 
 /* line 2, ../sass/partials/_fl-base.sass */
+.hidden-xxs-table-cell {
+  display: table-cell !important;
+}
+
+/* line 5, ../sass/partials/_fl-base.sass */
 .hidden-xs-inline {
   display: inline-block !important;
 }
 
-/* line 5, ../sass/partials/_fl-base.sass */
+/* line 8, ../sass/partials/_fl-base.sass */
 .visible-xs-inline {
   display: none !important;
 }
 
 @media screen and (max-width: 767px) {
-  /* line 9, ../sass/partials/_fl-base.sass */
+  /* line 12, ../sass/partials/_fl-base.sass */
   .visible-xs-inline {
     display: inline-block !important;
   }
 
-  /* line 12, ../sass/partials/_fl-base.sass */
+  /* line 15, ../sass/partials/_fl-base.sass */
   .hidden-xs-inline {
     display: none !important;
   }
 }
-/* line 17, ../sass/partials/_fl-base.sass */
+@media screen and (max-width: 320px) {
+  /* line 19, ../sass/partials/_fl-base.sass */
+  .hidden-xxs-table-cell {
+    display: none !important;
+  }
+}
+/* line 23, ../sass/partials/_fl-base.sass */
 .clickable {
   cursor: pointer;
 }
 
-/* line 24, ../sass/partials/_fl-base.sass */
+/* line 30, ../sass/partials/_fl-base.sass */
 .badge.danger {
   background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 100, color-stop(0%, #f41818), color-stop(100%, #cf0404));
   background-image: -webkit-radial-gradient(top, #f41818 0%, #cf0404 100%);
@@ -317,7 +328,7 @@ html, body {
   background-image: radial-gradient(top, #f41818 0%, #cf0404 100%);
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_16 {
   min-width: 16px;
   min-height: 16px;
@@ -325,7 +336,7 @@ html, body {
   height: 16px;
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_24 {
   min-width: 24px;
   min-height: 24px;
@@ -333,7 +344,7 @@ html, body {
   height: 24px;
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_48 {
   min-width: 48px;
   min-height: 48px;
@@ -341,7 +352,7 @@ html, body {
   height: 48px;
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_56 {
   min-width: 56px;
   min-height: 56px;
@@ -349,7 +360,7 @@ html, body {
   height: 56px;
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_64 {
   min-width: 64px;
   min-height: 64px;
@@ -357,7 +368,7 @@ html, body {
   height: 64px;
 }
 
-/* line 35, ../sass/partials/_fl-base.sass */
+/* line 41, ../sass/partials/_fl-base.sass */
 .profile_128 {
   min-width: 128px;
   min-height: 128px;
