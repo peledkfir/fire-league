@@ -15,8 +15,14 @@ fApp.directive('analytics', function() {
 				console.log('no ga: '+ $scope.config);
 			}
 		},
-		controller: ['$scope', 'GOOGLE_ANALYTICS', function($scope, GOOGLE_ANALYTICS){
+		controller: ['$scope', '$rootScope', '$location', 'GOOGLE_ANALYTICS', function($scope, $rootScope, $location, GOOGLE_ANALYTICS){
 			$scope.config = GOOGLE_ANALYTICS;
+
+			if (GOOGLE_ANALYTICS) {
+				$rootScope.$on('$stateChangeSuccess', function() {
+					ga('send', 'pageview', { page: $location.path() });
+				});
+			}
 		}]
 	};
 });
