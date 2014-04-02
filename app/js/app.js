@@ -77,6 +77,8 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		});
 		
 		$urlRouterProvider
+		.when('/network/:league/league/:season', '/league/:league/season/:season') // backward compatibility for alpha 0.0.2
+		.when('/network/:league', '/league/:league') // backward compatibility for alpha 0.0.2
 		.when('', '/browse')
 		.otherwise('/pageNotFound');
 	})
