@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-  <li><a ui-sref="browse">Networks</a></li>
-  <li><a ui-sref="network({network: networkName})">{{networkName}}</a></li>
+  <li><a ui-sref="browse">Leagues</a></li>
+  <li><a ui-sref="league({league: leagueName})">{{leagueName}}</a></li>
   <li ng-class="{active: !$state.params.player}">
   	<a ng-if="$state.params.player" ui-sref=".dashboard">{{season.name}}</a>
   	<span ng-if="!$state.params.player">{{season.name}}</span></li>

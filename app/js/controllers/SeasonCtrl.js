@@ -9,7 +9,7 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 	'use strict';
 
 	var seasonName = params.seasonName,
-		networkName = params.networkName;
+		leagueName = params.leagueName;
 
 	var state = {
 
@@ -26,7 +26,7 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 		},
 
 		canEdit: function() {
-			return leagueService.logic.network.isOwner(state.$owners, $rootScope.auth) || this.currentUserMatch();
+			return leagueService.logic.league.isOwner(state.$owners, $rootScope.auth) || this.currentUserMatch();
 		},
 
 		edit: function() {
@@ -123,19 +123,19 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 		}
 	};
 
-	state.$players = leagueService.res.season.players.sync(networkName, seasonName);
-	state.$owners = leagueService.res.network.owners.sync(networkName);
+	state.$players = leagueService.res.season.players.sync(leagueName, seasonName);
+	state.$owners = leagueService.res.league.owners.sync(leagueName);
 
 	$scope.loading = false;
 	$scope.season = { name: seasonName };
-	$scope.networkName = networkName;
+	$scope.leagueName = leagueName;
 
 	var promise = $timeout(function(){
 		$scope.loading = true;
 	}, 50);
 
 	state.$players.$on('loaded', function() {
-		state.$seasonData = leagueService.res.season.table.sync(networkName, seasonName);
+		state.$seasonData = leagueService.res.season.table.sync(leagueName, seasonName);
 
 		state.$seasonData.$on('loaded', function() {
 			$scope.loading = false;

@@ -9,42 +9,42 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		$stateProvider
 		.state('browse', {
 			url: '/browse',
-			templateUrl: 'templates/NetworkBrowse.html',
-			controller: 'NetworkBrowseCtrl'
+			templateUrl: 'templates/LeagueBrowse.html',
+			controller: 'LeagueBrowseCtrl'
 		})
-		.state('networkCreate', {
-			url: '/create/network',
-			templateUrl: 'templates/NetworkCreate.html',
-			controller: 'NetworkCreateCtrl'
+		.state('leagueCreate', {
+			url: '/create/league',
+			templateUrl: 'templates/LeagueCreate.html',
+			controller: 'LeagueCreateCtrl'
 		})
 		.state('seasonCreate', {
-			url: '/create/season?network',
+			url: '/create/season?league',
 			templateUrl: 'templates/SeasonCreate.html',
 			controller: 'SeasonCreateCtrl'
 		})
 
-		.state('network', {
-			url: '/network/:network',
-			templateUrl: 'templates/NetworkSeasons.html',
-			controller: 'NetworkSeasonsCtrl'
+		.state('league', {
+			url: '/league/:league',
+			templateUrl: 'templates/LeagueSeasons.html',
+			controller: 'LeagueSeasonsCtrl'
 		})
-		.state('network.edit', {
+		.state('league.edit', {
 			url: '/edit',
 			views: {
 				'@': {
-					templateUrl: 'templates/NetworkEdit.html',
-					controller: 'NetworkEditCtrl'
+					templateUrl: 'templates/LeagueEdit.html',
+					controller: 'LeagueEditCtrl'
 				}
 			}
 		})
 
 		.state('season', {
 			abstract: true,
-			url: '/network/:network/season/:season',
+			url: '/league/:league/season/:season',
 			templateUrl: 'templates/Season.html',
 			controller: 'SeasonCtrl',
 			resolve: {
-				params: function($stateParams) { return { seasonName: $stateParams.season, networkName: $stateParams.network }; }
+				params: function($stateParams) { return { seasonName: $stateParams.season, leagueName: $stateParams.league }; }
 			}
 		})
 		.state('season.dashboard', {
@@ -111,8 +111,8 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		// cache modals
 		_.delay(function() {
 			$http.get('templates/LoginModal.html', {cache: $templateCache});
-			//$http.get('templates/NetworkDeleteModal.html', {cache: $templateCache});
-		}, 2000);
+			$http.get('templates/LeagueDeleteModal.html', {cache: $templateCache});
+		}, 10000);
 	})
 	.run(function($rootScope, Facebook) {
 		'use strict';

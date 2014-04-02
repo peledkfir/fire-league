@@ -2,7 +2,7 @@
 fApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $timeout, $stateParams, leagueService) {
 	'use strict';
 
-	var network = $scope.network = $stateParams.network;
+	var league = $scope.league = $stateParams.league;
 	
 	$scope.benchPlayer = function($index) {
 		var benched = $scope.teams.splice($index, 1);
@@ -22,15 +22,15 @@ fApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $t
 		console.log(newSeason);
 
 		// Creates the season
-		leagueService.res.season.$set(network, newSeason);
+		leagueService.res.season.$set(league, newSeason);
 
 		// Connects the users to the season
 		for (var j = teams.length - 1; j >= 0; j--) {
-			leagueService.res.favorites.season.set(leagueService.ids.facebook(teams[j].id), network, newSeason.name);
+			leagueService.res.favorites.season.set(leagueService.ids.facebook(teams[j].id), league, newSeason.name);
 		}
 
 		// state ref to child dashboard state till it gets fixed: https://github.com/angular-ui/ui-router/issues/948
-		$state.go('season.dashboard', {network: network, season: newSeason.name});
+		$state.go('season.dashboard', {league: league, season: newSeason.name});
 	};
 
 	$scope.$watchCollection('teams', function(newTeams, oldTeams, $scope) {
@@ -57,10 +57,10 @@ fApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $t
 		$scope.loading = true;
 	}, 50);
 
-	// Loading network friends
-	var networkFriends = leagueService.res.network.friends.ref(network);
+	// Loading league friends
+	var leagueFriends = leagueService.res.league.friends.ref(league);
 	
-	networkFriends.once('value', function(snap) {
+	leagueFriends.once('value', function(snap) {
 		$timeout.cancel(promise);
 		$scope.loading = false;
 		$scope.teams = _.toArray(snap.val());

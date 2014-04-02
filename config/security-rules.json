@@ -3,13 +3,13 @@
       ".read": false,
       ".write": false,
 
-      "networks": {
+      "leagues": {
          ".read": true,
-         "$network": {
+         "$league": {
             ".write": "auth != null && (!data.exists() || data.child('owners').child(auth.uid).exists())",
             ".validate": "newData.hasChildren(['name', 'owners', 'friends'])",
             "name": {
-               ".validate": "newData.isString() && newData.val().length <= 40 && $network == newData.val()"
+               ".validate": "newData.isString() && newData.val().length <= 40 && $league == newData.val()"
             },
             "friends": { 
                "$friend": {
@@ -48,16 +48,16 @@
          }
       },
       
-      "network_seasons": {
+      "league_seasons": {
         ".read": true,
         
-        "$network": {
-          ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
-          ".validate": "root.child('networks').child($network).exists()",
+        "$league": {
+          ".write": "root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
+          ".validate": "root.child('leagues').child($league).exists()",
           
           "$season": {
             ".read": true,
-            ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
+            ".write": "root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
             ".validate": "newData.hasChildren(['name', 'players'])",
             
             "name": {
@@ -66,7 +66,7 @@
             
             "players": {
               "$player": {
-                   ".validate": "root.child('networks').child($network).child('friends').child($player).exists() && newData.hasChildren(['id', 'name'])",
+                   ".validate": "root.child('leagues').child($league).child('friends').child($player).exists() && newData.hasChildren(['id', 'name'])",
                   
                   "id": {
                     ".validate": "newData.isNumber()"
@@ -90,13 +90,13 @@
       "season_matches": {
         ".read": true,
         
-        "$network": {
-          ".write": "root.child('networks').child($network).child('owners').child(auth.uid).exists()",
-          ".validate": "root.child('networks').child($network).exists()",
+        "$league": {
+          ".write": "root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
+          ".validate": "root.child('leagues').child($league).exists()",
           
           "$season": {
-            ".write": "root.child('network_seasons').child($network).child($season).child('players').child(auth.uid).exists()",
-            ".validate": "root.child('network_seasons').child($network).child($season).exists()",
+            ".write": "root.child('league_seasons').child($league).child($season).child('players').child(auth.uid).exists()",
+            ".validate": "root.child('league_seasons').child($league).child($season).exists()",
             
             "rounds": {
               "$round": {
@@ -144,19 +144,19 @@
         ".read": true,
         "$user": {
           ".read": true,
-          "networks": {
-            "$network": {
+          "leagues": {
+            "$league": {
               ".read": true,
-              ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
-              ".validate": "root.child('networks').child($network).exists() &&
-                            root.child('networks').child($network).child('friends').child($user).exists() &&
+              ".write": "auth.uid == $user || root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
+              ".validate": "root.child('leagues').child($league).exists() &&
+                            root.child('leagues').child($league).child('friends').child($user).exists() &&
                             (newData.child('seasons').exists() || !data.child('seasons').exists())",
               
               "seasons": {
                 "$season": {
                   ".read": true,
-                  ".write": "auth.uid == $user || root.child('networks').child($network).child('owners').child(auth.uid).exists()",
-                  ".validate": "root.child('network_seasons').child($network).child($season).exists()"
+                  ".write": "auth.uid == $user || root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
+                  ".validate": "root.child('league_seasons').child($league).child($season).exists()"
                 }
               },
                 

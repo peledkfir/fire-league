@@ -2,7 +2,7 @@
 fApp.config(function($stateProvider) {
   'use strict';
 
-  var NetworkDeleteCtrl = function($scope, leagueService, network) {
+  var LeagueDeleteCtrl = function($scope, leagueService, league) {
     $scope.dismiss = function() {
       $scope.$dismiss();
     };
@@ -10,41 +10,41 @@ fApp.config(function($stateProvider) {
     $scope.delete = function() {
       $scope.deleting = true;
 
-      var friends = leagueService.res.network.friends.ref(network);
+      var friends = leagueService.res.league.friends.ref(league);
 
-      // Deletes all network favorites
+      // Deletes all league favorites
       friends.once('value', function(snap) {
         snap.forEach(function(friendSnap) {
-          leagueService.res.favorites.network.remove(friendSnap.name(), network);
+          leagueService.res.favorites.league.remove(friendSnap.name(), league);
         });
 
         // deletes all seasons data
-        leagueService.res.network.seasonsData.remove(network);
+        leagueService.res.league.seasonsData.remove(league);
 
         // deletes all the seasons
-        leagueService.res.season.all.remove(network);
+        leagueService.res.season.all.remove(league);
 
-        // deletes the network
-        leagueService.res.network.ref(network).remove(function() {
+        // deletes the league
+        leagueService.res.league.ref(league).remove(function() {
           $scope.$close(true);
         });
       });
     };
 
-    $scope.network = network;
+    $scope.league = league;
     $scope.deleting = false;
   };
 
 	$stateProvider
-	.state('network.delete', {
+	.state('league.delete', {
 		url: '/delete',
 		onEnter: function($stateParams, $state, $modal) {
       $modal.open({
-        templateUrl: 'templates/NetworkDeleteModal.html',
+        templateUrl: 'templates/LeagueDeleteModal.html',
         resolve: {
-          network: function() { return $stateParams.network; }
+          league: function() { return $stateParams.league; }
         },
-        controller: NetworkDeleteCtrl
+        controller: LeagueDeleteCtrl
       })
       .result.then(function(result) {
         if (result) {

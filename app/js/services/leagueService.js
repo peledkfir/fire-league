@@ -43,7 +43,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 		},
 
 		logic: {
-			network: {
+			league: {
 				isOwner: function(owners, auth) {
 					owners = (owners || {}).owners || owners;
 					var uid = _.isObject(auth) && auth.user ? auth.user.uid : auth;
@@ -69,9 +69,9 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					return syncData('user_favorites/' + uid);
 				},
 
-				network: {
+				league: {
 					ref: function(uid, name) {
-						return firebaseRef('user_favorites/' + uid + '/networks/' + name);
+						return firebaseRef('user_favorites/' + uid + '/leagues/' + name);
 					},
 
 					set: function(uid, name) {
@@ -86,46 +86,46 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				},
 
 				season: {
-					set: function(uid, network, name) {
-						var ref = firebaseRef('user_favorites/' + uid + '/networks/' + network + '/seasons/' + name);
+					set: function(uid, league, name) {
+						var ref = firebaseRef('user_favorites/' + uid + '/leagues/' + league + '/seasons/' + name);
 						ref.set(true);
 					}
 				}
 			},
 
-			network: {
+			league: {
 				ref: function(name) {
-					return firebaseRef('networks/' + name);
+					return firebaseRef('leagues/' + name);
 				},
 
 				sync: function(name) {
-					return syncData('networks/' + name);
+					return syncData('leagues/' + name);
 				},
 
-				set: function(networkObj) {
-					var ref = this.ref(networkObj.name);
-					ref.set(networkObj);
+				set: function(leagueObj) {
+					var ref = this.ref(leagueObj.name);
+					ref.set(leagueObj);
 				},
 
 				all: {
 					sync: function() {
-						return syncData('networks');
+						return syncData('leagues');
 					}
 				},
 
 				owners: {
 					ref: function(name){
-						return firebaseRef('networks/' + name + '/owners');
+						return firebaseRef('leagues/' + name + '/owners');
 					},
 
 					sync: function(name){
-						return syncData('networks/' + name + '/owners');
+						return syncData('leagues/' + name + '/owners');
 					}
 				},
 
 				friends: {
 					ref: function(name) {
-						return firebaseRef('networks/' + name + '/friends');
+						return firebaseRef('leagues/' + name + '/friends');
 					}
 				},
 
@@ -142,50 +142,50 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			},
 
 			season: {
-				$set: function(network, seasonObj) {
-					var sync = this.sync(network, seasonObj.name);
+				$set: function(league, seasonObj) {
+					var sync = this.sync(league, seasonObj.name);
 					sync.$set(seasonObj);
 				},
 
-				sync: function(network, season) {
-					var sync = syncData('network_seasons/' + network + '/' + season);
+				sync: function(league, season) {
+					var sync = syncData('league_seasons/' + league + '/' + season);
 					return sync;
 				},
 
 				players: {
-					sync: function(network, season) {
-						var sync = syncData('network_seasons/' + network + '/' + season + '/players');
+					sync: function(league, season) {
+						var sync = syncData('league_seasons/' + league + '/' + season + '/players');
 						return sync;
 					}
 				},
 
-				set: function(network, seasonObj) {
-					var ref = this.ref(network, seasonObj.name);
+				set: function(league, seasonObj) {
+					var ref = this.ref(league, seasonObj.name);
 					ref.set(seasonObj);
 				},
 
-				ref: function(network, season) {
-					var ref = firebaseRef('network_seasons/' + network + '/' + season);
+				ref: function(league, season) {
+					var ref = firebaseRef('league_seasons/' + league + '/' + season);
 					return ref;
 				},
 
 				table: {
-					sync: function (network, season) {
-						return syncData('season_matches/' + network + '/' + season);
+					sync: function (league, season) {
+						return syncData('season_matches/' + league + '/' + season);
 					}
 				},
 
 				all: {
-					ref: function(network) {
-						return firebaseRef('network_seasons/' + network);
+					ref: function(league) {
+						return firebaseRef('league_seasons/' + league);
 					},
 
-					sync: function(network) {
-						return syncData('network_seasons/' + network);
+					sync: function(league) {
+						return syncData('league_seasons/' + league);
 					},
 
-					remove: function(network) {
-						var ref = this.ref(network);
+					remove: function(league) {
+						var ref = this.ref(league);
 						ref.remove();
 					}
 				}

@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-  <li><a ui-sref="browse">Networks</a></li>
-  <li><a ui-sref="network({network: $state.params.network})">{{$state.params.network}}</a></li>
+  <li><a ui-sref="browse">Leagues</a></li>
+  <li><a ui-sref="league({league: $state.params.league})">{{$state.params.league}}</a></li>
   <li class="active">Edit</li>
 </ol>
 
@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-lg-offset-2 col-lg-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-fw fa-edit"></i> Edit '{{$state.params.network}}' Network</div>
+			<div class="panel-heading"><i class="fa fa-fw fa-edit"></i> Edit '{{$state.params.league}}' League</div>
 			<div class="panel-body">
 				<form ng-hide="loading" ng-cloak ng-submit="save()">
 					<div class="form-group">

@@ -1,13 +1,13 @@
 <ol class="breadcrumb">
-  <li><a ui-sref="browse">Networks</a></li>
-  <li class="active">{{networkName}}</li>
+  <li><a ui-sref="browse">Leagues</a></li>
+  <li class="active">{{leagueName}}</li>
 </ol>
 
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="icon icon-field-o fa-fw fa-lg"></i> {{networkName}}'s Seasons
-				<div class="pull-right"><button ng-if="isOwner(owners, $root.auth)" ui-sref="seasonCreate({network: networkName})" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Create New</button></div>
+			<div class="panel-heading"><i class="icon icon-field-o fa-fw fa-lg"></i> {{leagueName}}'s Seasons
+				<div class="pull-right"><button ng-if="isOwner(owners, $root.auth)" ui-sref="seasonCreate({league: leagueName})" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Create New</button></div>
 			</div>
 			<div class="panel-body">
 				<div class="text-center" ng-show="loading">
@@ -17,7 +17,7 @@
 			<table class="table table-hover" ng-hide="loading">
 				<tbody>
                 	<!-- state ref to child dashboard state till it gets fixed: https://github.com/angular-ui/ui-router/issues/948 -->
-					<tr ui-sref="season.dashboard({ network: networkName, season: season.name })" ng-repeat="season in seasons" class="clickable">
+					<tr ui-sref="season.dashboard({ league: leagueName, season: season.name })" ng-repeat="season in seasons" class="clickable">
 						<td>{{season.name}}</td>
 						<td><span tooltip="Players"><i class="icon icon-player2"></i> {{keys(season.players).length}}</span></td>
 					</tr>
