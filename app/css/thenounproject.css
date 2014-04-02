@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'thenounproject';
-	src:url('../fonts/thenounproject.eot?10y4r8');
-	src:url('../fonts/thenounproject.eot?#iefix10y4r8') format('embedded-opentype'),
-		url('../fonts/thenounproject.woff?10y4r8') format('woff'),
-		url('../fonts/thenounproject.ttf?10y4r8') format('truetype'),
-		url('../fonts/thenounproject.svg?10y4r8#thenounproject') format('svg');
+	src:url('fonts/thenounproject.eot?-70jws8');
+	src:url('fonts/thenounproject.eot?#iefix-70jws8') format('embedded-opentype'),
+		url('fonts/thenounproject.woff?-70jws8') format('woff'),
+		url('fonts/thenounproject.ttf?-70jws8') format('truetype'),
+		url('fonts/thenounproject.svg?-70jws8#thenounproject') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -24,33 +24,57 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-player2:before {
-	content: "\e600";
+.icon-cleat:before {
+	content: "\e611";
 }
-.icon-trophy:before {
-	content: "\e601";
+.icon-trophy2:before {
+	content: "\e60a";
 }
-.icon-player:before {
-	content: "\e604";
+.icon-shield:before {
+	content: "\e60b";
 }
-.icon-goal:before {
-	content: "\e605";
+.icon-stadium:before {
+	content: "\e60c";
 }
-.icon-goalkeeper:before {
-	content: "\e606";
+.icon-trophy2-o:before {
+	content: "\e60d";
+}
+.icon-cleat-o:before {
+	content: "\e60e";
+}
+.icon-ball-o:before {
+	content: "\e60f";
+}
+.icon-ball:before {
+	content: "\e610";
+}
+.icon-field-o:before {
+	content: "\e609";
+}
+.icon-registration:before {
+	content: "\e608";
 }
 .icon-god:before {
 	content: "\e607";
 }
-.icon-registration:before {
-	content: "\e608";
+.icon-goalkeeper:before {
+	content: "\e606";
+}
+.icon-goal:before {
+	content: "\e605";
+}
+.icon-trophy:before {
+	content: "\e601";
+}
+.icon-player2:before {
+	content: "\e600";
+}
+.icon-player:before {
+	content: "\e604";
 }
 .icon-field:before {
 	content: "\e602";
 }
 .icon-bench:before {
 	content: "\e603";
-}
-.icon-field-o:before {
-	content: "\e609";
 }

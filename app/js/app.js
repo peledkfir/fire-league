@@ -67,7 +67,14 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 					'Creation by Jakob Vogel from The Noun Project',
 					'Soccer Field by Erik Wagner from The Noun Project',
 					'Soccer by Juan Pablo Bravo from The Noun Project',
-					'Goalkeeper by Juan Pablo Bravo from The Noun Project'
+					'Goalkeeper by Juan Pablo Bravo from The Noun Project',
+					'Soccer Boot by Simon Child from The Noun Project',
+					'Football by james zamyslianskyj from The Noun Project',
+					'Soccer Ball by Laurent Patain from The Noun Project',
+					'Cleat by david fauveau ∞ from The Noun Project',
+					'World Cup Trophy by San Salido Martínez from The Noun Project',
+					'Soccer by Ruben Sheep from The Noun Project',
+					'World Cup Trophy by Marco Hernandez from The Noun Project'
 				];
 			}
 		})
