@@ -1,6 +1,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<i class="fa fa-tasks fa-fw"></i> Matches
+		<span class="pull-right"><span ng-if="stats.totalMissingMatches" class="badge danger" tooltip="Missing Matches">{{stats.totalMissingMatches}}</span></span>
 	</div>
 	<div class="panel-body">
 		<div class="text-center">
@@ -21,9 +22,9 @@
 					</span>
 				</p>
 
-				<div class="buttons" ng-if="match.canEdit() || match.isOverdue(stats.currentRound)">
+				<div class="buttons clearfix" ng-if="match.canEdit() || match.isOverdue(stats.currentRound)">
 					<button ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button>
-					<span ng-if="match.isOverdue(stats.currentRound)" class="label label-danger pull-right">Overdue</span>
+					<span ng-if="match.isOverdue(stats.currentRound)" class="label label-danger pull-right"><i class="fa fa-clock-o fa-fw"></i> Overdue</span>
 				</div>
 			</div>
 		</div>

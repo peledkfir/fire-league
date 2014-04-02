@@ -30,7 +30,7 @@
 					<th ng-if="playing"><span ng-if="match.result">-</span></th>
 					<th ng-if="playing">{{match.result.away}}</th>
 
-					<th><i ng-if="match.isOverdue(stats.currentRound)" class="fa fa-clock-o"></i></th>
+					<th><i tooltip="Overdue" ng-if="match.isOverdue(stats.currentRound)" class="fa fa-clock-o"></i></th>
 				</tr>
 			</tbody>
 		</table>

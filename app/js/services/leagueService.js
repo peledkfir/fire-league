@@ -420,11 +420,14 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				});
 			});
 
+			var totalMissingMatches = 0;
+
 			if (currentRound > 1) {
 				_.each(allMatches, function(match) {
 					if (match.isOverdue(currentRound)) {
 						teamStats[match.home.name].missingMatches++;
 						teamStats[match.away.name].missingMatches++;
+						totalMissingMatches++;
 					}
 				});
 
@@ -434,7 +437,6 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			}
 			
 			var table = _.sortBy(_.toArray(tblHash), function(row) { return teamStats[row.team.name].posPerRound[season.rounds.length - 1]; });
-			
 			/**
 			 * @typedef Statistices
 			 * @type {Object}
@@ -442,12 +444,14 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			 * @property {Season} season Season general information which processed the stats for.
 			 * @property {Number} currentRound Current round playing
 			 * @property {Object<string, TeamStats>} teamStats Dictionary of stats per team 
+			 * @property {Number} totalMissingMatches Number of matches that are not played (before current round)
 			 */
 			return {
 				table: table,
 				season: season,
 				currentRound: currentRound,
-				teamStats: teamStats
+				teamStats: teamStats,
+				totalMissingMatches: totalMissingMatches
 			};
 		}
 	};
