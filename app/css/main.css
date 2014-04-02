@@ -326,9 +326,10 @@ html, body {
   background-image: -moz-radial-gradient(top, #f41818 0%, #cf0404 100%);
   background-image: -o-radial-gradient(top, #f41818 0%, #cf0404 100%);
   background-image: radial-gradient(top, #f41818 0%, #cf0404 100%);
+  box-shadow: 1px 1px 3px #9c9c9c;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_16 {
   min-width: 16px;
   min-height: 16px;
@@ -336,7 +337,7 @@ html, body {
   height: 16px;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_24 {
   min-width: 24px;
   min-height: 24px;
@@ -344,7 +345,7 @@ html, body {
   height: 24px;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_48 {
   min-width: 48px;
   min-height: 48px;
@@ -352,7 +353,7 @@ html, body {
   height: 48px;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_56 {
   min-width: 56px;
   min-height: 56px;
@@ -360,7 +361,7 @@ html, body {
   height: 56px;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_64 {
   min-width: 64px;
   min-height: 64px;
@@ -368,7 +369,7 @@ html, body {
   height: 64px;
 }
 
-/* line 41, ../sass/partials/_fl-base.sass */
+/* line 42, ../sass/partials/_fl-base.sass */
 .profile_128 {
   min-width: 128px;
   min-height: 128px;
