@@ -2,8 +2,8 @@
   <li><a ui-sref="browse">Networks</a></li>
   <li><a ui-sref="network({network: networkName})">{{networkName}}</a></li>
   <li ng-class="{active: !$state.params.player}">
-  	<a ng-if="$state.params.player" ui-sref=".dashboard">{{league.name}}</a>
-  	<span ng-if="!$state.params.player">{{league.name}}</span></li>
+  	<a ng-if="$state.params.player" ui-sref=".dashboard">{{season.name}}</a>
+  	<span ng-if="!$state.params.player">{{season.name}}</span></li>
   <li ng-if="$state.params.player" class="active">{{$state.params.player}}</li>
 </ol>
 
@@ -11,9 +11,9 @@
 	<i class="fa fa-cog fa-spin fa-5x"></i>
 </div>
 
-<div class="row" ng-if="!loading && stats && stats.league && stats.league.teams" ng-cloak>
-	<ul class="league-links">
-		<li tooltip="{{team.name}}" ng-repeat="team in stats.league.teams">
+<div class="row" ng-if="!loading && stats && stats.season && stats.season.teams" ng-cloak>
+	<ul class="season-links">
+		<li tooltip="{{team.name}}" ng-repeat="team in stats.season.teams">
 			<a ui-sref=".player({ player: team.name })" ui-sref-active="active" class="thumbnail"><fb-avatar size="56" id="team.id"></fb-avatar></a>
 			<span ng-if="stats.teamStats[team.name].missingMatches" class="badge danger">{{stats.teamStats[team.name].missingMatches}}</span>
 		</li>

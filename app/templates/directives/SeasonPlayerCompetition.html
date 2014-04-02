@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<i class="fa fa-bar-chart-o fa-fw"></i> League Competition
+		<i class="fa fa-bar-chart-o fa-fw"></i> Season Competition
 	</div>
 	<div class="panel-body table-responsive">
 		<table class="table table-hover table-condensed competition-table">
@@ -16,14 +16,14 @@
 				</tr>
 			</thead>
 			<tbody ng-init="playerStats = stats.teamStats[player]">
-				<tr ng-repeat="round in stats.league.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]">
+				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]">
 					<th>{{$index + 1}}</th>
 					<th ng-if="!playing" colspan="2"></th>
 					<th ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</th>
 					<th ng-if="!playing" colspan="4"></th>
 					
 					<th ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</th>
-					<th ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.league.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</th>
+					<th ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.season.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</th>
 					<th ng-if="playing" style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
 					<th ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
 					<th ng-if="playing">{{match.result.home}}</th>

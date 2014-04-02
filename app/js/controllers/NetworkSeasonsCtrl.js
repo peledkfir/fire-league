@@ -1,5 +1,5 @@
 
-fApp.controller('NetworkLeaguesCtrl', function NetworkLeaguesCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
+fApp.controller('NetworkSeasonsCtrl', function NetworkSeasonsCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
 	'use strict';
 
 	$scope.isOwner = leagueService.logic.network.isOwner;
@@ -12,10 +12,10 @@ fApp.controller('NetworkLeaguesCtrl', function NetworkLeaguesCtrl($scope, $rootS
 		$scope.loading = true;
 	}, 50);
 	
-	var $leagues = $scope.leagues = leagueService.res.league.all.sync(name);
+	var $seasons = $scope.seasons = leagueService.res.season.all.sync(name);
 	$scope.owners = leagueService.res.network.owners.sync(name);
 
-	$leagues.$on('loaded', function() {
+	$seasons.$on('loaded', function() {
 		$timeout.cancel(promise);
 		$scope.loading = false;
 	});

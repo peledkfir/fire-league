@@ -18,11 +18,11 @@ fApp.config(function($stateProvider) {
           leagueService.res.favorites.network.remove(friendSnap.name(), network);
         });
 
-        // deletes all leagues data
-        leagueService.res.network.leaguesData.remove(network);
+        // deletes all seasons data
+        leagueService.res.network.seasonsData.remove(network);
 
-        // deletes all the leagues
-        leagueService.res.league.all.remove(network);
+        // deletes all the seasons
+        leagueService.res.season.all.remove(network);
 
         // deletes the network
         leagueService.res.network.ref(network).remove(function() {

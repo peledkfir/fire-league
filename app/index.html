@@ -40,7 +40,7 @@
                 <a ui-sref="networkCreate"><i class="fa fa-sitemap fa-fw"></i> Network</a>
               </li>
               <li ng-show="$state.params.network">
-                  <a ui-sref="leagueCreate({network: $state.params.network})"><i class="icon icon-field-o fa-fw"></i> League</a>
+                  <a ui-sref="seasonCreate({network: $state.params.network})"><i class="icon icon-field-o fa-fw"></i> Season</a>
               </li>
             </ul>
           </li>
@@ -51,9 +51,9 @@
                 <span ng-if="networkObj !== true"><i class="fa fa-sitemap"></i> {{network}}</span>
                 <a ng-if="!(networkObj !== true)" ui-sref="network({network: network})"><i class="fa fa-sitemap fa-fw"></i> {{network}}</a>
               </li>
-              <li ui-sref-active="active" ng-repeat="(league, value) in networkObj.leagues">
+              <li ui-sref-active="active" ng-repeat="(season, value) in networkObj.seasons">
                 <!-- state ref to child dashboard state till it gets fixed: https://github.com/angular-ui/ui-router/issues/948 -->
-                <a ui-sref="league.dashboard({network: network, league: league})"><i class="fa fa-caret-right fa-fw"></i> {{league}}</a>
+                <a ui-sref="season.dashboard({network: network, season: season})"><i class="fa fa-caret-right fa-fw"></i> {{season}}</a>
               </li>
               <li ng-repeat-end ng-if="!$last" class="divider"></li>
             </ul>
@@ -141,9 +141,9 @@
 <script src="js/controllers/NetworkCreateCtrl.js"></script>  
 <script src="js/controllers/NetworkEditCtrl.js"></script>  
 <script src="js/controllers/NetworkDeleteCtrl.js"></script>  
-<script src="js/controllers/NetworkLeaguesCtrl.js"></script>  
-<script src="js/controllers/LeagueCreateCtrl.js"></script>  
-<script src="js/controllers/LeagueCtrl.js"></script>  
+<script src="js/controllers/NetworkSeasonsCtrl.js"></script>  
+<script src="js/controllers/SeasonCreateCtrl.js"></script>  
+<script src="js/controllers/SeasonCtrl.js"></script>  
 <script src="js/controllers/MatchEditModalCtrl.js"></script>  
 <script src="js/services/firebaseHelper.js"></script>  
 <script src="js/services/leagueService.js"></script>  

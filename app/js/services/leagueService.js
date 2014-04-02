@@ -85,9 +85,9 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					}
 				},
 
-				league: {
+				season: {
 					set: function(uid, network, name) {
-						var ref = firebaseRef('user_favorites/' + uid + '/networks/' + network + '/leagues/' + name);
+						var ref = firebaseRef('user_favorites/' + uid + '/networks/' + network + '/seasons/' + name);
 						ref.set(true);
 					}
 				}
@@ -129,9 +129,9 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					}
 				},
 
-				leaguesData: {
+				seasonsData: {
 					ref: function(name) {
-						return firebaseRef('league_matches/' + name);
+						return firebaseRef('season_matches/' + name);
 					},
 
 					remove: function(name) {
@@ -141,47 +141,47 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}
 			},
 
-			league: {
-				$set: function(network, leagueObj) {
-					var sync = this.sync(network, leagueObj.name);
-					sync.$set(leagueObj);
+			season: {
+				$set: function(network, seasonObj) {
+					var sync = this.sync(network, seasonObj.name);
+					sync.$set(seasonObj);
 				},
 
-				sync: function(network, league) {
-					var sync = syncData('network_leagues/' + network + '/' + league);
+				sync: function(network, season) {
+					var sync = syncData('network_seasons/' + network + '/' + season);
 					return sync;
 				},
 
 				players: {
-					sync: function(network, league) {
-						var sync = syncData('network_leagues/' + network + '/' + league + '/players');
+					sync: function(network, season) {
+						var sync = syncData('network_seasons/' + network + '/' + season + '/players');
 						return sync;
 					}
 				},
 
-				set: function(network, leagueObj) {
-					var ref = this.ref(network, leagueObj.name);
-					ref.set(leagueObj);
+				set: function(network, seasonObj) {
+					var ref = this.ref(network, seasonObj.name);
+					ref.set(seasonObj);
 				},
 
-				ref: function(network, league) {
-					var ref = firebaseRef('network_leagues/' + network + '/' + league);
+				ref: function(network, season) {
+					var ref = firebaseRef('network_seasons/' + network + '/' + season);
 					return ref;
 				},
 
 				table: {
-					sync: function (network, league) {
-						return syncData('league_matches/' + network + '/' + league);
+					sync: function (network, season) {
+						return syncData('season_matches/' + network + '/' + season);
 					}
 				},
 
 				all: {
 					ref: function(network) {
-						return firebaseRef('network_leagues/' + network);
+						return firebaseRef('network_seasons/' + network);
 					},
 
 					sync: function(network) {
-						return syncData('network_leagues/' + network);
+						return syncData('network_seasons/' + network);
 					},
 
 					remove: function(network) {
@@ -235,7 +235,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}
 			});
 
-			var league = {
+			var season = {
 				name: name,
 				teams: teams
 			};
@@ -304,25 +304,25 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				}
 			}
 
-			league.matchInRound = matchesInRound - dummy;
-			league.rounds = rounds;
-			league.totalMatches = league.matchInRound * rounds.length;
+			season.matchInRound = matchesInRound - dummy;
+			season.rounds = rounds;
+			season.totalMatches = season.matchInRound * rounds.length;
 
-			return league;
+			return season;
 		},
 
 
 		/**
-		 * Calculates statistices of given league
-		 * @param  {League} league The league to calc the statistices for
+		 * Calculates statistices of given season
+		 * @param  {Season} season The season to calc the statistices for
 		 * @return {Statistices} Calculated statistics
 		 */
-		stats: function (league) {
+		stats: function (season) {
 			var tblHash = {};
 			var teamStats = {};
 
-			for (var t = 0; t < league.teams.length; t++) {
-				var team = league.teams[t];
+			for (var t = 0; t < season.teams.length; t++) {
+				var team = season.teams[t];
 
 				/**
 				 * @typedef TableRow
@@ -364,7 +364,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			var currentRound = 1;
 			var allMatches = [];
 
-			_.each(league.rounds, function(round) {
+			_.each(season.rounds, function(round) {
 				if (round.matches) {
 					var resultCount = 0;
 
@@ -399,7 +399,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 					if (resultCount > 0) {
 						currentRound = round.number;
 
-						if (resultCount  == league.matchInRound && round.number < league.rounds.length) {
+						if (resultCount  == season.matchInRound && round.number < season.rounds.length) {
 							currentRound++;
 						}
 					}
@@ -433,19 +433,19 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				});
 			}
 			
-			var table = _.sortBy(_.toArray(tblHash), function(row) { return teamStats[row.team.name].posPerRound[league.rounds.length - 1]; });
+			var table = _.sortBy(_.toArray(tblHash), function(row) { return teamStats[row.team.name].posPerRound[season.rounds.length - 1]; });
 			
 			/**
 			 * @typedef Statistices
 			 * @type {Object}
 			 * @property {Array.<TableRow>} table Ordered table rows from the first place to the last. 
-			 * @property {League} league League general information which processed the stats for.
+			 * @property {Season} season Season general information which processed the stats for.
 			 * @property {Number} currentRound Current round playing
 			 * @property {Object<string, TeamStats>} teamStats Dictionary of stats per team 
 			 */
 			return {
 				table: table,
-				league: league,
+				season: season,
 				currentRound: currentRound,
 				teamStats: teamStats
 			};

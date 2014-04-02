@@ -63,24 +63,24 @@
 }
 
 /* line 59, ../sass/partials/_fl-league.sass */
-.league-links {
+.season-links {
   text-align: center;
   -webkit-padding-start: 0;
   -webkit-margin-after: 0;
 }
 /* line 64, ../sass/partials/_fl-league.sass */
-.league-links li {
+.season-links li {
   position: relative;
   display: inline-block;
   vertical-align: top;
   margin: 0 10px;
 }
 /* line 70, ../sass/partials/_fl-league.sass */
-.league-links li a {
+.season-links li a {
   color: black;
 }
 /* line 73, ../sass/partials/_fl-league.sass */
-.league-links li .badge {
+.season-links li .badge {
   position: absolute;
   bottom: 17px;
   right: -3px;
@@ -145,19 +145,19 @@
 }
 
 /* line 138, ../sass/partials/_fl-league.sass */
-.leagueEdit .players {
+.seasonEdit .players {
   border-radius: 5px;
   border: 2px dashed #868686;
   margin: 10px 10px 0 0;
   padding: 5px;
 }
 /* line 144, ../sass/partials/_fl-league.sass */
-.leagueEdit .player {
+.seasonEdit .player {
   cursor: move;
   padding: 10px 15px;
 }
 /* line 148, ../sass/partials/_fl-league.sass */
-.leagueEdit .player-placeholder {
+.seasonEdit .player-placeholder {
   padding: 5px 15px;
   border: 4px dashed #cfcfcf;
   opacity: 0.8;
@@ -165,7 +165,7 @@
   vertical-align: middle;
 }
 /* line 155, ../sass/partials/_fl-league.sass */
-.leagueEdit .player-placeholder:before {
+.seasonEdit .player-placeholder:before {
   color: #cfcfcf;
   content: "DROP HERE";
 }

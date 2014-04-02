@@ -1,25 +1,25 @@
 <ol class="breadcrumb">
   <li><a ui-sref="browse">Networks</a></li>
   <li><a ui-sref="network({network: network})">{{network}}</a></li>
-  <li class="active">Create league</li>
+  <li class="active">Start a New Season</li>
 </ol>
 
 <div class="row">
 	<div class="col-lg-8">
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-fw fa-pencil"></i> Create New League</div>
+			<div class="panel-heading"><i class="fa fa-fw fa-pencil"></i> Start a New Season</div>
 			<div class="panel-body">
 				<div class="text-center" ng-show="loading">
 					<i class="fa fa-cog fa-spin fa-5x"></i>
 				</div>
-				<form ng-hide="loading" ng-submit="create()" class="leagueEdit">
+				<form ng-hide="loading" ng-submit="create()" class="seasonEdit">
 					<div class="form-group">
 						<label for="networkName">Network</label>
 						<input id="networkName" class="form-control" type="text" value="{{network}}" disabled>
 					</div>
 					<div class="form-group">
-						<label for="leagueName">League name</label>
-						<input id="leagueName" class="form-control" type="text" ng-model="name" required>
+						<label for="seasonName">Season name</label>
+						<input id="seasonName" class="form-control" type="text" ng-model="name" required>
 					</div>
 
 					<div class="form-group">
@@ -59,18 +59,18 @@
 			<div class="panel-heading"><i class="fa fa-fw fa-eye"></i> Matches Preview</div>
 			<div class="panel-body">
 				<div class="text-center">
-					<pagination total-items="leaguePreview.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm" boundary-links="true"></pagination>
+					<pagination total-items="seasonPreview.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm" boundary-links="true"></pagination>
 				</div>
 
 				<div class="list-group">
-					<div class="list-group-item" ng-repeat="match in leaguePreview.rounds[currPage-1].matches">
+					<div class="list-group-item" ng-repeat="match in seasonPreview.rounds[currPage-1].matches">
 			        	<span class="small"><fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="home">{{match.home.name}}</span></span>
 						<span class="score text-center">vs.</span>
 						<span class="pull-right small"><span class="away">{{match.away.name}}</span> <fb-avatar size="24" id="match.away.id"></fb-avatar>
 					</div>
 				</div>
 
-				<p>Total rounds: {{leaguePreview.rounds.length}}</p>
+				<p>Total rounds: {{seasonPreview.rounds.length}}</p>
 			</div>
 		</div>
 	</div>

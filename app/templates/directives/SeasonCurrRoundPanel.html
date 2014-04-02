@@ -4,12 +4,12 @@
 	</div>
 	<div class="panel-body">
 		<div class="text-center">
-			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm hidden-xs-inline" boundary-links="true"></pagination>
-			<pagination total-items="stats.league.rounds.length" items-per-page="1" page="currPage" max-size="3" class="visible-xs-inline" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+			<pagination total-items="stats.season.rounds.length" items-per-page="1" page="currPage" max-size="3" class="pagination-sm hidden-xs-inline" boundary-links="true"></pagination>
+			<pagination total-items="stats.season.rounds.length" items-per-page="1" page="currPage" max-size="3" class="visible-xs-inline" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 		</div>
 
 		<div class="list-group">
-			<div class="list-group-item" ng-repeat="match in stats.league.rounds[currPage - 1].matches">
+			<div class="list-group-item" ng-repeat="match in stats.season.rounds[currPage - 1].matches">
 				<p class="clearfix home" ng-class="{'list-group-item-info': match.home.id == $root.auth.user.id}">
 					<span class="small"><fb-avatar size="24" id="match.home.id" clazz="pull-left"></fb-avatar> <span class="player-name pull-left">{{match.home.name}}</span></span>
 					<span class="score text-center pull-right">{{match.result.home}}</span>

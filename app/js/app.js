@@ -17,16 +17,16 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			templateUrl: 'templates/NetworkCreate.html',
 			controller: 'NetworkCreateCtrl'
 		})
-		.state('leagueCreate', {
-			url: '/create/league?network',
-			templateUrl: 'templates/LeagueCreate.html',
-			controller: 'LeagueCreateCtrl'
+		.state('seasonCreate', {
+			url: '/create/season?network',
+			templateUrl: 'templates/SeasonCreate.html',
+			controller: 'SeasonCreateCtrl'
 		})
 
 		.state('network', {
 			url: '/network/:network',
-			templateUrl: 'templates/NetworkLeagues.html',
-			controller: 'NetworkLeaguesCtrl'
+			templateUrl: 'templates/NetworkSeasons.html',
+			controller: 'NetworkSeasonsCtrl'
 		})
 		.state('network.edit', {
 			url: '/edit',
@@ -38,22 +38,22 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 			}
 		})
 
-		.state('league', {
+		.state('season', {
 			abstract: true,
-			url: '/network/:network/league/:league',
-			templateUrl: 'templates/League.html',
-			controller: 'LeagueCtrl',
+			url: '/network/:network/season/:season',
+			templateUrl: 'templates/Season.html',
+			controller: 'SeasonCtrl',
 			resolve: {
-				params: function($stateParams) { return { leagueName: $stateParams.league, networkName: $stateParams.network }; }
+				params: function($stateParams) { return { seasonName: $stateParams.season, networkName: $stateParams.network }; }
 			}
 		})
-		.state('league.dashboard', {
+		.state('season.dashboard', {
 			url: '',
-			templateUrl: 'templates/LeagueDashboard.html'
+			templateUrl: 'templates/SeasonDashboard.html'
 		})
-		.state('league.player', {
+		.state('season.player', {
 			url: '/player/:player',
-			templateUrl: 'templates/LeaguePlayer.html'
+			templateUrl: 'templates/SeasonPlayer.html'
 		})
 
 		.state('about', {

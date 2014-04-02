@@ -3,14 +3,14 @@ var fApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebas
 	.config(['$routeProvider', function($routeProvider) {
 		'use strict';
 
-		$routeProvider.when('/network/:network/league/:league',
+		$routeProvider.when('/network/:network/season/:season',
 			{
-				templateUrl: 'templates/LeagueDashboardBig.html',
-				controller: 'LeagueCtrl',
+				templateUrl: 'templates/SeasonDashboardBig.html',
+				controller: 'SeasonCtrl',
 				resolve: {
 					params: ['$route', function($route) {
 						return {
-							leagueName: $route.current.params.league,
+							seasonName: $route.current.params.season,
 							networkName: $route.current.params.network
 						};
 					}]

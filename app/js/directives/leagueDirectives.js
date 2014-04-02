@@ -6,13 +6,13 @@ fApp.directive('appVersion', ['version', function(version) {
 		elm.text(version);
 	};
 }])
-.directive('leagueTablePanel', function() {
+.directive('seasonTablePanel', function() {
 	'use strict';
 	
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'templates/directives/LeagueTablePanel.html',
+		templateUrl: 'templates/directives/SeasonTablePanel.html',
 		scope: {
 			table: '=',
 			maximizeUrl: '@'
@@ -22,13 +22,13 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('leagueCurrRoundPanel', function() {
+.directive('seasonCurrRoundPanel', function() {
 	'use strict';
 	
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'templates/directives/LeagueCurrRoundPanel.html',
+		templateUrl: 'templates/directives/SeasonCurrRoundPanel.html',
 		scope: {
 			stats: '='
 		},
@@ -42,13 +42,13 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('leaguePlayerCompetition', function() {
+.directive('seasonPlayerCompetition', function() {
 	'use strict';
 	
 	return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: 'templates/directives/LeaguePlayerCompetition.html',
+		templateUrl: 'templates/directives/SeasonPlayerCompetition.html',
 		scope: {
 			stats: '=',
 			player: '='
