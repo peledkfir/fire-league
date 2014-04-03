@@ -432,7 +432,7 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				});
 
 				_.each(teamStats, function(stats, team) {
-					tblHash[team].posChange = stats.posPerRound[currentRound-2] - stats[currentRound-1];
+					tblHash[team].posChange = stats.posPerRound[currentRound-2] - stats.posPerRound[currentRound-1];
 				});
 			}
 			
