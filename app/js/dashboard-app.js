@@ -3,6 +3,9 @@ var fApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebas
 	.config(['$routeProvider', function($routeProvider) {
 		'use strict';
 
+		// backward compatibility for alpha 0.0.2
+		$routeProvider.when('/network/:league/league/:season', { redirectTo: '/league/:league/season/:season' });
+
 		$routeProvider.when('/league/:league/season/:season',
 			{
 				templateUrl: 'templates/SeasonDashboardBig.html',
