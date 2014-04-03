@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'thenounproject';
-	src:url('fonts/thenounproject.eot?-70jws8');
-	src:url('fonts/thenounproject.eot?#iefix-70jws8') format('embedded-opentype'),
-		url('fonts/thenounproject.woff?-70jws8') format('woff'),
-		url('fonts/thenounproject.ttf?-70jws8') format('truetype'),
-		url('fonts/thenounproject.svg?-70jws8#thenounproject') format('svg');
+	src:url('../fonts/thenounproject.eot?-70jws8');
+	src:url('../fonts/thenounproject.eot?#iefix-70jws8') format('embedded-opentype'),
+		url('../fonts/thenounproject.woff?-70jws8') format('woff'),
+		url('../fonts/thenounproject.ttf?-70jws8') format('truetype'),
+		url('../fonts/thenounproject.svg?-70jws8#thenounproject') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
