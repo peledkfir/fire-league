@@ -6,6 +6,14 @@ fApp.directive('appVersion', ['version', function(version) {
 		elm.text(version);
 	};
 }])
+.directive('fSpinner', function() {
+	return {
+		restrict: 'A',
+		link: function($scope, $element) {
+			$element.addClass('fa fa-spin fa-circle-o-notch');
+		}
+	};
+})
 .directive('seasonTablePanel', function() {
 	'use strict';
 	

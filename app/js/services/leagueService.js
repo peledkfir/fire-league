@@ -1,5 +1,5 @@
 
-fApp.service('leagueService', function(firebaseRef, syncData) {
+fApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(firebaseRef, syncData, SITE_ID) {
 	'use strict';
 	
 	var mixinTableRow = {
@@ -16,6 +16,15 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 		ids: {
 			facebook: function(id) {
 				return 'facebook:' + id;
+			},
+			cloudinary: {
+				uuid: function() {
+				},
+
+				folder: function(league, season, match) {
+					var prefix = SITE_ID ? (SITE_ID + '/') : '';
+					return prefix + league + '/' + season + '/' + match.round + '/' + match.match;
+				}
 			}
 		},
 
@@ -195,6 +204,21 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 				set: function(uid, user) {
 					var ref = firebaseRef('users/' + uid);
 					ref.set(user);
+				}
+			},
+
+			cloudinary_hash: {
+				requests: {
+					set: function(uid, params) {
+						var ref = firebaseRef('cloudinary_hash/requests/' + uid);
+						ref.set(params);
+					}
+				},
+
+				results: {
+					ref: function(uid) {
+						return firebaseRef('cloudinary_hash/results/' + uid);
+					}
 				}
 			}
 		},
@@ -455,4 +479,4 @@ fApp.service('leagueService', function(firebaseRef, syncData) {
 			};
 		}
 	};
-});
+}]);

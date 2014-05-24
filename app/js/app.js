@@ -1,8 +1,8 @@
 
 
 // Declare app level module which depends on filters, and services
-var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
-	.value('version', '0.0.2a')
+var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'ui.knob', 'facebook', 'fire-league.config', 'firebase', 'cloudinary', 'blueimp.fileupload'])
+	.value('version', '0.0.3a')
 	.config(function($stateProvider, $urlRouterProvider) {
 		'use strict';
 		
@@ -102,7 +102,7 @@ var fApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootst
 		$rootScope.$stateParams = $stateParams;
 
 		$rootScope.$on('$stateChangeStart', function(ev, toState, toParams, fromState, fromParams) {
-			if ($rootScope.auth.user == null) {
+			if ($rootScope.auth == null || $rootScope.auth.user == null) {
 				if (_.endsWith(toState.name, 'Create')) {
 					ev.preventDefault();
 					$state.transitionTo('browse');

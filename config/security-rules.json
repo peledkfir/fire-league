@@ -121,6 +121,9 @@
                       }
                     },
                     
+                    "images": {
+                    },
+                    
                     "$other": {
                       ".validate": false
                     }
@@ -190,6 +193,27 @@
               ".validate": false
             }
          }
+      },
+
+      "cloudinary_hash": {
+        
+        "requests": {
+          "$user": {
+            ".read": "auth.uid === $user || auth.uid === 'heroku_server'",
+            ".write": "auth.uid === $user || auth.uid === 'heroku_server'"
+          }
+        },
+        
+        "results": {
+          "$user": {
+            ".read": "auth.uid === $user || auth.uid === 'heroku_server'",
+            ".write": "auth.uid === $user || auth.uid === 'heroku_server'"
+          }
+        },
+        
+        "$other": {
+          ".validate": false
+        }
       },
       
       "$other": {

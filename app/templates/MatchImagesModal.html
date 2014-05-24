@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+  <h4 class="modal-title" id="myModalLabel">{{match.home.name}} ({{match.result.home}}) vs. {{match.away.name}} ({{match.result.away}})</h4>
+</div>
+<div class="modal-body match-modal">
+	<div class="row form-group">
+      <div class="col-md-12">
+      	<div style="display:none">
+      		<i class="loading-carousel fa-5x" f-spinner></i>
+      	</div>
+		    <carousel>
+      		<slide ng-repeat="image in images" active="image.active">
+		        <img cl-image public-id="image.id" rn-lazy-loader=".loading-carousel">
+      		</slide>
+      	</carousel>
+      </div>
+    </div>
+</div>

@@ -31,6 +31,14 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 
 		edit: function() {
 			state.openEditMatchModal(this);
+		},
+
+		hasImages: function() {
+			return Boolean(this.images);
+		},
+
+		showImages: function() {
+			state.openMatchImagesModal(this);
 		}
 	};
 
@@ -79,22 +87,38 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 		}
 	};
 
+	state.openMatchImagesModal = function(match) {
+		if (match.hasImages()) {
+			var modal = $modal.open({
+				templateUrl: 'templates/MatchImagesModal.html',
+				resolve: {
+					match: function() {
+						return match;
+					}
+				},
+				controller: 'MatchImagesModalCtrl'
+			});
+		}
+	};
+
 	state.openEditMatchModal = function (match) {
 		if (match.canEdit()) {
 			var modal = $modal.open({
 				templateUrl: 'templates/MatchEditModal.html',
 				resolve: {
-					$seasonCtrlScope: function() {
-						return $scope;
-					},
 					match: function() {
 						return match;
+					},
+					folder: function() {
+						return leagueService.ids.cloudinary.folder(leagueName, seasonName, match);
 					}
 				},
 				controller: 'MatchEditModalCtrl'
 			});
 
-			modal.result.then(function(result) {
+			modal.result.then(function(modalResult) {
+				var result = (modalResult ? modalResult.result : null);
+
 				if (result && _.isNumber(result.away) && _.isNumber(result.home) && result.away >= 0 && result.home >= 0) {
 					// checking if adding match result for the first time
 					if (!state.$seasonData.rounds) {
@@ -106,10 +130,12 @@ fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, pa
 					}
 
 					match.result = angular.copy(result);
-					state.$seasonData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(result) };
+					match.images = _.pluck(modalResult.images, 'id');
+					state.$seasonData.rounds[match.round - 1].matches[match.match - 1] = { result: angular.copy(result), images: match.images };
 				} else {
 					if (state.$seasonData.rounds && state.$seasonData.rounds[match.round - 1] && state.$seasonData.rounds[match.round - 1].matches) {
 						delete match.result;
+						delete match.images;
 						delete state.$seasonData.rounds[match.round - 1].matches[match.match - 1];
 					}
 				}

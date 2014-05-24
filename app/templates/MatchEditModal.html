@@ -3,8 +3,8 @@
   <h4 class="modal-title" id="myModalLabel">Edit Match (Round {{match.round}})</h4>
 </div>
 <div class="modal-body match-modal">
-  <div class="row">
-    <form id="m{{match.matchIdx}}" ng-submit="save()">
+  <form id="m{{match.matchIdx}}" ng-submit="save()">
+    <div class="row form-group">
       <div class="col-md-5 text-center">
         <fb-avatar size="128" id="match.home.id" clazz="thumbnail"></fb-avatar>
         <p>{{match.home.name}}</p>
@@ -18,10 +18,22 @@
         <p>{{match.away.name}}</p>
         <div><input type="number" min="0" max="99" ng-model="result.away"></div>
       </div>
-    </form>
-  </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <label>Screen Shots</label>
+          <upload-photos service="uploadService" folder="folder" />
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="modal-footer">
-  <button type="submit" form="m{{match.matchIdx}}" class="btn btn-primary" ng-click="save()">Save</button>
-  <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+  <strong ng-if="uploadService.$scope.queue.length > 0 && (result.home == null || result.away == null)" class="text-danger">Saving without result will remove the images</strong>
+  <span file-upload-progress="progress()" class="fade" ng-class="{ in: active() }">
+    <knob knob-data="num" knob-options="{ 'readOnly': true, 'width': 18, 'height': 18, 'displayInput': false }"></knob>
+  </span>
+  <button type="submit" form="m{{match.matchIdx}}" class="btn btn-primary" ng-class="{ disabled: saving }">Save</button>
+  <button type="button" class="btn btn-default" ng-click="cancel()" ng-class="{ disabled: saving }">Close</button>
 </div>  

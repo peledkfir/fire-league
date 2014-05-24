@@ -103,6 +103,10 @@ $lastPlayerColor: rgb(233, 115, 115)
 .table.competition-table
 	th
 		text-align: center
+	th:last-child
+		.btn
+			padding: 0
+		text-align: left
 	.red-o
 		background-color: $lastPlayerColor
 		color: white
@@ -119,7 +123,7 @@ $lastPlayerColor: rgb(233, 115, 115)
 // match edit
 //
 .match-modal
-	input
+	input[type=number]
 		width: 75px
 		font-size: 230%
 
@@ -155,3 +159,37 @@ $lastPlayerColor: rgb(233, 115, 115)
 		&:before
 			color: #cfcfcf
 			content: "DROP HERE"
+
+//
+// upload photos
+//
+
+.upload-photos
+	.preview
+		float: left
+		margin-right: 10px
+
+	#photosDropZone
+		&:before
+			content: "DROP HERE"
+
+		&.initializing
+			&:before
+				content: "LOADING.. PLEASE WAIT"
+			opacity: 0.3
+
+		padding: 35px 0
+		border: 5px dashed #e5e5e5
+		border-radius: 3px
+		text-align: center
+		text-transform: uppercase
+		font-size: 16px
+		font-weight: bold
+		color: gray
+
+		button
+			margin-top: 10px
+			text-transform: uppercase
+
+		input
+			display: none

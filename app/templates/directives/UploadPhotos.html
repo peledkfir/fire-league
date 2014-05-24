@@ -1,0 +1,56 @@
+<div class="upload-photos" file-upload="options" >
+	<div id="photosDropZone" ng-class="{'initializing': !signed}" class="form-group">
+    <div><button type="button" class="btn btn-default" ng-class="{disabled: !signed }">Browse</button></div>
+    <input name="file" type="file" multiple ng-disabled="!signed" />
+  </div>
+  <div style="display:none">
+    <i class="loading-carousel fa-3x" f-spinner></i>
+  </div>
+  <alert type="danger" ng-show="error" close="deleteAlert()">{{error}}</alert>
+
+  <div class="list-group">
+    <div class="list-group-item clearfix" data-ng-repeat="file in queue" ng-class="{'processing': file.$processing()}">
+      <!-- File got uploaded right now -->
+      <span class="preview" ng-if="!!file.thumbnailUrl">
+          <img data-ng-src="{{file.thumbnailUrl}}" alt="">
+      </span>
+      <!-- File already exists -->
+      <span class="preview" ng-if="!!file.id">
+        <img cl-image public-id="file.id" data-transformation="media_lib_thumb" rn-lazy-loader=".loading-carousel">
+      </span>
+      
+      <!-- File pending upload -->
+      <span class="preview" ng-if="!file.thumbnailUrl && !file.id" file-upload-preview="file"></span>
+
+      <div>
+        <strong ng-file="file.name">{{file.name}}</strong>
+        <span style="display:inline-block" ng-if="!file.thumbnailUrl && !file.id && file.$state() != 'pending'">
+          <span class="label label-success">New</span>
+          <button type="button" class="btn-link" tooltip="Remove" ng-click="file.$cancel()"><i class="fa fa-trash-o"></i></button>
+        </span>
+        <span ng-if="!file.thumbnailUrl && !file.id && file.$state() == 'pending'">
+          <span class="label label-default">Uploading</span>
+        </span>
+        <span style="display:inline-block" ng-if="file.thumbnailUrl || file.id">
+          <span class="label label-success" ng-if="!file.isDeleted && file.thumbnailUrl">New</span>
+          <span class="label label-danger" ng-if="file.isDeleted">Delete</span>
+          <span class="label label-info" ng-if="file.thumbnailUrl">Uploaded</span>
+
+          <button type="button" class="btn-link" ng-if="!file.isDeleted" tooltip="Remove" ng-click="toggleFileDeleted(file)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+          <button type="button" class="btn-link" ng-if="file.isDeleted" ng-click="toggleFileDeleted(file)" tooltip="Undo">
+            <i class="fa fa-undo"></i>
+          </button>
+        
+        </span>
+      </div>
+      
+      <small class="text-muted">{{file.size | formatFileSize}}</small>
+
+      <div file-upload-progress="file.$progress()" class="fade pull-right" ng-class="{pending: 'in'}[file.$state()]">
+        <knob knob-data="num" knob-options="{ 'readOnly': true, 'width': 30, 'height': 30, 'displayInput': false }"></knob>
+      </div>
+    </div>
+  </div>
+</div>
