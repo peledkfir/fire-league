@@ -1,5 +1,5 @@
 
-fApp.service('cloudinaryHelper', ['$timeout', 'leagueService', 'CLOUDINARY_CONFIG', function($timeout, leagueService, CLOUDINARY_CONFIG) {
+flApp.service('cloudinaryHelper', ['$timeout', 'leagueService', 'CLOUDINARY_CONFIG', function($timeout, leagueService, CLOUDINARY_CONFIG) {
 	return {
 		url: CLOUDINARY_CONFIG.url,
 		sign: function(uid, params, callback) {

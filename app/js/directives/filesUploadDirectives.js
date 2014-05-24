@@ -1,5 +1,5 @@
 
-fApp
+flApp
 .config(['fileUploadProvider',function(fileUploadProvider) {
 	'use strict';
 
@@ -49,7 +49,7 @@ fApp
 		};
 	};
 }])
-.directive('uploadPhotos', function() {
+.directive('flUploadPhotos', function() {
 	'use strict';
 
 	return {

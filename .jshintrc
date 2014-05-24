@@ -4,8 +4,7 @@
   "eqeqeq": false,
   "globals": {
     "angular": true,
-    "fApp": true,
-    "myApp": true,
+    "flApp": true,
     "sprintf": true,
     "_": true,
     "$": true

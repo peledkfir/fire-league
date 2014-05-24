@@ -1,5 +1,5 @@
 
-fApp.controller('LeagueBrowseCtrl', function LeagueBrowseCtrl($scope, $timeout, leagueService) {
+flApp.controller('LeagueBrowseCtrl', function LeagueBrowseCtrl($scope, $timeout, leagueService) {
 	'use strict';
 	
 	$scope.isOwner = leagueService.logic.league.isOwner;

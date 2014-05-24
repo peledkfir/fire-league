@@ -1,5 +1,5 @@
 
-fApp.controller('LeagueSeasonsCtrl', function LeagueSeasonsCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
+flApp.controller('LeagueSeasonsCtrl', function LeagueSeasonsCtrl($scope, $rootScope, $stateParams, $timeout, leagueService) {
 	'use strict';
 
 	$scope.isOwner = leagueService.logic.league.isOwner;

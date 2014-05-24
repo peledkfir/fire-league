@@ -1,5 +1,5 @@
 
-var fApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
+var flApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
 	.config(['$routeProvider', function($routeProvider) {
 		'use strict';
 

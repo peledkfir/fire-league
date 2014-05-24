@@ -1,5 +1,5 @@
 
-fApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(firebaseRef, syncData, SITE_ID) {
+flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(firebaseRef, syncData, SITE_ID) {
 	'use strict';
 	
 	var mixinTableRow = {

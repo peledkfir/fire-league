@@ -1,5 +1,5 @@
 
-fApp.service('notificationService', function($rootScope, $timeout) {
+flApp.service('notificationService', function($rootScope, $timeout) {
 	'use strict';
 	$rootScope.notifications = {};
 	var notificationId = 0;

@@ -1,5 +1,5 @@
 
-fApp.controller('LeagueEditCtrl', function LeagueEditCtrl($scope, $timeout, $state, $stateParams, leagueService) {
+flApp.controller('LeagueEditCtrl', function LeagueEditCtrl($scope, $timeout, $state, $stateParams, leagueService) {
 	'use strict';
 	var leagueName = $stateParams.league;
 

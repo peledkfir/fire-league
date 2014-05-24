@@ -1,5 +1,5 @@
 
-fApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $rootScope, $state, leagueService) {
+flApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $rootScope, $state, leagueService) {
 	'use strict';
 	
 	$scope.create = function() {

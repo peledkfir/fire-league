@@ -1,5 +1,5 @@
 
-fApp.directive('analytics', function() {
+flApp.directive('ggAnalytics', function() {
 	'use strict';
 	
 	return {

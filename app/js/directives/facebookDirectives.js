@@ -1,5 +1,5 @@
 
-fApp.directive('fbAvatar', function() {
+flApp.directive('fbAvatar', function() {
 	'use strict';
 	
 	return {

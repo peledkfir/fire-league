@@ -1,5 +1,5 @@
 
-fApp.config(function($stateProvider) {
+flApp.config(function($stateProvider) {
   'use strict';
 
   var LeagueDeleteCtrl = function($scope, leagueService, league) {

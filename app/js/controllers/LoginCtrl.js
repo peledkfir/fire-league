@@ -1,5 +1,5 @@
 
-fApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, leagueService) {
+flApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, leagueService) {
 	'use strict';
 	
 	$scope.openLoginModal = function () {

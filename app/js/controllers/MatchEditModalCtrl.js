@@ -1,5 +1,5 @@
 
-fApp.controller('MatchEditModalCtrl', function MatchEditModalCtrl($scope, $rootScope, $modalInstance, UploadPhotosService, leagueService, match, folder) {
+flApp.controller('MatchEditModalCtrl', function MatchEditModalCtrl($scope, $rootScope, $modalInstance, UploadPhotosService, leagueService, match, folder) {
 	'use strict';
 
 	$scope.match = match;

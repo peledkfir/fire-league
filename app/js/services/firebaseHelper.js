@@ -1,5 +1,5 @@
 // a simple utility to create references to Firebase paths
-fApp.factory('firebaseRef', function($firebase, FBURL) {
+flApp.factory('firebaseRef', function($firebase, FBURL) {
    function pathRef(args) {
       for(var i=0; i < args.length; i++) {
          if( typeof(args[i]) === 'object' ) {

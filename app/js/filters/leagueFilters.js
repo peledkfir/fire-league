@@ -1,5 +1,5 @@
 
-fApp.filter('isDefined', function() {
+flApp.filter('isDefined', function() {
 	'use strict';
 
 	return function(input, val) {

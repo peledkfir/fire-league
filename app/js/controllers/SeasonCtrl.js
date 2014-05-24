@@ -5,7 +5,7 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-fApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, params, $timeout, notificationService, leagueService) {
+flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, params, $timeout, notificationService, leagueService) {
 	'use strict';
 
 	var seasonName = params.seasonName,

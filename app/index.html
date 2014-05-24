@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/thenounproject.css"/>
   <link rel="stylesheet" href="css/social-buttons.css"/>
 </head>
-<body ng-cloak ng-controller="LoginCtrl" analytics>
+<body ng-cloak ng-controller="LoginCtrl" gg-analytics>
   <div id="page-main">
 
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -62,7 +62,7 @@
 
         <ul class="nav navbar-nav navbar-right" ng-cloak>
           <li ng-show="loading">
-            <a><i class="fa-lg fa-fw" f-spinner></i></a>
+            <a><i class="fa-lg fa-fw" fl-spinner></i></a>
           </li>
           <li class="dropdown" ng-if="$root.auth.user">
             <a class="dropdown-toggle dropdown-24" data-toggle="dropdown" href="#">
@@ -102,7 +102,7 @@
     <div class="container navbar-default">
     <ul class="footer-links">
       <li class="delimiter"></li>
-      <li class="text"><small>Currently v<span app-version></span></small></li>
+      <li class="text"><small>Currently v<span fl-app-version></span></small></li>
       <li class="delimiter"></li>
       <li><a target="_blank" href="https://github.com/peledkfir/fire-league" class="btn btn-xs btn-link"><i class="fa fa-github"></i> Github</a></li>
       <li class="delimiter"></li>

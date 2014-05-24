@@ -1,4 +1,4 @@
-fApp.controller('LoginModalCtrl',
+flApp.controller('LoginModalCtrl',
 	function LoginModalCtrl ($scope, $rootScope, $modalInstance, Facebook, leagueService, $loginCtrlScope) {
 		'use strict';
 

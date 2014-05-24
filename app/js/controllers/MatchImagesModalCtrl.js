@@ -1,5 +1,5 @@
 
-fApp.controller('MatchImagesModalCtrl', ['$scope', 'match', '$modalInstance',
+flApp.controller('MatchImagesModalCtrl', ['$scope', 'match', '$modalInstance',
 	function($scope, match, $modalInstance) {
 		'use strict';
 		

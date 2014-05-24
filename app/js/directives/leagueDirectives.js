@@ -1,12 +1,14 @@
 
-fApp.directive('appVersion', ['version', function(version) {
+flApp.directive('flAppVersion', ['version', function(version) {
 	'use strict';
     
 	return function(scope, elm) {
 		elm.text(version);
 	};
 }])
-.directive('fSpinner', function() {
+.directive('flSpinner', function() {
+	'use strict';
+	
 	return {
 		restrict: 'A',
 		link: function($scope, $element) {
@@ -14,7 +16,7 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('seasonTablePanel', function() {
+.directive('flSeasonTablePanel', function() {
 	'use strict';
 	
 	return {
@@ -30,7 +32,7 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('seasonCurrRoundPanel', function() {
+.directive('flSeasonCurrRoundPanel', function() {
 	'use strict';
 	
 	return {
@@ -50,7 +52,7 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('seasonPlayerCompetition', function() {
+.directive('flSeasonPlayerCompetition', function() {
 	'use strict';
 	
 	return {
@@ -63,7 +65,7 @@ fApp.directive('appVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('editableFriendsList', function() {
+.directive('flEditableFriendsList', function() {
 	'use strict';
 
 	return {

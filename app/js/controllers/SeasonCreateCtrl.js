@@ -1,5 +1,5 @@
 
-fApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $timeout, $stateParams, leagueService) {
+flApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $timeout, $stateParams, leagueService) {
 	'use strict';
 
 	var league = $scope.league = $stateParams.league;
