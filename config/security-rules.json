@@ -196,6 +196,7 @@
       },
 
       "cloudinary_hash": {
+        ".read": "auth.uid === 'heroku_server'",
         
         "requests": {
           "$user": {

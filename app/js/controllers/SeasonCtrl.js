@@ -34,7 +34,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 		},
 
 		hasImages: function() {
-			return Boolean(this.images);
+			return Boolean(this.images) && this.images.length;
 		},
 
 		showImages: function() {

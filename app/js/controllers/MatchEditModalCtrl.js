@@ -14,7 +14,7 @@ flApp.controller('MatchEditModalCtrl', function MatchEditModalCtrl($scope, $root
 
 	$scope.save = function() {
 		if (!$scope.saving) {
-			if (result.home && result.away) {
+			if (result.home !== null && result.away !== null) {
 				$scope.saving = true;
 				$scope.progress = uploadService.progress;
 				$scope.active = uploadService.active;
