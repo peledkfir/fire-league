@@ -79,6 +79,10 @@
                   }
               }
             },
+
+            "locked": {
+              ".validate": "newData.isBoolean()"
+            },
             
             "$other": {
               ".validate": true
@@ -95,7 +99,9 @@
           ".validate": "root.child('leagues').child($league).exists()",
           
           "$season": {
-            ".write": "root.child('league_seasons').child($league).child($season).child('players').child(auth.uid).exists()",
+            ".write": "((!root.child('league_seasons').child($league).child($season).child('locked').exists() ||
+                        root.child('league_seasons').child($league).child($season).child('locked').val() == false) &&
+                        root.child('league_seasons').child($league).child($season).child('players').child(auth.uid).exists())",
             ".validate": "root.child('league_seasons').child($league).child($season).exists()",
             
             "rounds": {

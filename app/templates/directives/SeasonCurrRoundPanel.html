@@ -23,8 +23,8 @@
 				</p>
 
 				<div class="buttons clearfix" ng-if="match.canEdit() || match.isOverdue(stats.currentRound) || match.hasImages()">
-					<button ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button>
-					<button tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs btn-info pull-right" ng-click="match.showImages()"><i class="fa fa-picture-o"></i></button>
+					<button type="button" ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button>
+					<button type="button" tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs btn-info pull-right" ng-click="match.showImages()"><i class="fa fa-picture-o"></i></button>
 					<span ng-if="match.isOverdue(stats.currentRound)" class="label label-danger pull-right"><i class="fa fa-clock-o fa-fw"></i> Overdue</span>
 				</div>
 			</div>

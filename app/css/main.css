@@ -107,15 +107,15 @@
 }
 
 /* line 104, ../sass/partials/_fl-league.sass */
-.table.competition-table th {
+.table.competition-table th, .table.competition-table td {
   text-align: center;
 }
 /* line 106, ../sass/partials/_fl-league.sass */
-.table.competition-table th:last-child {
+.table.competition-table td:last-child {
   text-align: left;
 }
 /* line 107, ../sass/partials/_fl-league.sass */
-.table.competition-table th:last-child .btn {
+.table.competition-table td:last-child .btn {
   padding: 0;
 }
 /* line 110, ../sass/partials/_fl-league.sass */

@@ -33,6 +33,6 @@ flApp.controller('LeagueCreateCtrl', function LeagueCreateCtrl($scope, $rootScop
 		name: '',
 		friends: []
 	};
-	var owner = { id: Number($rootScope.auth.user.id), name: $rootScope.auth.user.name, isOwner: true };
+	var owner = { id: Number($rootScope.auth.user.id), name: $rootScope.auth.user.displayName, isOwner: true };
 	league.friends.push(owner);
 });

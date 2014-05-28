@@ -47,6 +47,15 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 				params: function($stateParams) { return { seasonName: $stateParams.season, leagueName: $stateParams.league }; }
 			}
 		})
+		.state('season.edit', {
+			url: '/edit',
+			views: {
+				'@': {
+					templateUrl: 'templates/SeasonEdit.html',
+					controller: 'SeasonEditCtrl'
+				}
+			}
+		})
 		.state('season.dashboard', {
 			url: '',
 			templateUrl: 'templates/SeasonDashboard.html'
@@ -108,7 +117,12 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 					$state.transitionTo('browse');
 				} else if (_.endsWith(toState.name, 'delete') || _.endsWith(toState.name, 'edit')) {
 					ev.preventDefault();
-					$state.transitionTo(_.strLeftBack(toState.name, '.'), toParams, { location: 'replace' });
+					var toState = _.strLeftBack(toState.name, '.');
+					// Cannot transition to abstract state
+					if (toState == 'season') {
+						toState = 'season.dashboard';
+					}
+					$state.transitionTo(toState, toParams, { location: 'replace' });
 					// TODO: report bug for this $state.transitionTo('^', toParams, { location: 'replace', relative: toState });					
 				}
 			}

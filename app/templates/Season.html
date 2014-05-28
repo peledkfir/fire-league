@@ -12,6 +12,12 @@
 </div>
 
 <div class="row" ng-if="!loading && stats && stats.season && stats.season.teams" ng-cloak>
+	<div class="col-lg-12">
+		<div ng-if="locked.$value && $root.auth.user" class="alert alert-info">
+			<i class="fa fa-lock"></i> <strong> League is locked.</strong> Owner is responsible for updating league results.
+		</div>
+	</div>
+
 	<ul class="season-links">
 		<li tooltip="{{team.name}}" ng-repeat="team in stats.season.teams">
 			<a ui-sref=".player({ player: team.name })" ui-sref-active="active" class="thumbnail"><fb-avatar size="56" id="team.id"></fb-avatar></a>

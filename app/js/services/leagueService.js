@@ -161,6 +161,12 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 					return sync;
 				},
 
+				locked: {
+					sync: function(league, season) {
+						return syncData('league_seasons/' + league + '/' + season + '/locked');
+					}
+				},
+
 				players: {
 					sync: function(league, season) {
 						var sync = syncData('league_seasons/' + league + '/' + season + '/players');

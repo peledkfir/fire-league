@@ -18,25 +18,25 @@
 			</thead>
 			<tbody ng-init="playerStats = stats.teamStats[player]">
 				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]">
-					<th><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></th>
-					<th>{{$index + 1}}</th>
-					<th ng-if="!playing" colspan="2"></th>
-					<th ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</th>
-					<th ng-if="!playing" colspan="4"></th>
+					<td><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></td>
+					<td>{{$index + 1}}</td>
+					<td ng-if="!playing" colspan="2"></td>
+					<td ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</td>
+					<td ng-if="!playing" colspan="4"></td>
 					
-					<th ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</th>
-					<th ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.season.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</th>
-					<th ng-if="playing" style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</th>
-					<th ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</th>
-					<th ng-if="playing">{{match.result.home}}</th>
-					<th ng-if="playing"><span ng-if="match.result">-</span></th>
-					<th ng-if="playing">{{match.result.away}}</th>
+					<td ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</td>
+					<td ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.season.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</td>
+					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</td>
+					<td ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</td>
+					<td ng-if="playing">{{match.result.home}}</td>
+					<td ng-if="playing"><span ng-if="match.result">-</span></td>
+					<td ng-if="playing">{{match.result.away}}</td>
 
-					<th>
-						<button tooltip="Edit" ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i></button>
+					<td>
+						<button type="button" tooltip="Edit" ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i></button>
 						<a tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs text-info" ng-click="match.showImages()"><i class="fa fa-fw fa-picture-o"></i></a>
 						<i tooltip="Overdue" ng-if="match.isOverdue(stats.currentRound)" class="fa fa-fw fa-clock-o"></i>
-					</th>
+					</td>
 				</tr>
 			</tbody>
 		</table>

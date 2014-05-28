@@ -26,7 +26,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 		},
 
 		canEdit: function() {
-			return leagueService.logic.league.isOwner(state.$owners, $rootScope.auth) || this.currentUserMatch();
+			return leagueService.logic.league.isOwner(state.$owners, $rootScope.auth) || (!state.$locked.$value && this.currentUserMatch());
 		},
 
 		edit: function() {
@@ -150,9 +150,11 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 	};
 
 	state.$players = leagueService.res.season.players.sync(leagueName, seasonName);
+	state.$locked = leagueService.res.season.locked.sync(leagueName, seasonName);
 	state.$owners = leagueService.res.league.owners.sync(leagueName);
 
 	$scope.loading = false;
+	$scope.locked = state.$locked;
 	$scope.season = { name: seasonName };
 	$scope.leagueName = leagueName;
 
@@ -167,10 +169,14 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 			$scope.loading = false;
 			$timeout.cancel(promise);
 			syncStats();
-		});
-		
-		state.$seasonData.$on('change', function() {
-			syncStats();
+	
+			state.$seasonData.$on('change', function() {
+				syncStats();
+			});
+		});		
+
+		$scope.$on('$destroy', function() {
+			state.$seasonData.$off();
 		});
 	});
 });
