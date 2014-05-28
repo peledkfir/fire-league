@@ -25,7 +25,7 @@ function print(env, lvl, message, obj) {
 function start(env) {
 	if (!env.listening) {
 		clearOrphanImages(env);
-		env.intervalId = setInterval(clearOrphanImages, 1000 * 60 * 60 /* 1 hour */, env);
+		env.intervalId = setInterval(clearOrphanImages, 1000 * 60 * 60 * 12 /* 12 hours */, env);
 		
 		print(env, 'log', 'Creates new work queue');
 
@@ -67,7 +67,7 @@ function authenticate(env) {
 }
 
 function checkPublicId (env, publicId) {
-	print(env, 'log', 'Checking: ' + publicId);
+	//print(env, 'debug', 'Checking: ' + publicId);
 	var split = publicId.split('/');
 	var startIdx = 0;
 
