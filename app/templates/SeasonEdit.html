@@ -7,11 +7,11 @@
   <li class="active">Edit</li>
 </ol>
 
-<div class="text-center" ng-show="loading">
+<div class="text-center" ng-show="loading < 0">
 	<i class="fa-5x" fl-spinner></i>
 </div>
 
-<div class="row">
+<div class="row" ng-hide="loading < 0">
 	<div class="col-lg-offset-2 col-lg-8">
 		<div class="panel panel-default">
 			<div class="panel-heading"><i class="fa fa-fw fa-edit"></i> Edit '{{$state.params.season}}' Season</div>
@@ -23,6 +23,12 @@
                                 <input type="checkbox" ng-model="locked"> <i class="fa fa-lock"></i> Lock for updates
                             </label>
                         </div>
+                    </div>
+                    <div class="form-group">
+					    <label>Overwrite current match</label> <span class="text-muted small">effects when current round arrears the one you set here</span>
+                        <select class="form-control" ng-model="roundOverwrite" ng-options="n * 1 for n in rounds">
+                            <option value="">No overwrite</option>
+                        </select>
 					</div>
 <!-- 					<div class="form-group">
 						<button type="submit" data-loading-text="Saving..." class="btn btn-primary">Save</button>

@@ -161,6 +161,15 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 					return sync;
 				},
 
+				roundOverwrite: {
+					ref: function(league, season) {
+						return firebaseRef('league_seasons/' + league + '/' + season + '/roundOverwrite');
+					},
+					sync: function(league, season) {
+						return syncData('league_seasons/' + league + '/' + season + '/roundOverwrite');
+					}
+				},
+
 				locked: {
 					sync: function(league, season) {
 						return syncData('league_seasons/' + league + '/' + season + '/locked');
@@ -347,7 +356,7 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 		 * @param  {Season} season The season to calc the statistices for
 		 * @return {Statistices} Calculated statistics
 		 */
-		stats: function (season) {
+		stats: function (season, roundOverwrite) {
 			var tblHash = {};
 			var teamStats = {};
 
@@ -451,6 +460,11 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			});
 
 			var totalMissingMatches = 0;
+
+			// overwrites current round if valid
+			if (roundOverwrite >= 1 && roundOverwrite <= season.rounds.length && roundOverwrite > currentRound) {
+				currentRound = roundOverwrite;
+			}
 
 			if (currentRound > 1) {
 				_.each(allMatches, function(match) {

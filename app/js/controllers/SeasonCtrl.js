@@ -43,6 +43,18 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 	};
 
 	var syncStats = function() {
+		if (!state.players) {
+			if (_.isArray(state.$players.$getIndex()) && state.$players.$getIndex().length > 0) {
+				var keys = state.$players.$getIndex();
+				var players = [];
+				keys.forEach(function(key, i) {
+					players.push(state.$players[key]);
+				});
+
+				state.players = players;
+			}
+		}
+
 		if (state.players) {
 			// saves ui state aside
 			var roundTabInfo = _.map($scope.season.rounds, function(round) { return _.pick(round, 'active'); });
@@ -67,23 +79,13 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 
 			// update scope
 			$scope.season = season;
-			$scope.stats = leagueService.stats($scope.season);
+			$scope.stats = leagueService.stats($scope.season, state.$roundOverwrite.$value);
 			// var stats = 
 			// stats.overdueRounds = _(stats.season.allMatches)
 			//	.filter(function(val) { return val.isOverdue(); })
 			//	.groupBy(function(val) { return val.round; })
 			//	.value();
 			// stats.overdueRoundsLength = _.size(stats.overdueRounds);
-		} else if (_.isArray(state.$players.$getIndex()) && state.$players.$getIndex().length > 0) {
-			var keys = state.$players.$getIndex();
-			var players = [];
-			keys.forEach(function(key, i) {
-				players.push(state.$players[key]);
-			});
-
-			state.players = players;
-
-			syncStats();
 		}
 	};
 
@@ -149,11 +151,13 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 		}
 	};
 
+	state.$roundOverwrite = leagueService.res.season.roundOverwrite.sync(leagueName, seasonName);
 	state.$players = leagueService.res.season.players.sync(leagueName, seasonName);
 	state.$locked = leagueService.res.season.locked.sync(leagueName, seasonName);
 	state.$owners = leagueService.res.league.owners.sync(leagueName);
 
 	$scope.loading = false;
+	var loaded = false;
 	$scope.locked = state.$locked;
 	$scope.season = { name: seasonName };
 	$scope.leagueName = leagueName;
@@ -162,10 +166,21 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 		$scope.loading = true;
 	}, 50);
 
+	state.$roundOverwrite.$on('change', function() {
+		if (loaded) {
+			syncStats();
+		}
+	});
+
+	$scope.$on('$destroy', function() {
+		state.$roundOverwrite.$off();
+	});
+
 	state.$players.$on('loaded', function() {
 		state.$seasonData = leagueService.res.season.table.sync(leagueName, seasonName);
 
 		state.$seasonData.$on('loaded', function() {
+			loaded = true;
 			$scope.loading = false;
 			$timeout.cancel(promise);
 			syncStats();
@@ -173,7 +188,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 			state.$seasonData.$on('change', function() {
 				syncStats();
 			});
-		});		
+		});
 
 		$scope.$on('$destroy', function() {
 			state.$seasonData.$off();

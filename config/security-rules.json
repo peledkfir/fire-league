@@ -83,6 +83,10 @@
             "locked": {
               ".validate": "newData.isBoolean()"
             },
+
+            "roundOverwrite": {
+              ".validate": "newData.isNumber()"
+            },
             
             "$other": {
               ".validate": true
