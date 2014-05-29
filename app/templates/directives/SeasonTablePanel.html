@@ -21,16 +21,16 @@
 			</thead>
 			<tbody>
 				<tr ng-class="{info: row.team.id == $root.auth.user.id}" ng-repeat="row in table">
-					<th>{{$index + 1}}<span ng-if="row.posChange" ng-class="{'green': row.posChange > 0, 'red': row.posChange < 0}"><i ng-class="{'fa-caret-up': row.posChange > 0, 'fa-caret-down': row.posChange < 0}" class="fa fa-fw"></i><small>{{abs(row.posChange)}}</small></span></th>
-					<th><fb-avatar size="24" id="row.team.id"></fb-avatar> <span class="hidden-xs-inline">{{row.team.name}}</span></th>
-					<th>{{row.p}}</th>
-					<th>{{row.w}}</th>
-					<th>{{row.d}}</th>
-					<th>{{row.l}}</th>
-					<th class="hidden-xxs-table-cell">{{row.f}}</th>
-					<th class="hidden-xxs-table-cell">{{row.a}}</th>
-					<th ng-class="{'red': row.gd() < 0}">{{row.gd()}}</th>
-					<th>{{row.pts()}}</th>
+					<td>{{$index + 1}}<span ng-if="row.posChange" ng-class="{'green': row.posChange > 0, 'red': row.posChange < 0}"><i ng-class="{'fa-caret-up': row.posChange > 0, 'fa-caret-down': row.posChange < 0}" class="fa fa-fw"></i><small>{{abs(row.posChange)}}</small></span></td>
+					<td><fb-avatar size="24" id="row.team.id"></fb-avatar> <span class="hidden-xs-inline">{{row.team.name}}</span></td>
+					<td>{{row.p}}</td>
+					<td>{{row.w}}</td>
+					<td>{{row.d}}</td>
+					<td>{{row.l}}</td>
+					<td class="hidden-xxs-table-cell">{{row.f}}</td>
+					<td class="hidden-xxs-table-cell">{{row.a}}</td>
+					<td ng-class="{'red': row.gd() < 0}">{{row.gd()}}</td>
+					<td>{{row.pts()}}</td>
 				</tr>
 			</tbody>
 		</table>
