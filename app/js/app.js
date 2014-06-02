@@ -1,7 +1,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'ui.knob', 'facebook', 'fire-league.config', 'firebase', 'cloudinary', 'blueimp.fileupload'])
+var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'ui.knob', 'angularMoment', 'facebook', 'fire-league.config', 'firebase', 'cloudinary', 'blueimp.fileupload'])
 	.value('version', '0.0.3a')
 	.config(function($stateProvider, $urlRouterProvider) {
 		'use strict';

@@ -152,6 +152,40 @@
           }
         }  
       },
+
+      "season_matches_latest": {
+        ".read": true,
+        
+        "$league": {
+          ".write": "root.child('leagues').child($league).child('owners').child(auth.uid).exists()",
+          ".validate": "root.child('leagues').child($league).exists()",
+          
+          "$season": {
+            ".write": "((!root.child('league_seasons').child($league).child($season).child('locked').exists() ||
+                        root.child('league_seasons').child($league).child($season).child('locked').val() == false) &&
+                        root.child('league_seasons').child($league).child($season).child('players').child(auth.uid).exists())",
+            ".validate": "root.child('league_seasons').child($league).child($season).exists()",
+
+            "list": {
+              "$matchKey": {
+                ".validate": "newData.hasChildren(['author'])",
+
+                "author": {
+                  ".validate": "root.child('league_seasons').child($league).child($season).child('players').child(newData.val()).exists()"
+                },
+
+                "$other": {
+                  ".validate": false
+                }
+              }
+            },
+
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      },
       
       "user_favorites": {
         ".read": true,
@@ -197,6 +231,9 @@
             },
             "name": {
               ".validate": "newData.isString()"
+            },
+            "lastOnline": {
+              ".validate": "newData.isString() || newData.isNumber()"
             },
             
             "$other": {

@@ -32,6 +32,18 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('flSeasonLatestPanel', function($rootScope) {
+	'use strict';
+
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/SeasonLatestPanel.html',
+		scope: {
+			latest: '='
+		}
+	};
+})
 .directive('flSeasonCurrRoundPanel', function() {
 	'use strict';
 	

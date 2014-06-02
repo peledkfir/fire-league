@@ -80,12 +80,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 			// update scope
 			$scope.season = season;
 			$scope.stats = leagueService.stats($scope.season, state.$roundOverwrite.$value);
-			// var stats = 
-			// stats.overdueRounds = _(stats.season.allMatches)
-			//	.filter(function(val) { return val.isOverdue(); })
-			//	.groupBy(function(val) { return val.round; })
-			//	.value();
-			// stats.overdueRoundsLength = _.size(stats.overdueRounds);
+			$scope.latestMatches = leagueService.latestMatches($scope.season, state.$latestMatches, $rootScope.userLastOnline);
 		}
 	};
 
@@ -143,6 +138,12 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 				}
 				
 				state.$seasonData.$save().then(function() {
+					if (match.result) {
+						leagueService.res.season.latestMatches.set(state.$latestMatches, match, $rootScope.auth.user.uid);						
+					} else {
+						state.$latestMatches.$remove(leagueService.res.season.latestMatches.key(match));
+					}
+
 					notificationService.notify('success', 'Saved !', 2000);
 				}, function() {
 					notificationService.notify('danger', 'Failed !', 3500);
@@ -180,18 +181,27 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 		state.$seasonData = leagueService.res.season.table.sync(leagueName, seasonName);
 
 		state.$seasonData.$on('loaded', function() {
-			loaded = true;
-			$scope.loading = false;
-			$timeout.cancel(promise);
-			syncStats();
+			state.$latestMatches = leagueService.res.season.latestMatches.sync(leagueName, seasonName, 15);
+
+			state.$latestMatches.$on('loaded', function() {
+				loaded = true;
+				$scope.loading = false;
+				$timeout.cancel(promise);
+				syncStats();
+			});
+
+			state.$latestMatches.$on('change', function() {
+				syncStats();
+			});
 	
 			state.$seasonData.$on('change', function() {
 				syncStats();
 			});
-		});
 
-		$scope.$on('$destroy', function() {
-			state.$seasonData.$off();
+			$scope.$on('$destroy', function() {
+				state.$latestMatches.$off();
+				state.$seasonData.$off();
+			});
 		});
 	});
 });

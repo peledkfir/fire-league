@@ -1,5 +1,5 @@
 
-flApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, leagueService) {
+flApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, leagueService, loginService) {
 	'use strict';
 	
 	$scope.openLoginModal = function () {
@@ -21,6 +21,7 @@ flApp.controller('LoginCtrl', function LoginCtrl($scope, $rootScope, $modal, lea
 	$scope.loading = false;
 
 	$rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
+		loginService.handleConnection(user.uid);
 		$scope.favorites = leagueService.res.favorites.sync(user.uid);
 	});
 

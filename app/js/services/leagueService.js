@@ -199,6 +199,20 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 					}
 				},
 
+				latestMatches: {
+					sync: function(league, season, limit) {
+						return syncData('season_matches_latest/' + league + '/' + season + '/list', limit);
+					},
+
+					key: function(match) {
+						return match.round + '_' + match.match;
+					},
+
+					set: function($latestMatches, match, uid) {
+						$latestMatches.$child(this.key(match)).$set({ author: uid, $priority: Firebase.ServerValue.TIMESTAMP });
+					}
+				},
+
 				all: {
 					ref: function(league) {
 						return firebaseRef('league_seasons/' + league);
@@ -219,6 +233,17 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 				set: function(uid, user) {
 					var ref = firebaseRef('users/' + uid);
 					ref.set(user);
+				},
+				lastOnline: {
+					ref: function(uid) {
+						return firebaseRef('users/' + uid + '/lastOnline');
+					}
+				}
+			},
+
+			_info: {
+				connected: function() {
+					return firebaseRef('.info/connected');
 				}
 			},
 
@@ -496,6 +521,28 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 				currentRound: currentRound,
 				teamStats: teamStats,
 				totalMissingMatches: totalMissingMatches
+			};
+		},
+
+		latestMatches: function(season, $latestMatches, lastTimeOnline) {
+			var matches = [];
+			var keys = $latestMatches.$getIndex();
+			var newItems = 0;
+
+			for (var i = keys.length - 1; i >= 0; i--) {
+				var matchSplit = keys[i].split('_');
+				var round = parseInt(matchSplit[0], 10) - 1;
+				var match = parseInt(matchSplit[1], 10) - 1;
+				var timestamp = $latestMatches[keys[i]].$priority;
+				if (timestamp > lastTimeOnline) {
+					newItems++;
+				}
+				matches.push( { timestamp: timestamp, match: season.rounds[round].matches[match]});
+			}
+
+			return {
+				new: newItems,
+				matches: matches
 			};
 		}
 	};
