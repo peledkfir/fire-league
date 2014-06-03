@@ -1,7 +1,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'ui.knob', 'angularMoment', 'facebook', 'fire-league.config', 'firebase', 'cloudinary', 'blueimp.fileupload'])
+var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.bootstrap', 'ui.knob', 'angularUtils.directives.dirDisqus', 'angularMoment', 'facebook', 'fire-league.config', 'firebase', 'cloudinary', 'blueimp.fileupload'])
 	.value('version', '0.0.3a')
 	.config(function($stateProvider, $urlRouterProvider) {
 		'use strict';
@@ -10,23 +10,42 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 		.state('browse', {
 			url: '/browse',
 			templateUrl: 'templates/LeagueBrowse.html',
-			controller: 'LeagueBrowseCtrl'
+			controller: 'LeagueBrowseCtrl',
+			data: {
+				pageTitle: function() {
+					return 'Fire-League';
+				}
+			}
 		})
 		.state('leagueCreate', {
 			url: '/create/league',
 			templateUrl: 'templates/LeagueCreate.html',
-			controller: 'LeagueCreateCtrl'
+			controller: 'LeagueCreateCtrl',
+			data: {
+				pageTitle: function() {
+					return 'Create new League';	
+				} 
+			}
 		})
 		.state('seasonCreate', {
 			url: '/create/season?league',
 			templateUrl: 'templates/SeasonCreate.html',
-			controller: 'SeasonCreateCtrl'
+			controller: 'SeasonCreateCtrl',
+			data: {
+				pageTitle: function($stateParams) {
+					return $stateParams.league + ': Create new Season';
+				}
+			}
 		})
-
 		.state('league', {
 			url: '/league/:league',
 			templateUrl: 'templates/LeagueSeasons.html',
-			controller: 'LeagueSeasonsCtrl'
+			controller: 'LeagueSeasonsCtrl',
+			data: {
+				pageTitle: function($stateParams) {
+					return $stateParams.league;
+				}
+			}
 		})
 		.state('league.edit', {
 			url: '/edit',
@@ -34,6 +53,11 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 				'@': {
 					templateUrl: 'templates/LeagueEdit.html',
 					controller: 'LeagueEditCtrl'
+				}
+			},
+			data: {
+				pageTitle: function($stateParams) {
+					return 'Edit: ' + $stateParams.league;
 				}
 			}
 		})
@@ -54,15 +78,30 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 					templateUrl: 'templates/SeasonEdit.html',
 					controller: 'SeasonEditCtrl'
 				}
+			},
+			data: {
+				pageTitle: function($stateParams) {
+					return 'Edit: ' + $stateParams.season;
+				}
 			}
 		})
 		.state('season.dashboard', {
 			url: '',
-			templateUrl: 'templates/SeasonDashboard.html'
+			templateUrl: 'templates/SeasonDashboard.html',
+			data: {
+				pageTitle: function($stateParams) {
+					return $stateParams.league + ' - ' + $stateParams.season;
+				}
+			}
 		})
 		.state('season.player', {
 			url: '/player/:player',
-			templateUrl: 'templates/SeasonPlayer.html'
+			templateUrl: 'templates/SeasonPlayer.html',
+			data: {
+				pageTitle: function($stateParams) {
+					return $stateParams.season + ' - ' + $stateParams.player;
+				}
+			}
 		})
 
 		.state('about', {
@@ -86,11 +125,21 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 					'World Cup Trophy by Marco Hernandez from The Noun Project',
 					'Easel by Monika Ciapala from The Noun Project'
 				];
+			},
+			data: {
+				pageTitle: function() {
+					return 'Fire-League';
+				}
 			}
 		})
 		.state('unknown', {
 			url: '/pageNotFound',
 			templateUrl: 'templates/NotFound.html',
+			data: {
+				pageTitle: function() {
+					return 'Fire-League: Page Not Found';
+				}
+			}
 		});
 		
 		$urlRouterProvider

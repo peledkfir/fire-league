@@ -4,20 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Builds soccer leagues tables</title>
+  <title>Fire-League Dashboard</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css"/>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="css/thenounproject.css"/>
+  <script>
+        var loc = window.location.href
+        if (loc.indexOf("#") != -1 &&  loc.indexOf("#!") == -1 ){
+          // backward compatibility after adding hashPrefix
+          window.location.href = loc.replace("#", "#!");
+        }
+  </script>
 </head>
 <body>
 	<div ng-view class="dashboard-big"></div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 
-<script src="//cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.min.js"></script>
+<script src="//cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
 
 <script src="lib/angular-ui/ui-bootstrap-0.10.0.min.js"></script>
 <script src="//cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>

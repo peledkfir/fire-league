@@ -5,9 +5,10 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, params, $timeout, notificationService, leagueService) {
+flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $location, DISQUS_ID, params, $timeout, notificationService, leagueService) {
 	'use strict';
-
+	$scope.disqus = DISQUS_ID;
+	$scope.url = $location.absUrl();
 	var seasonName = params.seasonName,
 		leagueName = params.leagueName;
 
@@ -80,7 +81,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 			// update scope
 			$scope.season = season;
 			var stats = $scope.stats = leagueService.stats($scope.season, state.$roundOverwrite.$value);
-			$scope.upcoming = $rootScope.auth.user ? leagueService.filterPlayerUpcoming(stats, 1, 2, true) : null;
+			$scope.upcoming = ($rootScope.auth && $rootScope.auth.user) ? leagueService.filterPlayerUpcoming(stats, 1, 2, true) : null;
 			$scope.latestMatches = leagueService.latestMatches($scope.season, state.$latestMatches, $rootScope.userLastOnline);
 		}
 	};
@@ -140,7 +141,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 				
 				state.$seasonData.$save().then(function() {
 					if (match.result) {
-						leagueService.res.season.latestMatches.set(state.$latestMatches, match, $rootScope.auth.user.uid);						
+						leagueService.res.season.latestMatches.set(state.$latestMatches, match, $rootScope.auth.user.uid);
 					} else {
 						state.$latestMatches.$remove(leagueService.res.season.latestMatches.key(match));
 					}

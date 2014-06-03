@@ -1,6 +1,6 @@
 <div class="row" ng-hide="loading || !stats" ng-cloak>
 	<div class="col-md-7 col-lg-8">
-		<fl-season-table-panel table="stats.table" maximize-url="dashboard.html#/league/{{leagueName}}/season/{{season.name}}"></fl-season-table-panel>
+		<fl-season-table-panel table="stats.table" maximize-url="dashboard.html#!/league/{{leagueName}}/season/{{season.name}}"></fl-season-table-panel>
 
 		<fl-season-latest-panel latest="latestMatches"></fl-season-latest-panel>
 	</div>
@@ -9,4 +9,11 @@
 		<fl-player-upcoming-panel stats="stats" upcoming="upcoming"></fl-player-upcoming-panel>
 		<fl-season-curr-round-panel stats="stats"></fl-season-curr-round-panel>
 	</div>
+</div>
+<div class="row" ng-hide="loading || !stats" ng-if="disqus">
+	<dir-disqus disqus-shortname="{{disqus}}"
+         disqus-identifier="{{ url }}"
+         disqus-title="{{leagueName + ': ' + season.name}}"
+         disqus-url="{{url}}">
+	</dir-disqus>
 </div>

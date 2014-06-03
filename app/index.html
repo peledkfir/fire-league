@@ -4,12 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Builds soccer leagues tables</title>
+  <title ng-bind="$state.current.data.pageTitle($state.params)"></title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css"/>
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="css/thenounproject.css"/>
   <link rel="stylesheet" href="css/social-buttons.css"/>
+  <script>
+        var loc = window.location.href
+        if (loc.indexOf("#") != -1 &&  loc.indexOf("#!") == -1 ){
+          // backward compatibility after adding hashPrefix
+          window.location.href = loc.replace("#", "#!");
+        }
+  </script>
 </head>
 <body ng-cloak ng-controller="LoginCtrl" gg-analytics>
   <div id="page-main">
@@ -131,6 +138,7 @@
 <script src="lib/angular-ui/ui-bootstrap-0.10.0.min.js"></script>
 <script src="lib/angular-ui/moment.min.js"></script>
 <script src="lib/angular-ui/angular-moment.min.js"></script>
+<script src="lib/angular-ui/dirDisqus.js"></script>
 <script src="lib/jquery/sortable.min.js"></script>
 <script src="//cdn.firebase.com/libs/angularfire/0.7.1/angularfire.js"></script>
 <script src="lib/facebook/angular-facebook.js"></script>
@@ -168,5 +176,6 @@
 <script src="js/directives/facebookDirectives.js"></script>  
 <script src="js/directives/googleDirectives.js"></script>  
 <script src="js/filters/leagueFilters.js"></script>  
+<script src="js/services/leagueServiceEx.js"></script>  
 </body>
 </html>
