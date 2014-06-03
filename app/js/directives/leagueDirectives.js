@@ -57,6 +57,26 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('flSeasonGeneralStatsPanel', function() {
+	'use strict';
+
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/SeasonGeneralStatsPanel.html',
+		scope: {
+			stats: '='
+		},
+		link: function($scope) {
+			$scope.knobDraw = function() {
+				$(this.i).val(this.cv + '%');
+			};
+			$scope.round = function(num) {
+				return Math.floor(num * 100);
+			};
+		}
+	};
+})
 .directive('flSeasonCurrRoundPanel', function() {
 	'use strict';
 	

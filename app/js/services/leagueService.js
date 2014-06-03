@@ -437,7 +437,8 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', '$modal', 
 				};
 			}
 
-			var currentRound = 1;
+			var currentRound = 1,
+				totalPlayedMatches = 0;
 			var allMatches = [];
 
 			_.each(season.rounds, function(round) {
@@ -448,6 +449,7 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', '$modal', 
 						allMatches.push(match);
 
 						if (match.result) {
+							totalPlayedMatches++;
 							resultCount++;
 							var h = tblHash[match.home.name];
 							var a = tblHash[match.away.name];
@@ -532,7 +534,8 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', '$modal', 
 				season: season,
 				currentRound: currentRound,
 				teamStats: teamStats,
-				totalMissingMatches: totalMissingMatches
+				totalMissingMatches: totalMissingMatches,
+				totalPlayedMatches: totalPlayedMatches
 			};
 		},
 

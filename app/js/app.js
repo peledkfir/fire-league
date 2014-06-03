@@ -83,7 +83,8 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 					'Cleat by david fauveau ∞ from The Noun Project',
 					'World Cup Trophy by San Salido Martínez from The Noun Project',
 					'Soccer by Ruben Sheep from The Noun Project',
-					'World Cup Trophy by Marco Hernandez from The Noun Project'
+					'World Cup Trophy by Marco Hernandez from The Noun Project',
+					'Easel by Monika Ciapala from The Noun Project'
 				];
 			}
 		})

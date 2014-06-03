@@ -1,0 +1,14 @@
+<div class="panel panel-default hidden-xs" ng-if="stats">
+	<div class="panel-heading">
+		<i class="icon icon-board fa-lg fa-fw"></i> Info
+	</div>
+	<div class="panel-body" ng-init="width = 120; height = 95">
+		<div>
+			<div class="progress-knob" style="width: {{width}}px; height: {{height}}px">
+		    	<knob knob-data="round((stats.totalPlayedMatches + stats.totalMissingMatches) / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, 'displayInput': false, fgColor: '#faebcc' }"></knob>
+		    	<knob knob-data="round(stats.totalPlayedMatches / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, fgColor: '#d6e9c6', bgColor: 'transparent', 'draw': knobDraw }"></knob>
+	    	</div>
+	    	<div class="text-center small">Progress</div>
+		</div>
+	</div>
+</div>
