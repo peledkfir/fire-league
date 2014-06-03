@@ -5,7 +5,7 @@
 			<li class="dropdown-header">Select groups</li>
 			<li ng-hide="groups">Loading</li>
 			<li ng-repeat="group in groups">
-				<a ng-click="group.filter = !group.filter"><i class="fa fa-fw" ng-class="{'fa-check-square-o': group.filter, 'fa-square-o': !group.filter}"></i> {{group.name}}</a>
+				<a ng-click="group.filter = !group.filter" href="javascript:void(0)"><i class="fa fa-fw" ng-class="{'fa-check-square-o': group.filter, 'fa-square-o': !group.filter}"></i> {{group.name}}</a>
 			</li>
 		</ul>
 	</div><!-- /btn-group -->
