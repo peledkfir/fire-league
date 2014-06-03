@@ -11,9 +11,11 @@
 	</div>
 </div>
 <div class="row" ng-hide="loading || !stats" ng-if="disqus">
-	<dir-disqus disqus-shortname="{{disqus}}"
-         disqus-identifier="{{ url }}"
-         disqus-title="{{leagueName + ': ' + season.name}}"
-         disqus-url="{{url}}">
-	</dir-disqus>
+	<div class="col-lg-12">
+		<dir-disqus disqus-shortname="{{disqus}}"
+	         disqus-identifier="{{ url }}"
+	         disqus-title="{{leagueName + ': ' + season.name}}"
+	         disqus-url="{{url}}">
+		</dir-disqus>
+	</div>
 </div>
