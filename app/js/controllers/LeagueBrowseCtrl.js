@@ -5,6 +5,11 @@ flApp.controller('LeagueBrowseCtrl', function LeagueBrowseCtrl($scope, $timeout,
 	$scope.isOwner = leagueService.logic.league.isOwner;
 	$scope.keys = Object.keys;
 
+	$scope.deleteModal = function(ev, league) {
+		ev.stopPropagation();
+		leagueService.logic.league.delete(league.name);
+	};
+
 	$scope.loading = false;
 	
 	var promise = $timeout(function(){

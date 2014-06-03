@@ -128,12 +128,14 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 			}
 		});
 	})
-	.run(function($http, $templateCache) {
+	.run(function($http, $templateCache, $timeout) {
 		'use strict';
 		
 		// cache modals
-		_.delay(function() {
+		$timeout(function() {
 			$http.get('templates/LoginModal.html', {cache: $templateCache});
+			$http.get('templates/MatchEditModal.html', {cache: $templateCache});
+			$http.get('templates/MatchImagesModal.html', {cache: $templateCache});
 			$http.get('templates/LeagueDeleteModal.html', {cache: $templateCache});
 		}, 10000);
 	})

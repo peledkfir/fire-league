@@ -21,7 +21,7 @@
 						<td>
 							<div class="pull-right" ng-if="isOwner(league, $root.auth)">
 				                <button type="button" class="btn btn-default btn-xs" ui-sref="league.edit({league: league.name})" ng-click="$event.stopPropagation()"><i class="fa fa-edit"></i> Edit</button>
-							    <button type="button" class="btn btn-danger btn-xs" ui-sref="league.delete({league: league.name})" ui-sref-opts="{ location: false }" ng-click="$event.stopPropagation()"><i class="fa fa-trash-o"></i> Delete</button>
+							    <button type="button" class="btn btn-danger btn-xs" ng-click="deleteModal($event, league)"><i class="fa fa-trash-o"></i> Delete</button>
 							</div>
 						</td>
 					</tr>

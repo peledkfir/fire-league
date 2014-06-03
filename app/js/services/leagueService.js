@@ -1,5 +1,5 @@
 
-flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(firebaseRef, syncData, SITE_ID) {
+flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', '$modal', '$state', 'notificationService', function(firebaseRef, syncData, SITE_ID, $modal, $state, notificationService) {
 	'use strict';
 	
 	var mixinTableRow = {
@@ -12,7 +12,7 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 		}
 	};
 	
-	return {
+	var service = {
 		ids: {
 			facebook: function(id) {
 				return 'facebook:' + id;
@@ -210,6 +210,17 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 
 					set: function($latestMatches, match, uid) {
 						$latestMatches.$child(this.key(match)).$set({ author: uid, $priority: Firebase.ServerValue.TIMESTAMP });
+					},
+
+					remove: function(league, season) {
+						var url = 'season_matches_latest/' + league;
+
+						if (season) {
+							url += '/' + season;
+						}
+
+						var ref = firebaseRef(url);
+						ref.remove();
 					}
 				},
 
@@ -574,4 +585,52 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			};
 		}
 	};
+
+	service.res.league.delete = function(league, cb) {
+		var friends = service.res.league.friends.ref(league);
+
+		// Deletes all league favorites
+		friends.once('value', function(snap) {
+			snap.forEach(function(friendSnap) {
+				service.res.favorites.league.remove(friendSnap.name(), league);
+			});
+
+			// deletes all seasons updates
+			service.res.season.latestMatches.remove(league);
+
+			// deletes all seasons data
+			service.res.league.seasonsData.remove(league);
+
+			// deletes all the seasons
+			service.res.season.all.remove(league);
+
+			// deletes the league
+			service.res.league.ref(league).remove(function() {
+				if (cb) {
+					cb();
+				}
+			});
+		});
+	};
+
+	service.logic.league.delete = function(league) {
+		var modal = $modal.open({
+			templateUrl: 'templates/LeagueDeleteModal.html',
+			resolve: {
+				league: function() { return league; }
+			},
+			controller: 'LeagueDeleteCtrl'
+		});
+
+		modal.result.then(function(result) {
+			if (result) {
+				service.res.league.delete(league, function() {
+					notificationService.notify('success', 'Deleted', 3500);
+					$state.transitionTo('browse');
+				});
+			}
+		});
+	};
+
+	return service;
 }]);
