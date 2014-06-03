@@ -2,9 +2,9 @@
 	<div class="panel-heading">
 		<i class="fa fa-history fa-fw"></i> Latest Results
 
-		<div ng-if="latest.new > 0" class="pull-right" tooltip="Updates"><i class="fa fa-bell"></i> {{latest.new}}</div>
+		<div ng-if="latest.new > 0" class="pull-right" tooltip="Updates"><small><i class="fa fa-bell"></i> {{latest.new}}</small></div>
 	</div>
-	<div class="panel-body table-responsive">
+	<div class="panel-body table-responsive" style="overflow-x: auto">
 		<table class="table table-hover table-condensed latest-table">
 			<thead>
 				<tr>

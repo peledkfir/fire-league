@@ -76,8 +76,8 @@
 //
 .season-links
 	text-align: center
-	-webkit-padding-start: 0
-	-webkit-margin-after: 0
+	padding: 0
+	margin: 0
 
 	li
 		position: relative
@@ -141,12 +141,18 @@ $lastPlayerColor: rgb(233, 115, 115)
 // match edit
 //
 .match-modal
-	input[type=number]
+	.hidden-xs .vs 
+		font-size: 150%
+
+	.hidden-xs input[type=number]
 		width: 75px
 		font-size: 230%
 
+	input[type=number]
+		width: 48px
+		font-size: 130%
+
 	.vs
-		font-size: 150%
 		line-height: 10
 
 	.thumbnail

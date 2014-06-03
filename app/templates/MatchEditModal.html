@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body match-modal">
   <form id="m{{match.matchIdx}}" ng-submit="save()">
-    <div class="row form-group">
+    <div class="row hidden-xs form-group">
       <div class="col-md-5 text-center">
         <fb-avatar size="128" id="match.home.id" clazz="thumbnail"></fb-avatar>
         <p>{{match.home.name}}</p>
@@ -15,6 +15,21 @@
       </div>
       <div class="col-md-5 text-center">
         <fb-avatar size="128" id="match.away.id" clazz="thumbnail"></fb-avatar>
+        <p>{{match.away.name}}</p>
+        <div><input type="number" min="0" max="99" ng-model="result.away"></div>
+      </div>
+    </div>
+    <div class="row visible-xs form-group">
+      <div class="col-xs-5 text-center">
+        <fb-avatar size="64" id="match.home.id" clazz="thumbnail"></fb-avatar>
+        <p>{{match.home.name}}</p>
+        <div><input type="number" min="0" max="99" ng-model="result.home"></div>
+      </div>
+      <div class="col-xs-2 text-center" >
+        <p class="vs">VS.</p>
+      </div>
+      <div class="col-xs-5 text-center">
+        <fb-avatar size="64" id="match.away.id" clazz="thumbnail"></fb-avatar>
         <p>{{match.away.name}}</p>
         <div><input type="number" min="0" max="99" ng-model="result.away"></div>
       </div>
