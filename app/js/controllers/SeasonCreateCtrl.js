@@ -61,9 +61,10 @@ flApp.controller('SeasonCreateCtrl', function SeasonCreateCtrl($scope, $state, $
 	var leagueFriends = leagueService.res.league.friends.ref(league);
 	
 	leagueFriends.once('value', function(snap) {
-		$timeout.cancel(promise);
-		$scope.loading = false;
-		$scope.teams = _.toArray(snap.val());
-		$scope.$digest();
+		$timeout(function() {
+			$timeout.cancel(promise);
+			$scope.loading = false;
+			$scope.teams = _.toArray(snap.val());
+		});
 	});
 });
