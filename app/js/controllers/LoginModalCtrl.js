@@ -15,7 +15,7 @@ flApp.controller('LoginModalCtrl',
 					.then(function(user) {
 							console.log('Logged in as: ', user);
 							$loginCtrlScope.loading = false;
-							leagueService.res.user.set(user.uid, { id: user.id, name: user.name });
+							leagueService.res.user.set(user.uid, { id: user.id, name: user.displayName });
 						}, function(error) {
 							$loginCtrlScope.loading = false;
 							console.error('Login failed: ', error);

@@ -32,7 +32,20 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
-.directive('flSeasonLatestPanel', function($rootScope) {
+.directive('flPlayerUpcomingPanel', function() {
+	'use strict';
+	
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/PlayerUpcomingPanel.html',
+		scope: {
+			stats: '=',
+			upcoming: '='
+		}
+	};
+})
+.directive('flSeasonLatestPanel', function() {
 	'use strict';
 
 	return {

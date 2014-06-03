@@ -276,21 +276,21 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			};
 
 			matchMixin = _.extend(matchMixin || {}, {
-				versus: function(team) {
-					return this.home.name == team ? this.away : this.home;
+				versus: function(teamId) {
+					return this.home.id == teamId ? this.away : this.home;
 				},
 
-				conclude: function(team) {
+				conclude: function(teamId) {
 					if (this.result) {
 						if (this.result.home == this.result.away) {
 							return 'D';
 						}
 
 						if (this.result.home > this.result.away) {
-							return this.home.name == team ? 'W' : 'L';
+							return this.home.id == teamId ? 'W' : 'L';
 						}
 
-						return this.home.name == team ? 'L' : 'W';
+						return this.home.id == teamId ? 'L' : 'W';
 					}
 				},
 
@@ -419,6 +419,7 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 				 * @property {Number} missingMatches Number of unplayed matches of previous rounds (previous to current round)
 				 */
 				teamStats[team.name] = {
+					team: team,
 					posPerRound: [],
 					ptsPerRound: [],
 					missingMatches: 0
@@ -522,6 +523,33 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 				teamStats: teamStats,
 				totalMissingMatches: totalMissingMatches
 			};
+		},
+
+		filterPlayerUpcoming: function(stats, below, after, overdue) {
+			var matches = [];
+
+			if (stats && stats.season.rounds) {
+				var rounds = stats.season.rounds;
+				
+				for (var i = 0; i < Math.min(rounds.length, stats.currentRound + after); i++) {
+					var round = rounds[i];
+					var match = null;
+
+					for (var j = round.matches.length - 1; j >= 0; j--) {
+						if (round.matches[j].currentUserMatch()) {
+							match = round.matches[j];
+							break;
+						}
+					}
+
+					if (match && ((stats.currentRound - below <= match.round && match.round <= stats.currentRound + after) ||
+									(overdue && match.isOverdue(stats.currentRound)))) {
+						matches.push(match);
+					}
+				}
+			}
+
+			return matches;
 		},
 
 		latestMatches: function(season, $latestMatches, lastTimeOnline) {

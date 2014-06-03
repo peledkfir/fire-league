@@ -17,7 +17,7 @@
 				</tr>
 			</thead>
 			<tbody ng-init="playerStats = stats.teamStats[player]">
-				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]">
+				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]; versus = match.versus(playerStats.team.id)">
 					<td><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></td>
 					<td>{{$index + 1}}</td>
 					<td ng-if="!playing" colspan="2"></td>
@@ -26,7 +26,7 @@
 					
 					<td ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</td>
 					<td ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.season.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</td>
-					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="match.versus(player).id"></fb-avatar> {{match.versus(player).name}}</td>
+					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="versus.id"></fb-avatar> {{versus.name}}</td>
 					<td ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</td>
 					<td ng-if="playing">{{match.result.home}}</td>
 					<td ng-if="playing"><span ng-if="match.result">-</span></td>

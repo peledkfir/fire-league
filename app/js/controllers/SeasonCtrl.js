@@ -79,7 +79,8 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, p
 
 			// update scope
 			$scope.season = season;
-			$scope.stats = leagueService.stats($scope.season, state.$roundOverwrite.$value);
+			var stats = $scope.stats = leagueService.stats($scope.season, state.$roundOverwrite.$value);
+			$scope.upcoming = $rootScope.auth.user ? leagueService.filterPlayerUpcoming(stats, 1, 2, true) : null;
 			$scope.latestMatches = leagueService.latestMatches($scope.season, state.$latestMatches, $rootScope.userLastOnline);
 		}
 	};

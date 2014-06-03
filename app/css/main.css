@@ -1,10 +1,21 @@
 @charset "UTF-8";
 /* line 7, ../sass/partials/_fl-league.sass */
+.list-group-item .img-versus {
+  margin: 0 5px;
+}
+/* line 10, ../sass/partials/_fl-league.sass */
+.list-group-item .match-current-cursor {
+  position: absolute;
+  top: 16px;
+  left: 7px;
+}
+
+/* line 19, ../sass/partials/_fl-league.sass */
 .list-group-item .home, .list-group-item .away {
   position: relative;
   padding: 3px;
 }
-/* line 11, ../sass/partials/_fl-league.sass */
+/* line 23, ../sass/partials/_fl-league.sass */
 .list-group-item .home .player-name, .list-group-item .away .player-name {
   width: 34%;
   overflow: hidden;
@@ -14,16 +25,16 @@
   vertical-align: middle;
   padding-top: 4px;
 }
-/* line 21, ../sass/partials/_fl-league.sass */
+/* line 33, ../sass/partials/_fl-league.sass */
 .list-group-item .home .player-name {
   padding-left: 2px;
 }
-/* line 24, ../sass/partials/_fl-league.sass */
+/* line 36, ../sass/partials/_fl-league.sass */
 .list-group-item .away .player-name {
   text-align: right;
   padding-right: 2px;
 }
-/* line 28, ../sass/partials/_fl-league.sass */
+/* line 40, ../sass/partials/_fl-league.sass */
 .list-group-item .score {
   position: absolute;
   left: 0;
@@ -31,30 +42,30 @@
   top: 5px;
   display: inline-block;
 }
-/* line 35, ../sass/partials/_fl-league.sass */
+/* line 47, ../sass/partials/_fl-league.sass */
 .list-group-item .score.visible-xs-inline {
   bottom: 0;
 }
-/* line 38, ../sass/partials/_fl-league.sass */
+/* line 50, ../sass/partials/_fl-league.sass */
 .list-group-item.active {
   background-color: whitesmoke;
 }
-/* line 41, ../sass/partials/_fl-league.sass */
+/* line 53, ../sass/partials/_fl-league.sass */
 .list-group-item .buttons {
   padding-top: 4px;
   margin-top: 10px;
   border-top: 1px #eeeeee solid;
 }
-/* line 46, ../sass/partials/_fl-league.sass */
+/* line 58, ../sass/partials/_fl-league.sass */
 .list-group-item .buttons .pull-right {
   margin-top: 3px;
 }
-/* line 49, ../sass/partials/_fl-league.sass */
+/* line 61, ../sass/partials/_fl-league.sass */
 .list-group-item.list-group-item-info .buttons {
   border-top: 1px #94bacc solid;
 }
 
-/* line 52, ../sass/partials/_fl-league.sass */
+/* line 64, ../sass/partials/_fl-league.sass */
 .pagination-sm > li > a {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -62,109 +73,109 @@
   cursor: default;
 }
 
-/* line 59, ../sass/partials/_fl-league.sass */
+/* line 71, ../sass/partials/_fl-league.sass */
 .season-links {
   text-align: center;
   -webkit-padding-start: 0;
   -webkit-margin-after: 0;
 }
-/* line 64, ../sass/partials/_fl-league.sass */
+/* line 76, ../sass/partials/_fl-league.sass */
 .season-links li {
   position: relative;
   display: inline-block;
   vertical-align: top;
   margin: 0 10px;
 }
-/* line 70, ../sass/partials/_fl-league.sass */
+/* line 82, ../sass/partials/_fl-league.sass */
 .season-links li a {
   color: black;
 }
-/* line 73, ../sass/partials/_fl-league.sass */
+/* line 85, ../sass/partials/_fl-league.sass */
 .season-links li .badge {
   position: absolute;
   bottom: 17px;
   right: -3px;
 }
 
-/* line 86, ../sass/partials/_fl-league.sass */
+/* line 98, ../sass/partials/_fl-league.sass */
 .table.fixtures-table tbody tr:first-child {
   border-bottom-color: #3291f8;
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
-/* line 90, ../sass/partials/_fl-league.sass */
+/* line 102, ../sass/partials/_fl-league.sass */
 .table.fixtures-table tbody tr:last-child {
   border-top-style: double;
   border-top-color: #e97373;
 }
-/* line 94, ../sass/partials/_fl-league.sass */
+/* line 106, ../sass/partials/_fl-league.sass */
 .table.fixtures-table .red {
   color: red;
 }
-/* line 97, ../sass/partials/_fl-league.sass */
+/* line 109, ../sass/partials/_fl-league.sass */
 .table.fixtures-table .green {
   color: green;
 }
 
-/* line 104, ../sass/partials/_fl-league.sass */
+/* line 116, ../sass/partials/_fl-league.sass */
 .table.competition-table th, .table.competition-table td {
   text-align: center;
 }
-/* line 106, ../sass/partials/_fl-league.sass */
+/* line 118, ../sass/partials/_fl-league.sass */
 .table.competition-table td:last-child {
   text-align: left;
 }
-/* line 107, ../sass/partials/_fl-league.sass */
+/* line 119, ../sass/partials/_fl-league.sass */
 .table.competition-table td:last-child .btn {
   padding: 0;
 }
-/* line 110, ../sass/partials/_fl-league.sass */
+/* line 122, ../sass/partials/_fl-league.sass */
 .table.competition-table .red-o {
   background-color: #e97373;
   color: white;
 }
-/* line 113, ../sass/partials/_fl-league.sass */
+/* line 125, ../sass/partials/_fl-league.sass */
 .table.competition-table .blue-o {
   background-color: #3291f8;
   color: white;
 }
-/* line 116, ../sass/partials/_fl-league.sass */
+/* line 128, ../sass/partials/_fl-league.sass */
 .table.competition-table .red {
   color: red;
 }
-/* line 119, ../sass/partials/_fl-league.sass */
+/* line 131, ../sass/partials/_fl-league.sass */
 .table.competition-table .green {
   color: green;
 }
 
-/* line 126, ../sass/partials/_fl-league.sass */
+/* line 138, ../sass/partials/_fl-league.sass */
 .match-modal input[type=number] {
   width: 75px;
   font-size: 230%;
 }
-/* line 130, ../sass/partials/_fl-league.sass */
+/* line 142, ../sass/partials/_fl-league.sass */
 .match-modal .vs {
   font-size: 150%;
   line-height: 10;
 }
-/* line 134, ../sass/partials/_fl-league.sass */
+/* line 146, ../sass/partials/_fl-league.sass */
 .match-modal .thumbnail {
   display: inline;
 }
 
-/* line 142, ../sass/partials/_fl-league.sass */
+/* line 154, ../sass/partials/_fl-league.sass */
 .seasonEdit .players {
   border-radius: 5px;
   border: 2px dashed #868686;
   margin: 10px 10px 0 0;
   padding: 5px;
 }
-/* line 148, ../sass/partials/_fl-league.sass */
+/* line 160, ../sass/partials/_fl-league.sass */
 .seasonEdit .player {
   cursor: move;
   padding: 10px 15px;
 }
-/* line 152, ../sass/partials/_fl-league.sass */
+/* line 164, ../sass/partials/_fl-league.sass */
 .seasonEdit .player-placeholder {
   padding: 5px 15px;
   border: 4px dashed #cfcfcf;
@@ -172,18 +183,18 @@
   text-align: center;
   vertical-align: middle;
 }
-/* line 159, ../sass/partials/_fl-league.sass */
+/* line 171, ../sass/partials/_fl-league.sass */
 .seasonEdit .player-placeholder:before {
   color: #cfcfcf;
   content: "DROP HERE";
 }
 
-/* line 168, ../sass/partials/_fl-league.sass */
+/* line 180, ../sass/partials/_fl-league.sass */
 .upload-photos .preview {
   float: left;
   margin-right: 10px;
 }
-/* line 172, ../sass/partials/_fl-league.sass */
+/* line 184, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone {
   padding: 35px 0;
   border: 5px dashed #e5e5e5;
@@ -194,24 +205,24 @@
   font-weight: bold;
   color: gray;
 }
-/* line 173, ../sass/partials/_fl-league.sass */
+/* line 185, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone:before {
   content: "DROP HERE";
 }
-/* line 176, ../sass/partials/_fl-league.sass */
+/* line 188, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone.initializing {
   opacity: 0.3;
 }
-/* line 177, ../sass/partials/_fl-league.sass */
+/* line 189, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone.initializing:before {
   content: "LOADING.. PLEASE WAIT";
 }
-/* line 190, ../sass/partials/_fl-league.sass */
+/* line 202, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone button {
   margin-top: 10px;
   text-transform: uppercase;
 }
-/* line 194, ../sass/partials/_fl-league.sass */
+/* line 206, ../sass/partials/_fl-league.sass */
 .upload-photos #photosDropZone input {
   display: none;
 }
@@ -389,6 +400,14 @@ html, body {
   min-height: 24px;
   width: 24px;
   height: 24px;
+}
+
+/* line 42, ../sass/partials/_fl-base.sass */
+.profile_36 {
+  min-width: 36px;
+  min-height: 36px;
+  width: 36px;
+  height: 36px;
 }
 
 /* line 42, ../sass/partials/_fl-base.sass */

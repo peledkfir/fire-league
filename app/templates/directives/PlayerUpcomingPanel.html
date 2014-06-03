@@ -1,0 +1,22 @@
+<div class="panel panel-default" ng-if="upcoming && $root.auth.user">
+	<div class="panel-heading">
+		<i class="fa fa-calendar-o fa-fw"></i> Your Matches
+	</div>
+		<div class="list-group">
+			<div ng-repeat="match in upcoming" ng-init="versus = match.versus($root.auth.user.id)" class="list-group-item clearfix">
+				<div class="match-current-cursor"><i tooltip="Current round" ng-if="match.round == stats.currentRound" class="fa fa-lg fa-caret-right"></i></div>
+				<fb-avatar size="36" id="versus.id" clazz="pull-left img-versus"></fb-avatar> 
+				<div>
+					<strong class="primary-font">{{versus.name}}</strong>
+					<span class="pull-right" ng-if="match.result">{{match.result.home}} - {{match.result.away}}</span>
+				</div>
+				<p class="small text-muted">Round {{match.round}}</p>
+				<div class="buttons clearfix">
+					<button type="button" ng-if="match.canEdit()" class="btn btn-xs btn-link" ng-click="match.edit()"><i class="fa fa-fw fa-edit"></i>Edit</button>
+					<button type="button" tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs btn-info pull-right" ng-click="match.showImages()"><i class="fa fa-picture-o"></i></button>
+					<span ng-if="match.isOverdue(stats.currentRound)" class="label label-danger pull-right"><i class="fa fa-clock-o fa-fw"></i> Overdue</span>
+				</div>
+			</div>
+		</div>
+	
+</div>
