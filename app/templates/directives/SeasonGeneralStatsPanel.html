@@ -1,14 +1,55 @@
-<div class="panel panel-default hidden-xs" ng-if="stats">
+<div class="panel panel-default hidden-xs season-stats" ng-if="stats">
 	<div class="panel-heading">
 		<i class="icon icon-board fa-lg fa-fw"></i> Info
 	</div>
 	<div class="panel-body" ng-init="width = 120; height = 95">
 		<div>
-			<div class="progress-knob" style="width: {{width}}px; height: {{height}}px">
-		    	<knob knob-data="round((stats.totalPlayedMatches + stats.totalMissingMatches) / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, 'displayInput': false, fgColor: '#faebcc' }"></knob>
-		    	<knob knob-data="round(stats.totalPlayedMatches / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, fgColor: '#d6e9c6', bgColor: 'transparent', 'draw': knobDraw }"></knob>
+			<div ng-if="stats.seasonStats.totalMissingMatches" class="alert alert-warning">
+	    		<i class="fa fa-warning"></i> There {{stats.seasonStats.totalMissingMatches > 1 && 'are' || 'is'}} <strong>{{stats.seasonStats.totalMissingMatches}}</strong> missing match{{stats.seasonStats.totalMissingMatches > 1 && 'es' || ''}}.
 	    	</div>
-	    	<div class="text-center small">Progress</div>
+
+			<div class="progress-knob" style="width: {{width}}px; height: {{height}}px">
+		    	<knob knob-data="round((stats.seasonStats.totalPlayedMatches + stats.seasonStats.totalMissingMatches) / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, 'displayInput': false, fgColor: '#faebcc' }"></knob>
+		    	<knob knob-data="round(stats.seasonStats.totalPlayedMatches / stats.season.totalMatches)" knob-options="{ 'angleOffset': -125, 'angleArc': 250, 'readOnly': true, 'width': {{width}}, 'height': {{height}}, 'thickness': 0.2, fgColor: '#d6e9c6', bgColor: 'transparent', 'draw': knobDraw }"></knob>
+	    	</div>
+	    	<div class="text-center small form-group">Progress</div>	    	
+
+	    	<dl>
+	    		<dt ng-if="stats.seasonStats.biggestWin.length">Biggest Win</dt>
+	    		<dd ng-if="stats.seasonStats.biggestWin.length">
+					<div class="stats-match-preview" ng-class="{info: match.currentUserMatch()}" ng-repeat="match in stats.seasonStats.biggestWin">
+	    				<div class="player" ng-class="{ 'winner': match.result.home > match.result.away }">
+							<fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.home.name}}</span>
+							<span class="score text-center small">{{match.result.home}}</span>
+							<span class="pull-right">
+								<a tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs text-info" ng-click="match.showImages()"><i class="fa fa-fw fa-picture-o"></i></a>
+							</span>
+						</div>
+						
+						<div class="player" ng-class="{ 'winner': match.result.home < match.result.away }">
+							<fb-avatar size="24" id="match.away.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.away.name}}</span>
+							<span class="score text-center small">{{match.result.away}}</span>
+						</div>
+					</div>
+	    		</dd>
+	    		<dt ng-if="stats.seasonStats.biggestGoalsInMatch.length">Highest N. of Goals</dt>
+	    		<dd ng-if="stats.seasonStats.biggestGoalsInMatch.length">
+		    		<div class="stats-match-preview" ng-class="{info: match.currentUserMatch()}" ng-repeat="match in stats.seasonStats.biggestGoalsInMatch">
+	    				<div class="player" ng-class="{ 'winner': match.result.home > match.result.away }">
+							<fb-avatar size="24" id="match.home.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.home.name}}</span>
+							<span class="score text-center small">{{match.result.home}}</span>
+							<span class="pull-right">
+								<a tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs text-info" ng-click="match.showImages()"><i class="fa fa-fw fa-picture-o"></i></a>
+							</span>
+						</div>
+						
+						<div class="player" ng-class="{ 'winner': match.result.home < match.result.away }">
+							<fb-avatar size="24" id="match.away.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.away.name}}</span>
+							<span class="score text-center small">{{match.result.away}}</span>
+						</div>
+					</div>
+				</dd>
+	    	</dl>
 		</div>
 	</div>
 </div>

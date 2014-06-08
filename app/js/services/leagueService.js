@@ -255,6 +255,9 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			_info: {
 				connected: function() {
 					return firebaseRef('.info/connected');
+				},
+				authenticated: function() {
+					return firebaseRef('.info/authenticated');
 				}
 			},
 
@@ -396,6 +399,14 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			var tblHash = {};
 			var teamStats = {};
 
+			function matchGoalDifference(match) {
+				return Math.abs(match.result.home - match.result.away);
+			}
+
+			function matchTotalGoals(match) {
+				return match.result.home + match.result.away;
+			}
+
 			for (var t = 0; t < season.teams.length; t++) {
 				var team = season.teams[t];
 
@@ -438,7 +449,9 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 			}
 
 			var currentRound = 1,
-				totalPlayedMatches = 0;
+				totalPlayedMatches = 0,
+				biggestWin = [],
+				biggestGoalsInMatch = [];
 			var allMatches = [];
 
 			_.each(season.rounds, function(round) {
@@ -451,6 +464,7 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 						if (match.result) {
 							totalPlayedMatches++;
 							resultCount++;
+
 							var h = tblHash[match.home.name];
 							var a = tblHash[match.away.name];
 							h.p++;
@@ -470,6 +484,18 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 								var looser = winner == h ? a : h;
 								winner.w++;
 								looser.l++;
+
+								if (biggestWin.length == 0 || matchGoalDifference(match) == matchGoalDifference(biggestWin[0])) {
+									biggestWin.push(match);
+								} else if (matchGoalDifference(match) > matchGoalDifference(biggestWin[0])) {
+									biggestWin = [match];
+								}
+							}
+
+							if (biggestGoalsInMatch.length == 0 || matchTotalGoals(match) == matchTotalGoals(biggestGoalsInMatch[0])) {
+								biggestGoalsInMatch.push(match);
+							} else if (matchTotalGoals(match) > matchTotalGoals(biggestGoalsInMatch[0])) {
+								biggestGoalsInMatch = [match];
 							}
 						}
 					});
@@ -534,8 +560,12 @@ flApp.service('leagueService', ['firebaseRef', 'syncData', 'SITE_ID', function(f
 				season: season,
 				currentRound: currentRound,
 				teamStats: teamStats,
-				totalMissingMatches: totalMissingMatches,
-				totalPlayedMatches: totalPlayedMatches
+				seasonStats: {
+					biggestWin: biggestWin,
+					biggestGoalsInMatch: biggestGoalsInMatch,
+					totalMissingMatches: totalMissingMatches,
+					totalPlayedMatches: totalPlayedMatches
+				}
 			};
 		},
 

@@ -19,11 +19,11 @@
 			<tbody>
 				<tr ng-class="{info: match.currentUserMatch()}" ng-repeat="update in latest.matches" ng-init="match = update.match">
 					<td><small>{{match.round}}</small></td>
-					<td class="text-right"><span class="hidden-xs-inline small">{{match.home.name}}</span> <fb-avatar size="24" id="match.home.id"></fb-avatar></td>
+					<td ng-class="{ 'winner': match.result.home > match.result.away }" class="text-right"><span class="hidden-xs-inline small">{{match.home.name}}</span> <fb-avatar size="24" id="match.home.id"></fb-avatar></td>
 					<td class="text-center"><small>{{match.result.home}}</small></td>
 					<td class="text-center"><small ng-if="match.result">-</small></td>
 					<td class="text-center"><small>{{match.result.away}}</small></td>
-					<td><fb-avatar size="24" id="match.away.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.away.name}}</span></td>
+					<td ng-class="{ 'winner': match.result.home < match.result.away }"><fb-avatar size="24" id="match.away.id"></fb-avatar> <span class="hidden-xs-inline small">{{match.away.name}}</span></td>
 					<td><a tooltip="Show image" ng-if="match.hasImages()" class="btn btn-xs text-info" ng-click="match.showImages()"><i class="fa fa-fw fa-picture-o"></i></a></td>
 					<td class="text-right text-muted">
 						<small>
