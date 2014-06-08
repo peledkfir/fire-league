@@ -190,19 +190,15 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $
 				$scope.loading = false;
 				$timeout.cancel(promise);
 				syncStats();
-			});
 
-			state.$latestMatches.$on('change', function() {
-				syncStats();
-			});
-	
-			state.$seasonData.$on('change', function() {
-				syncStats();
-			});
-
-			$scope.$on('$destroy', function() {
-				state.$latestMatches.$off();
-				state.$seasonData.$off();
+				var removeListener = $rootScope.$on('$firebaseSimpleLogin:login', syncStats);
+				state.$latestMatches.$on('change', syncStats);
+				state.$seasonData.$on('change', syncStats);
+				$scope.$on('$destroy', function() {
+					removeListener();
+					state.$latestMatches.$off();
+					state.$seasonData.$off();
+				});
 			});
 		});
 	});
