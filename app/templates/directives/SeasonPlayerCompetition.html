@@ -16,18 +16,18 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody ng-init="playerStats = stats.teamStats[player]">
-				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]; versus = match.versus(playerStats.team.id)">
+			<tbody>
+				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]; versus = match.versus(stats.teamStats[player].team.id)">
 					<td><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></td>
 					<td>{{$index + 1}}</td>
 					<td ng-if="!playing" colspan="2"></td>
 					<td ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</td>
 					<td ng-if="!playing" colspan="4"></td>
 					
-					<td ng-if="playing">{{playerStats.ptsPerRound[$index] | isDefined: match.result }}</td>
-					<td ng-if="playing" ng-class="{'blue-o': playerStats.posPerRound[$index] == 1 && match.result, 'red-o': playerStats.posPerRound[$index] == stats.season.teams.length && match.result}">{{playerStats.posPerRound[$index] | isDefined: match.result }}</td>
+					<td ng-if="playing">{{stats.teamStats[player].ptsPerRound[$index] | isDefined: match.result }}</td>
+					<td ng-if="playing" ng-class="{'blue-o': stats.teamStats[player].posPerRound[$index] == 1 && match.result, 'red-o': stats.teamStats[player].posPerRound[$index] == stats.season.teams.length && match.result}">{{stats.teamStats[player].posPerRound[$index] | isDefined: match.result }}</td>
 					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="versus.id"></fb-avatar> {{versus.name}}</td>
-					<td ng-if="playing" ng-class="{'red': match.conclude(player) == 'L', 'green': match.conclude(player) == 'W'}">{{match.conclude(player)}}</td>
+					<td ng-if="playing" ng-init="conclude = match.conclude(stats.teamStats[player].team.id)" ng-class="{'red': conclude == 'L', 'green': conclude == 'W'}">{{conclude}}</td>
 					<td ng-if="playing">{{match.result.home}}</td>
 					<td ng-if="playing"><span ng-if="match.result">-</span></td>
 					<td ng-if="playing">{{match.result.away}}</td>
