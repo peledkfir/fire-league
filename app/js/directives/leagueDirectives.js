@@ -110,6 +110,7 @@ flApp.directive('flAppVersion', ['version', function(version) {
 							autoGridCount: false,
 							gridCount: stats.currentRound,
 							minorGridEnabled: true,
+							showLastLabel: false,
 							title: 'Position'
 						}
 					],

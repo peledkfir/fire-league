@@ -3,7 +3,7 @@
 		<i class="fa fa-calendar-o fa-fw"></i> Your Matches
 	</div>
 		<div class="list-group">
-			<div ng-repeat="match in upcoming" ng-init="versus = match.versus($root.auth.user.id)" class="list-group-item clearfix">
+			<div ng-repeat="match in upcoming" ng-init="versus = match.versus($root.auth.user.id)" class="list-group-item clearfix match-preview">
 				<div class="match-current-cursor"><i tooltip="Current round" ng-if="match.round == stats.currentRound" class="fa fa-lg fa-caret-right"></i></div>
 				<fb-avatar size="36" id="versus.id" clazz="pull-left img-versus"></fb-avatar> 
 				<div>
