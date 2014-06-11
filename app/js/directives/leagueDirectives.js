@@ -233,6 +233,45 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('flSeasonPlayerGalleryPanel', function() {
+	'use strict';
+	
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/SeasonPlayerGalleryPanel.html',
+		scope: {
+			stats: '=',
+			player: '='
+		},
+		link: function($scope) {
+			$scope.$watch('stats', function(stats) {
+				if (stats) {
+					$scope.images = _.chain($scope.stats.season.rounds)
+						.flatten('matches')
+						.filter(function(match) {
+							return match.hasImages() && (match.away.name === $scope.player || match.home.name === $scope.player);
+						})
+						.reduce(function(result, match) {
+							for (var i = 0; i < match.images.length; i++) {
+								var text = match.home.name + ' (' + match.result.home + ') - ' + match.away.name + ' (' + match.result.away + ')';
+								var idx = match.images.length > 1 ? ' (' + (i + 1) + '/' + match.images.length + ')' : '';
+								result.push({
+									title: 'Round ' + match.round,
+									text: text,
+									id: match.images[i],
+									idx: idx
+								});
+							}
+
+							return result;
+						}, [])
+						.value();
+				}
+			});
+		}
+	};
+})
 .directive('flEditableFriendsList', function() {
 	'use strict';
 

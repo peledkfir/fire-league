@@ -1,0 +1,17 @@
+<div class="panel panel-default hidden-xs" ng-if="images">
+	<div class="panel-heading"><i class="fa fa-fw fa-picture-o"></i> Gallery</div>
+	<div class="panel-body">
+		<div style="display:none; min-height=300px">
+      		<i class="loading-carousel fa-5x" fl-spinner></i>
+      	</div>
+	    <carousel>
+      		<slide ng-repeat="image in images" active="image.active">
+		        <img cl-image public-id="image.id" rn-lazy-loader=".loading-carousel" rn-lazy-loader=".loading-carousel">
+		        <div class="carousel-caption">
+		          <h4>{{image.title}}<small style="color: inherit" ng-if="image.idx"> {{image.idx}}</small></h4>
+		          <p>{{image.text}}</p>
+		        </div>
+      		</slide>
+      	</carousel>
+	</div>
+</div>
