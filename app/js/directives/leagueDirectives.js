@@ -32,6 +32,128 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('flSeasonProgressPanel', function() {
+	'use strict';
+
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/SeasonProgressPanel.html',
+		scope: {
+			stats: '='
+		},
+		link: function($scope, $element, $attrs) {
+			var chart = false;
+			var initChart = function() {
+				if (chart) {
+					chart.destroy();
+				}
+
+				// building amCharts chart
+				var graphs = [];
+				var data = [];
+				var stats = $scope.stats;
+
+				angular.forEach(stats.teamStats, function(teamStats, team) {
+					graphs.push({
+						id: teamStats.team.id.toString(),
+						bullet: 'round',
+						title: team,
+						valueField: teamStats.team.id.toString(),
+						balloonText: '<img class="profile_16" src="//graph.facebook.com/' + teamStats.team.id + '/picture?type=square&width=16&height=16"><small> [[title]]</small>',
+						hidden: teamStats.posPerRound[stats.currentRound - 1] > 4
+					});
+				});
+
+				for (var i = 0; i < stats.season.rounds.length; i++) {
+					var roundData = {
+						round: i + 1
+					};
+
+					if (i + 1 <= stats.currentRound) {
+						angular.forEach(stats.teamStats, function(teamStats, team) {
+							roundData[teamStats.team.id] = teamStats.posPerRound[i];
+						});
+					}
+
+					data.push(roundData);
+				}
+
+				chart = AmCharts.makeChart('chartdiv', {
+					type: 'serial',
+					pathToImages: '',
+					categoryField: 'round',
+					sequencedAnimation: false,
+					zoomOutButtonImage: 'lib/amCharts/lens.png',
+					creditsPosition: 'bottom-right',
+					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+					categoryAxis: {
+						startOnAxis: true,
+						title: 'Round',
+						autoGridCount: false,
+						gridCount: stats.season.rounds.length
+					},
+					chartCursor: {
+						'animationDuration': 0.09,
+						zoomable: false
+					},
+					trendLines: [],
+					graphs: graphs,
+					guides: [],
+					valueAxes: [
+						{
+							baseValue: -1,
+							id: 'position',
+							minimum: 1,
+							precision: 0,
+							reversed: true,
+							autoGridCount: false,
+							gridCount: stats.currentRound,
+							minorGridEnabled: true,
+							title: 'Position'
+						}
+					],
+					allLabels: [],
+					balloon: {},
+					legend: {
+						bottom: 0,
+						position: $element.width() > 700 ? 'right' : 'bottom',
+						useGraphSettings: true,
+						valueWidth: 20
+					},
+					titles: [],
+					dataProvider: data
+				});
+			};
+
+			$scope.top4 = function() {
+				if (chart) {
+					var currentRound = $scope.stats.currentRound;
+					var teamStats = $scope.stats.teamStats;
+					angular.forEach(chart.graphs, function(graph) {
+						graph.hidden = teamStats[graph.title].posPerRound[currentRound - 1] > 4;
+					});
+					chart.validateNow();
+				}
+			};
+
+			$scope.all = function() {
+				if (chart) {
+					angular.forEach(chart.graphs, function(graph) {
+						graph.hidden = false;
+					});
+					chart.validateNow();
+				}
+			};
+
+			$scope.$watch('stats.teamStats', function(teamStats) {
+				if (teamStats) {
+					initChart();
+				}
+			});
+		}
+	};
+})
 .directive('flPlayerUpcomingPanel', function() {
 	'use strict';
 	
