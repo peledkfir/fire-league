@@ -32,6 +32,110 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		}
 	};
 })
+.directive('flSeasonPlayerProgressPanel', function() {
+	'use strict';
+
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'templates/directives/SeasonPlayerProgressPanel.html',
+		scope: {
+			stats: '=',
+			player: '='
+		},
+		link: function($scope, $element, $attrs) {
+			var chart = false;
+			var initChart = function() {
+				if (chart) {
+					chart.destroy();
+				}
+
+				// building amCharts chart
+				var graphs = [];
+				var data = [];
+				var stats = $scope.stats;
+				var teamStats = stats.teamStats[$scope.player];
+				if (!teamStats) {
+					return;
+				}
+
+				graphs.push({
+					id: teamStats.team.id.toString(),
+					title: teamStats.team.name,
+					valueField: teamStats.team.id.toString(),
+					bulletSize: 16,
+					customBulletField: 'customBullet',
+					lineColor: '#247BC1',
+					showBalloon: false
+				});
+
+				var maxPosition = 2;
+				
+				for (var i = 0; i < stats.season.rounds.length; i++) {
+					var roundData = {
+						round: i + 1
+					};
+
+					if (i + 1 <= stats.currentRound) {
+						roundData[teamStats.team.id] = teamStats.posPerRound[i];
+						
+						var currRndPts = teamStats.ptsPerRound[i] - (i === 0 ? 0 : teamStats.ptsPerRound[i - 1]);
+
+						roundData.customBullet = 'images/' + (currRndPts == 3 ? 'win' : (currRndPts == 1 ? 'draw' : 'lose')) + '_16.png';
+
+						if (teamStats.posPerRound[i] > maxPosition) {
+							maxPosition = teamStats.posPerRound[i];
+						}
+					}
+
+					data.push(roundData);
+				}
+
+				chart = AmCharts.makeChart('chartdiv', {
+					type: 'serial',
+					pathToImages: '',
+					categoryField: 'round',
+					sequencedAnimation: false,
+					zoomOutButtonImage: 'lib/amCharts/lens.png',
+					creditsPosition: 'bottom-right',
+					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+					categoryAxis: {
+						startOnAxis: true,
+						title: 'Round',
+						autoGridCount: false,
+						gridCount: stats.season.rounds.length
+					},
+					trendLines: [],
+					graphs: graphs,
+					guides: [],
+					valueAxes: [
+						{
+							baseValue: -1,
+							id: 'position',
+							minimum: 1,
+							precision: 0,
+							reversed: true,
+							autoGridCount: false,
+							gridCount: maxPosition,
+							minorGridEnabled: true,
+							showLastLabel: false,
+							title: 'Position'
+						}
+					],
+					allLabels: [],
+					titles: [],
+					dataProvider: data
+				});
+			};
+
+			$scope.$watch('stats.teamStats', function(teamStats) {
+				if (teamStats) {
+					initChart();
+				}
+			});
+		}
+	};
+})
 .directive('flSeasonProgressPanel', function() {
 	'use strict';
 
@@ -53,6 +157,7 @@ flApp.directive('flAppVersion', ['version', function(version) {
 				var graphs = [];
 				var data = [];
 				var stats = $scope.stats;
+				var maxPosition = 2;
 
 				angular.forEach(stats.teamStats, function(teamStats, team) {
 					graphs.push({
@@ -108,7 +213,7 @@ flApp.directive('flAppVersion', ['version', function(version) {
 							precision: 0,
 							reversed: true,
 							autoGridCount: false,
-							gridCount: stats.currentRound,
+							gridCount: stats.season.teams.length,
 							minorGridEnabled: true,
 							showLastLabel: false,
 							title: 'Position'
