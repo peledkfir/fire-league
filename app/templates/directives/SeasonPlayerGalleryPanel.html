@@ -1,8 +1,10 @@
 <div class="panel panel-default hidden-xs" ng-if="images">
 	<div class="panel-heading"><i class="fa fa-fw fa-picture-o"></i> Gallery</div>
 	<div class="panel-body">
-		<div style="display:none; min-height=300px">
-      		<i class="loading-carousel fa-5x" fl-spinner></i>
+		<div style="display:none">
+			<div class="loading-carousel">
+      			<i class="fa-5x" fl-spinner></i>
+			</div>
       	</div>
 	    <carousel>
       		<slide ng-repeat="image in images" active="image.active">

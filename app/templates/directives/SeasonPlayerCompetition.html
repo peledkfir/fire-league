@@ -8,8 +8,8 @@
 				<tr>
 					<th></th>
 					<th>#</th>
-					<th class="hidden-xxs-table-cell">Pt</th>
-					<th class="hidden-xxs-table-cell">P</th>
+					<th class="hidden-xs-table-cell">Pt</th>
+					<th class="hidden-xs-table-cell">P</th>
 					<th>VS</th>
 					<th>R</th>
 					<th colspan="3">Score</th>
@@ -20,13 +20,12 @@
 				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]; versus = match.versus(stats.teamStats[player].team.id)">
 					<td><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></td>
 					<td>{{$index + 1}}</td>
-					<td class="hidden-xxs-table-cell" ng-if="!playing" colspan="2"></td>
-					<td ng-if="!playing" style="text-align: left; padding-left: 33px">No match this week</td>
-					<td ng-if="!playing" colspan="4"></td>
+					<td class="hidden-xs-table-cell" ng-if="!playing" colspan="2"></td>
+					<td ng-if="!playing" style="text-align: left; padding-left: 33px" colspan="5">No match this week</td>
 					
-					<td class="hidden-xxs-table-cell" ng-if="playing">{{stats.teamStats[player].ptsPerRound[$index] | isDefined: match.result }}</td>
-					<td class="hidden-xxs-table-cell" ng-if="playing" ng-class="{'blue-o': stats.teamStats[player].posPerRound[$index] == 1 && match.result, 'red-o': stats.teamStats[player].posPerRound[$index] == stats.season.teams.length && match.result}">{{stats.teamStats[player].posPerRound[$index] | isDefined: match.result }}</td>
-					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="versus.id"></fb-avatar> {{versus.name}}</td>
+					<td class="hidden-xs-table-cell" ng-if="playing">{{stats.teamStats[player].ptsPerRound[$index] | isDefined: match.result }}</td>
+					<td class="hidden-xs-table-cell" ng-if="playing" ng-class="{'blue-o': stats.teamStats[player].posPerRound[$index] == 1 && match.result, 'red-o': stats.teamStats[player].posPerRound[$index] == stats.season.teams.length && match.result}">{{stats.teamStats[player].posPerRound[$index] | isDefined: match.result }}</td>
+					<td ng-if="playing" style="text-align: left"><fb-avatar size="24" id="versus.id"></fb-avatar> <span class="hidden-xs-inline">{{versus.name}}</span></td>
 					<td ng-if="playing" ng-init="conclude = match.conclude(stats.teamStats[player].team.id)" ng-class="{'red': conclude == 'L', 'green': conclude == 'W'}">{{conclude}}</td>
 					<td ng-if="playing">{{match.result.home}}</td>
 					<td ng-if="playing"><span ng-if="match.result">-</span></td>
