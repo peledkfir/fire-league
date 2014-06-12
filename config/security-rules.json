@@ -233,7 +233,7 @@
               ".validate": "newData.isString()"
             },
             "lastOnline": {
-              ".validate": "newData.isString() || newData.isNumber()"
+              ".validate": "newData.isNumber() && newData.exists()"
             },
             
             "$other": {

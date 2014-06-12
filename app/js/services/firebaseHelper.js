@@ -40,20 +40,38 @@ flApp.factory('firebaseRef', function($firebase, FBURL) {
 
   return {
     handleConnection: function(uid) {
-      // stores the timestamp of my last disconnect (the last time I was seen online)
-      var lastOnlineRef = leagueService.res.user.lastOnline.ref(uid);
-      lastOnlineRef.once('value', function(snap) {
-        $rootScope.userLastOnline = snap.val();
-      })
+      
+      if (!this.handledConnection) {
+        var lastOnlineRef = leagueService.res.user.lastOnline.ref(uid);
+        
+        // stores the timestamp of my last disconnect (the last time I was seen online)
+        lastOnlineRef.on('value', function(snap) {
+          $rootScope.userLastOnline = snap.val();
+        });
 
-      var connectedRef = leagueService.res._info.connected();
+        this.handledConnection = true;
+          
+        // Moving the connected mode inside because setting onDisconnects resets the value before we read it 
+        // (a race condition i didn't figured out yet)
+        var connectedRef = leagueService.res._info.connected();
 
-      connectedRef.on('value', function(snap) {
-        if (snap.val() === true) {
-          // when I disconnect, update the last time I was seen online
-          lastOnlineRef.onDisconnect().set(Firebase.ServerValue.TIMESTAMP);
-        }
-      });
+        connectedRef.on('value', function(snap) {
+          if (snap.val() === true) {
+            // when I disconnect, update the last time I was seen online
+            lastOnlineRef.onDisconnect().set(new Date().getTime());
+          }
+        });
+
+        var authenticatedRef = leagueService.res._info.authenticated();
+
+        authenticatedRef.on('value', function(snap) {
+          if (snap.val() === true) {
+
+          } else {
+           lastOnlineRef.onDisconnect().cancel(); 
+          }
+        });
+      }
     }
   };
 }]);
