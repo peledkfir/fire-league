@@ -105,6 +105,10 @@ flApp.directive('flAppVersion', ['version', function(version) {
 						autoGridCount: false,
 						gridCount: stats.season.rounds.length
 					},
+					chartCursor: {
+						'animationDuration': 0.09,
+						zoomable: false
+					},
 					trendLines: [],
 					graphs: graphs,
 					guides: [],
