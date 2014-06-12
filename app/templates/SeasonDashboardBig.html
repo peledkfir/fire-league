@@ -3,6 +3,12 @@
 	<i class="fa-5x" fl-spinner></i>
 </div>
 
-<div ng-hide="loading || !stats" ng-cloak>
-	<fl-season-table-panel table="stats.table"></fl-season-table-panel>
+<div class="row" ng-hide="loading || !stats" ng-cloak>
+	<div class="col-sm-6">
+		<fl-season-table-panel table="stats.table"></fl-season-table-panel>
+	</div>
+	<div class="col-sm-6">
+		<fl-season-general-stats-panel stats="stats" only-progress="true"></fl-season-general-stats-panel>
+		<fl-season-latest-panel latest="latestMatches"></fl-season-latest-panel>
+	</div>
 </div>

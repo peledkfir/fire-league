@@ -5,7 +5,7 @@
  * @param {Function} $timeout
  * @param {Object} leagueService
  */
-flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $location, DISQUS_ID, params, $timeout, notificationService, leagueService) {
+flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $location, DISQUS_ID, params, $timeout, notificationService, leagueService, latestMatchesCnt) {
 	'use strict';
 	$scope.disqus = DISQUS_ID;
 	$scope.url = $location.absUrl();
@@ -19,7 +19,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $
 	var matchMixin = {
 		currentUserMatch: function() {
 			var match = this;
-			if ($rootScope.auth.user) {
+			if ($rootScope.auth && $rootScope.auth.user) {
 				return match && match.home && match.away && (match.home.id == $rootScope.auth.user.id || match.away.id == $rootScope.auth.user.id);
 			}
 
@@ -183,7 +183,7 @@ flApp.controller('SeasonCtrl', function SeasonCtrl($scope, $rootScope, $modal, $
 		state.$seasonData = leagueService.res.season.table.sync(leagueName, seasonName);
 
 		state.$seasonData.$on('loaded', function() {
-			state.$latestMatches = leagueService.res.season.latestMatches.sync(leagueName, seasonName, 15);
+			state.$latestMatches = leagueService.res.season.latestMatches.sync(leagueName, seasonName, latestMatchesCnt || 15);
 
 			state.$latestMatches.$on('loaded', function() {
 				loaded = true;

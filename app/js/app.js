@@ -68,7 +68,8 @@ var flApp = angular.module('fire-league', ['ui.router', 'ui.sortable', 'ui.boots
 			templateUrl: 'templates/Season.html',
 			controller: 'SeasonCtrl',
 			resolve: {
-				params: function($stateParams) { return { seasonName: $stateParams.season, leagueName: $stateParams.league }; }
+				params: function($stateParams) { return { seasonName: $stateParams.season, leagueName: $stateParams.league }; },
+				latestMatchesCnt: function() { return 15; }
 			}
 		})
 		.state('season.edit', {

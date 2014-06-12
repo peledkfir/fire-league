@@ -1,5 +1,5 @@
 
-var flApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'firebase', 'facebook', 'fire-league.config'])
+var flApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'ui.knob', 'angularMoment', 'firebase', 'facebook', 'fire-league.config'])
 	.config(['$routeProvider', function($routeProvider) {
 		'use strict';
 
@@ -16,7 +16,8 @@ var flApp = angular.module('fire-dashboard', ['ngRoute', 'ui.bootstrap', 'fireba
 							seasonName: $route.current.params.season,
 							leagueName: $route.current.params.league
 						};
-					}]
+					}],
+					latestMatchesCnt: function() { return 4; }
 				}
 			});
 	}]);
