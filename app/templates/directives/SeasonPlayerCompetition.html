@@ -17,7 +17,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="round in stats.season.rounds" ng-init="playerMatch = (round.matches | filter:player); playing = playerMatch.length; match = playerMatch[0]; versus = match.versus(stats.teamStats[player].team.id)">
+				<tr ng-repeat="round in rounds" ng-init="playing = round.matches.length; match = round.matches[0]; versus = match.versus(stats.teamStats[player].team.id)">
 					<td><i tooltip="Current round" ng-if="stats.currentRound == $index + 1" class="fa fa-caret-right"></i></td>
 					<td>{{$index + 1}}</td>
 					<td class="hidden-xs-table-cell" ng-if="!playing" colspan="2"></td>

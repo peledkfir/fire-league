@@ -14,7 +14,7 @@
 	    	</div>
 	    	<div class="text-center small form-group">Progress</div>	    	
 
-	    	<dl>
+	    	<dl ng-if="!onlyProgress">
 	    		<dt ng-if="stats.seasonStats.biggestWin.length">Biggest Win</dt>
 	    		<dd ng-if="stats.seasonStats.biggestWin.length">
 					<div class="stats-match-preview" ng-class="{info: match.currentUserMatch()}" ng-repeat="match in stats.seasonStats.biggestWin">

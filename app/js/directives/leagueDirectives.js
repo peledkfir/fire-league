@@ -297,7 +297,8 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		replace: true,
 		templateUrl: 'templates/directives/SeasonGeneralStatsPanel.html',
 		scope: {
-			stats: '='
+			stats: '=',
+			onlyProgress: '='
 		},
 		link: function($scope) {
 			$scope.knobDraw = function() {
@@ -339,6 +340,24 @@ flApp.directive('flAppVersion', ['version', function(version) {
 		scope: {
 			stats: '=',
 			player: '='
+		},
+		link: function($scope) {
+			$scope.$watch('stats', function(stats) {
+				if (stats) {
+					$scope.rounds = _.chain($scope.stats.season.rounds)
+						.reduce(function(result, round) {
+							var cpy = angular.copy(round);
+							cpy.matches = _.filter(cpy.matches, function(match) {
+								return match.away.name === $scope.player || match.home.name === $scope.player;
+							});
+
+							result.push(cpy);
+
+							return result;
+						}, [])
+						.value();
+				}
+			});
 		}
 	};
 })
